@@ -73,25 +73,21 @@ class Question {
 class Choice {
   int id;
   String text;
-  bool status;
   bool selected;
 
   Choice({
     required this.id,
     required this.text,
-    required this.status,
     this.selected = false,
   });
 
   factory Choice.fromJson(Map<String, dynamic> json) => Choice(
         id: json["id"],
         text: json["text"],
-        status: json["status"],
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
         "text": text,
-        "status": status,
       };
 }

@@ -7,4 +7,5 @@ class Keys {
   static String adAndroidKey = "ca-app-pub-3940256099942544/1033173712";
   static String adIosKey = "ca-app-pub-3940256099942544/4411468910";  
   static String nativeAdUnitKey = '/6499/example/native';
+  static String manualsCacheKey = 'Manuals Cache Key';
 }

@@ -134,14 +134,17 @@ class QuestionCard extends StatelessWidget {
                                         ),
                                       ),
                                       child: Center(
-                                        child: Text(
-                                          String.fromCharCode(65 +
-                                              index), // Convert index to corresponding letter (A, B, C)
-                                          style: const TextStyle(
-                                            color: Colors.white,
-                                            fontWeight: FontWeight.bold,
-                                          ),
-                                        ),
+                                        child: TestHelper()
+                                                .getCheckedOrWrongIcon(
+                                                    controller
+                                                        .isAnswerSelected.value,
+                                                    choice.selected,
+                                                    controller
+                                                        .wasAnsweredCorrectly
+                                                        .value,
+                                                    choice.id,
+                                                    question.answerId) ??
+                                            const SizedBox.shrink(),
                                       ),
                                     ),
                                     onTap: () {

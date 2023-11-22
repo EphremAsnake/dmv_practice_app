@@ -18,10 +18,10 @@ void main() async {
   await internetConnectivity.initialize();
   await Hive.initFlutter();
   await Hive.openBox('driving_exam');
-  //injecting http depedency
+  //injecting http dependency
   CoreDependencyCreator.init();
   
-  //featching master data
+  //fetching master data
   MasterDataController masterDataController = Get.put(MasterDataController());
   masterDataController.getMasterData();
 
