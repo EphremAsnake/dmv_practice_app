@@ -1,6 +1,6 @@
 import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/home_page_top_card.dart';
-import 'package:drivingexam/app/utils/shared_widgets/pdf_reader.dart';
+import 'package:drivingexam/app/modules/home/views/widgets/read_manual.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
@@ -59,60 +59,7 @@ class HomeView extends GetView<HomeController> {
               ],
             ),
             const HomePageTopCard(),
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: GestureDetector(
-                onTap: () {
-                  Get.to(const PDFReader(
-                    pdfTitle: "Alaska Drivers Manual",
-                    pdfPath: "https://doa.alaska.gov/dmv/dlmanual/dlman.pdf",
-                  ));
-                },
-                child: Container(
-                  decoration: const BoxDecoration(
-                    boxShadow: [
-                      BoxShadow(
-                        color: Color.fromARGB(255, 238, 237, 237),
-                        spreadRadius: 2,
-                        blurRadius: 10,
-                        offset: Offset(0, 8), // horizontal, vertical offset
-                      ),
-                      BoxShadow(
-                        color: Color.fromARGB(255, 238, 237, 237),
-                        spreadRadius: 2,
-                        blurRadius: 10,
-                        offset: Offset(0, -8), // horizontal, vertical offset
-                      ),
-                    ],
-                  ),
-                  width: MediaQuery.of(context).size.width,
-                  height: 50,
-                  child: const Card(
-                    elevation: 0,
-                    child: Padding(
-                      padding: EdgeInsets.all(10.0),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Text(
-                            "Read Alaska's Drivers Manual",
-                            style: TextStyle(
-                              color: Color(0xFF016A70),
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          Icon(
-                            Icons.chevron_right,
-                            color: Color(0xFF016A70),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ),
-                ),
-              ),
-            ),
+            ReadManual(),
             const SizedBox(height: 5),
             Expanded(
               child: ListView.builder(
@@ -251,3 +198,4 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
+

@@ -10,26 +10,19 @@ import 'package:drivingexam/app/utils/keys/keys.dart';
 import 'package:get/get.dart';
 
 class MasterDataController extends GetxController {
-  @override
-  void onInit() {
-    super.onInit();
-    getMasterData();
-  }
-
   var httpService = Get.find<HttpService>();
   CacheStorageService cacheStorageService = CacheStorageService();
   Configs? configs;
   final apiStateHandler = ApiStateHandler<Configs>();
 
   //get master data from API
-  void getMasterData() async {
+  Future getMasterData() async {
     try {
       dynamic response =
           await httpService.sendHttpRequest(MasterDataHttpAttributes());
       final result = jsonDecode(response.body);
       //caching the data
       cacheStorageService.saveData(Keys.configsCacheKey, result);
-      readMasterData();
       update();
     } on HttpException catch (ex) {
       HttpException(HandleHttpException().handleHttpResponse(ex));
@@ -37,7 +30,7 @@ class MasterDataController extends GetxController {
   }
 
   //read master data from cache
-  void readMasterData() async {
+  Future readMasterData() async {
     apiStateHandler.setLoading();
     try {
       dynamic cachedData =

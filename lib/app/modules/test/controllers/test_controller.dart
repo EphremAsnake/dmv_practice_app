@@ -6,6 +6,7 @@ import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handle
 import 'package:drivingexam/app/data/models/result/result.dart';
 import 'package:drivingexam/app/data/models/test/test.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_http_attribuites.dart';
+import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
 import 'package:drivingexam/app/modules/test/views/result_page.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 import 'package:get/get.dart';
@@ -23,6 +24,9 @@ class TestController extends GetxController {
   List<Result> results = <Result>[].obs;
   Rx<int> questionPageNumber = 1.obs;
   Rx<bool> showDescription = false.obs;
+  Rx<int> incorrectAnswersCount = 0.obs;
+  Rx<int> correctAnswersCount = 0.obs;
+  TestHelper testHelper = TestHelper();
 
   final apiStateHandler = ApiStateHandler<Tests>();
   var httpService = Get.find<HttpService>();
@@ -123,6 +127,7 @@ class TestController extends GetxController {
 
     //adding result object to result list
     results.add(result);
+    setAnswersCount();
 
     isAnswerSelected.value = true;
     isSelectingAnswerEnabled.value = false;
@@ -134,6 +139,7 @@ class TestController extends GetxController {
   goToPreviousQuestion() {
     //resting question values
     resetQuestionValues();
+    setAnswersCount();
     //removing the last item from list
     results.removeAt(results.length - 1);
 
@@ -143,5 +149,12 @@ class TestController extends GetxController {
     }
     //decrementing  page number
     questionPageNumber.value = questionPageNumber.value - 1;
+  }
+
+  //setting correct answer count
+  setAnswersCount() {
+    correctAnswersCount.value = testHelper.countErrorsFromResult(results);
+    incorrectAnswersCount.value =
+        testHelper.countCorrectAnswersFromResult(results);
   }
 }

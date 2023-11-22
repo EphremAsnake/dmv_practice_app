@@ -45,6 +45,7 @@ class AppConfig {
 }
 
 class AppColors {
+    String whiteColor;
     String backgroundColor;
     String primaryColor;
     String secondaryColor;
@@ -53,8 +54,14 @@ class AppColors {
     String secondaryTextColor;
     String grayTextColor;
     String blackTextColor;
+    String shadowColor;
+    String primaryGrayColor;
+    String splashColor;
+    String errorColor;
+    String lightGrey;
 
     AppColors({
+        required this.whiteColor,
         required this.backgroundColor,
         required this.primaryColor,
         required this.secondaryColor,
@@ -63,9 +70,15 @@ class AppColors {
         required this.secondaryTextColor,
         required this.grayTextColor,
         required this.blackTextColor,
+        required this.shadowColor,
+        required this.primaryGrayColor,
+        required this.splashColor,
+        required this.errorColor,
+        required this.lightGrey,
     });
 
     factory AppColors.fromJson(Map<String, dynamic> json) => AppColors(
+        whiteColor: json["white_color"],
         backgroundColor: json["background_color"],
         primaryColor: json["primary_color"],
         secondaryColor: json["secondary_color"],
@@ -74,9 +87,15 @@ class AppColors {
         secondaryTextColor: json["secondary_text_color"],
         grayTextColor: json["gray_text_color"],
         blackTextColor: json["black_text_color"],
+        shadowColor: json["shadow_color"],
+        primaryGrayColor: json["primary_gray_color"],
+        splashColor: json["splash_color"],
+        errorColor: json["error_color"],
+        lightGrey: json["light_grey"],
     );
 
     Map<String, dynamic> toJson() => {
+        "white_color": whiteColor,
         "background_color": backgroundColor,
         "primary_color": primaryColor,
         "secondary_color": secondaryColor,
@@ -85,10 +104,16 @@ class AppColors {
         "secondary_text_color": secondaryTextColor,
         "gray_text_color": grayTextColor,
         "black_text_color": blackTextColor,
+        "shadow_color": shadowColor,
+        "primary_gray_color": primaryGrayColor,
+        "splash_color": splashColor,
+        "error_color": errorColor,
+        "light_grey": lightGrey,
     };
 }
 
 class HouseAd {
+    String title;
     String buttonText;
     bool show;
     bool typeApp;
@@ -96,6 +121,7 @@ class HouseAd {
     String androidUrl;
 
     HouseAd({
+        required this.title,
         required this.buttonText,
         required this.show,
         required this.typeApp,
@@ -104,6 +130,7 @@ class HouseAd {
     });
 
     factory HouseAd.fromJson(Map<String, dynamic> json) => HouseAd(
+        title: json["title"],
         buttonText: json["button_text"],
         show: json["show"],
         typeApp: json["type_app"],
@@ -112,6 +139,7 @@ class HouseAd {
     );
 
     Map<String, dynamic> toJson() => {
+        "title": title,
         "button_text": buttonText,
         "show": show,
         "type_app": typeApp,

@@ -1,6 +1,5 @@
 import 'dart:convert';
-
-import 'package:get/get.dart';
+import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:hive/hive.dart';
 
 class CacheStorageService {
@@ -19,12 +18,7 @@ class CacheStorageService {
         return null;
       }
     } catch (ex) {
-      Get.snackbar(
-        'Error',
-        "Error Occured while caching data",
-        duration: const Duration(seconds: 3),
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      customSnackBar(title: 'Error', body: "Error Occurred while caching data");
       return null;
     }
   }
@@ -36,12 +30,8 @@ class CacheStorageService {
       var a = json.encode(value);
       await _storage.put(key, a);
     } catch (ex) {
-      Get.snackbar(
-        'Error',
-        "Error Occured while reading cache data",
-        duration: const Duration(seconds: 3),
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      customSnackBar(
+          title: 'Error', body: "Error Occurred while reading cache data");
     }
   }
 }

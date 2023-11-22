@@ -1,8 +1,10 @@
 import 'dart:async';
-
 import 'package:drivingexam/app/core/core_dependency.dart';
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
+import 'package:drivingexam/app/utils/helper/app_colors.dart';
+import 'package:drivingexam/app/utils/helper/inital_route_determiner.dart';
 import 'package:drivingexam/app/utils/helper/internet_connectivity.dart';
+import 'package:drivingexam/app/utils/helper/master_data_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -20,20 +22,20 @@ void main() async {
   await Hive.openBox('driving_exam');
   //injecting http dependency
   CoreDependencyCreator.init();
-  
-  //fetching master data
-  MasterDataController masterDataController = Get.put(MasterDataController());
-  masterDataController.getMasterData();
+  //getting app's master data
+  MasterDataHelper().getMasterData();
 
+  //determining if the app's initial route
+  String initialRoute = await determineInitialRoute();
   // Set the app to be in portrait mode only
   SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
   //set the status bar color to transparent
-   SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor: Color(0xFF016A70),
-    ));
+  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+    statusBarColor: Color(0xFF016A70),
+  ));
 
   runApp(
     Sizer(
@@ -41,7 +43,7 @@ void main() async {
         return GetMaterialApp(
           debugShowCheckedModeBanner: false,
           title: "Driving Exam",
-          initialRoute: AppPages.INITIAL,
+          initialRoute: initialRoute,
           getPages: AppPages.routes,
         );
       },

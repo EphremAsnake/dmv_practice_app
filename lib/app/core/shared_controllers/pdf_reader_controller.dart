@@ -1,6 +1,7 @@
 import 'dart:io';
 import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
 import 'package:drivingexam/app/utils/keys/keys.dart';
+import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:get/get.dart';
 
@@ -37,22 +38,12 @@ class PDFController extends GetxController {
     } on HttpException catch (ex) {
       // Update state with error message
       String exceptionMessage = HandleHttpException().handleHttpResponse(ex);
-      Get.snackbar(
-        "Error",
-        exceptionMessage,
-        duration: const Duration(seconds: 3),
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      customSnackBar(title: 'Error', body: exceptionMessage);
       isError.value = true;
       isLoading.value = false;
       update();
     } catch (error) {
-      Get.snackbar(
-        "Error",
-        "Failed To Load Manual",
-        duration: const Duration(seconds: 3),
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      customSnackBar(title: 'Error', body: "Failed To Load Manual");
       isError.value = true;
       isLoading.value = false;
       update();

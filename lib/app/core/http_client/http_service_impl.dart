@@ -3,6 +3,7 @@ import 'package:drivingexam/app/core/http_client/http_status_code_worth_retrying
 import 'package:drivingexam/app/core/http_client/htttp_attrib_options.dart';
 import 'package:drivingexam/app/core/http_client/process_http_request.dart';
 import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
+import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:http/retry.dart';
@@ -38,12 +39,7 @@ class HttpServiceImpl implements HttpService {
       }
     } on Exception catch (e) {
       String message = HandleHttpException().handleHttpResponse(e);
-      Get.snackbar(
-        'Error',
-        message,
-        duration: const Duration(seconds: 3),
-        snackPosition: SnackPosition.BOTTOM,
-      );
+      customSnackBar(title: 'Error', body: message);
     }
     return null;
   }

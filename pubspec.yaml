@@ -19,6 +19,7 @@ dependencies:
   confetti: ^0.7.0
   google_mobile_ads: ^3.1.0
   easy_pdf_viewer: ^1.0.7
+  shimmer: ^3.0.0
   
 
 

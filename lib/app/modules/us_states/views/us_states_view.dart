@@ -1,6 +1,9 @@
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/helper/app_colors.dart';
 import 'package:drivingexam/app/utils/helper/hex_color_helper.dart';
+import 'package:drivingexam/app/utils/helper/master_data_helper.dart';
+import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:get/get.dart';
@@ -11,19 +14,15 @@ import '../controllers/us_states_controller.dart';
 class UsStatesView extends GetView<UsStatesController> {
   UsStatesView({Key? key}) : super(key: key);
   MasterDataController masterDataController = Get.find();
+  AppColors appColors = MasterDataHelper().appColors;
   @override
   Widget build(BuildContext context) {
     return GetBuilder<MasterDataController>(
       init: masterDataController,
       initState: (_) {},
       builder: (_) {
-        if (controller.apiStateHandler.apiState == ApiState.loading) {
-           return const Center(child: CircularProgressIndicator());
-        }
-        else{
         return Scaffold(
-          backgroundColor: HexColor(masterDataController
-              .configs!.appConfig.appColors.backgroundColor),
+          backgroundColor: HexColor(appColors.getBackgroundColor),
           body: SafeArea(
             child: GetBuilder<UsStatesController>(
               builder: (controller) {
@@ -45,8 +44,7 @@ class UsStatesView extends GetView<UsStatesController> {
                             style: TextStyle(
                                 fontSize: 18,
                                 fontWeight: FontWeight.w500,
-                                color: HexColor(masterDataController
-                                    .configs!.appConfig.appColors.blackColor),
+                                color: HexColor(appColors.getBlackColor),
                                 fontFamily: 'lato'),
                           ),
                         ),
@@ -95,12 +93,8 @@ class UsStatesView extends GetView<UsStatesController> {
                                         shape: isSelected
                                             ? RoundedRectangleBorder(
                                                 side: BorderSide(
-                                                    color: HexColor(
-                                                        masterDataController
-                                                            .configs!
-                                                            .appConfig
-                                                            .appColors
-                                                            .primaryColor),
+                                                    color: HexColor(appColors
+                                                        .getPrimaryColor),
                                                     width: 1.5),
                                                 borderRadius:
                                                     BorderRadius.circular(8.0),
@@ -110,11 +104,7 @@ class UsStatesView extends GetView<UsStatesController> {
                                           leading: CircleAvatar(
                                             radius: 15,
                                             backgroundColor: HexColor(
-                                                masterDataController
-                                                    .configs!
-                                                    .appConfig
-                                                    .appColors
-                                                    .primaryColor),
+                                                appColors.getPrimaryColor),
                                             child: Text(
                                               controller.apiStateHandler.data!
                                                   .states[index].name
@@ -128,12 +118,8 @@ class UsStatesView extends GetView<UsStatesController> {
                                           trailing: isSelected
                                               ? LineIcon.checkCircle(
                                                   size: 20.0,
-                                                  color: HexColor(
-                                                      masterDataController
-                                                          .configs!
-                                                          .appConfig
-                                                          .appColors
-                                                          .primaryColor),
+                                                  color: HexColor(appColors
+                                                      .getPrimaryColor),
                                                 )
                                               : null,
                                         ),
@@ -148,7 +134,14 @@ class UsStatesView extends GetView<UsStatesController> {
                       ),
                       GestureDetector(
                         onTap: () {
-                          Get.toNamed('/home');
+                          if (controller.selectedCardIndex.value != -1) {
+                            controller.savedStateData();
+                            Get.toNamed('/home');
+                          } else {
+                            customSnackBar(
+                                title: "Error",
+                                body: "Please Select State To Proceed");
+                          }
                         },
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
@@ -156,8 +149,7 @@ class UsStatesView extends GetView<UsStatesController> {
                             width: MediaQuery.of(context).size.width,
                             height: 50,
                             decoration: BoxDecoration(
-                                color: HexColor(masterDataController
-                                    .configs!.appConfig.appColors.primaryColor),
+                                color: HexColor(appColors.getPrimaryColor),
                                 borderRadius: BorderRadius.circular(5)),
                             child: const Center(
                               child: Text(
@@ -171,7 +163,7 @@ class UsStatesView extends GetView<UsStatesController> {
                             ),
                           ),
                         ),
-                      )
+                      ),
                     ],
                   );
                 } else if (controller.apiStateHandler.apiState ==
@@ -184,7 +176,6 @@ class UsStatesView extends GetView<UsStatesController> {
             ),
           ),
         );
-        }
       },
     );
   }
