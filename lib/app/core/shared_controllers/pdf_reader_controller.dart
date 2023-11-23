@@ -27,7 +27,7 @@ class PDFController extends GetxController {
         cacheManager: CacheManager(
           Config(
             Keys.manualsCacheKey,
-            stalePeriod: const Duration(days: 30),
+            stalePeriod: const Duration(days: 15),
             maxNrOfCacheObjects: 10,
           ),
         ),
