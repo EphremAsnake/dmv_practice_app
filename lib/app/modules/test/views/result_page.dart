@@ -15,8 +15,7 @@ class TestResult extends StatelessWidget {
   Widget build(BuildContext context) {
     int incorrectAnswers =
         TestHelper().countErrorsFromResult(controller.results);
-    bool passed =
-        TestHelper().passedOrFailed(controller.results, controller.tests!);
+    bool passed = TestHelper().passedOrFailed(controller.results);
     controller.playConfetti();
     return Scaffold(
       body: SafeArea(

@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:get/get.dart';
 
 import '../controllers/home_controller.dart';
@@ -8,5 +9,7 @@ class HomeBinding extends Bindings {
     Get.lazyPut<HomeController>(
       () => HomeController(),
     );
+    final MasterDataController masterDataController = Get.find();
+    masterDataController.readMasterData();
   }
 }

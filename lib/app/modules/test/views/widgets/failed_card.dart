@@ -108,7 +108,7 @@ class FailedWidget extends StatelessWidget {
                 child: Container(
                   width: 70.w,
                   decoration: BoxDecoration(
-                    color: themeData!.whiteColor,
+                    color: themeData!.lightGrey,
                     border: Border.all(
                       color: themeData!.whiteColor,
                     ),

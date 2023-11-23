@@ -1,6 +1,7 @@
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/data/models/result/result.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
+import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -13,6 +14,7 @@ class ProgressCard extends StatelessWidget {
   });
   final themeData = Get.find<ThemeController>().themeData.value;
   final TestController controller = Get.find();
+  final UsStatesController usStatesController = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -99,7 +101,7 @@ class ProgressCard extends StatelessWidget {
                           ),
                         ),
                         Text(
-                          controller.tests!.passingScore.toString(),
+                          usStatesController.state!.passingScore.toString(),
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,

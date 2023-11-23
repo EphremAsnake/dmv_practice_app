@@ -37,7 +37,7 @@ class QuestionController extends StatelessWidget {
                   child: Container(
                     width: 150,
                     decoration: BoxDecoration(
-                      color: themeData?.whiteColor,
+                      color: themeData?.backgroundColor,
                       border: Border.all(
                         color: themeData!.whiteColor,
                       ),

@@ -6,29 +6,21 @@ String testsToJson(Tests data) => json.encode(data.toJson());
 
 class Tests {
   int id;
-  int numberOfQuestions;
-  int passingScore;
   List<Question> questions;
 
   Tests({
     required this.id,
-    required this.numberOfQuestions,
-    required this.passingScore,
     required this.questions,
   });
 
   factory Tests.fromJson(Map<String, dynamic> json) => Tests(
         id: json["id"],
-        numberOfQuestions: json["number_of_questions"],
-        passingScore: json["passing_score"],
         questions: List<Question>.from(
             json["questions"].map((x) => Question.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
         "id": id,
-        "number_of_questions": numberOfQuestions,
-        "passing_score": passingScore,
         "questions": List<dynamic>.from(questions.map((x) => x.toJson())),
       };
 }

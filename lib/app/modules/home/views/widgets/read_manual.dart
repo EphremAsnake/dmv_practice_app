@@ -5,6 +5,7 @@ import 'package:drivingexam/app/utils/shared_widgets/pdf_reader.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:sizer/sizer.dart';
 
 class ReadManual extends StatelessWidget {
   ReadManual({
@@ -38,72 +39,77 @@ class ReadManual extends StatelessWidget {
             ),
           );
         } else if (controller.cacheStateHandler.apiState == ApiState.success) {
-          return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
-            child: GestureDetector(
-              onTap: () {
-                Get.to(() => PDFReader(
-                    pdfTitle: "${controller.state!.name} Drivers Manual",
-                    pdfPath: controller.state!.dmvManualLink));
-              },
-              child: Container(
-                decoration: BoxDecoration(
-                  boxShadow: [
-                    BoxShadow(
-                      color: themeData!.shadowColor,
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      offset: const Offset(0, 8), // horizontal, vertical offset
-                    ),
-                    BoxShadow(
-                      color: themeData!.shadowColor,
-                      spreadRadius: 2,
-                      blurRadius: 10,
-                      offset:
-                          const Offset(0, -8), // horizontal, vertical offset
-                    ),
-                  ],
-                ),
-                width: MediaQuery.of(context).size.width,
-                height: 70,
-                child: Card(
-                  elevation: 0,
-                  child: Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Row(
-                          children: [
-                            SizedBox(
-                              height: 80,
-                              child: Image.asset(
-                                "assets/images/manual.png",
-                                fit: BoxFit.contain,
+          if (controller.state != null) {
+            return Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: GestureDetector(
+                onTap: () {
+                  Get.to(() => PDFReader(
+                      pdfTitle: "${controller.state!.name} Drivers Manual",
+                      pdfPath: controller.state!.dmvManualLink));
+                },
+                child: Container(
+                  decoration: BoxDecoration(
+                    boxShadow: [
+                      BoxShadow(
+                        color: themeData!.shadowColor,
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        offset:
+                            const Offset(0, 8), // horizontal, vertical offset
+                      ),
+                      BoxShadow(
+                        color: themeData!.shadowColor,
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        offset:
+                            const Offset(0, -8), // horizontal, vertical offset
+                      ),
+                    ],
+                  ),
+                  width: MediaQuery.of(context).size.width,
+                  height: 70,
+                  child: Card(
+                    elevation: 0,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Row(
+                            children: [
+                              SizedBox(
+                                height: 80,
+                                child: Image.asset(
+                                  "assets/images/manual.png",
+                                  fit: BoxFit.contain,
+                                ),
                               ),
-                            ),
-                            Text(
-                              "Read ${controller.state!.name}'s Drivers Manual",
-                              style: TextStyle(
-                                color: themeData!.primaryColor,
-                                fontSize: 16,
-                                fontWeight: FontWeight.bold,
+                              Text(
+                                "Read ${controller.state!.name}'s Drivers Manual",
+                                style: TextStyle(
+                                  color: themeData!.primaryColor,
+                                  fontSize: 12.sp,
+                                  fontWeight: FontWeight.bold,
+                                ),
                               ),
-                            ),
-                          ],
-                        ),
-                        Icon(
-                          Icons.chevron_right,
-                          color: themeData!.primaryColor,
-                          size: 30,
-                        ),
-                      ],
+                            ],
+                          ),
+                          Icon(
+                            Icons.chevron_right,
+                            color: themeData!.primaryColor,
+                            size: 30,
+                          ),
+                        ],
+                      ),
                     ),
                   ),
                 ),
               ),
-            ),
-          );
+            );
+          } else {
+            return const SizedBox.shrink();
+          }
         } else if (controller.cacheStateHandler.apiState == ApiState.error) {
           return Text('Error: ${controller.apiStateHandler.error}');
         } else {

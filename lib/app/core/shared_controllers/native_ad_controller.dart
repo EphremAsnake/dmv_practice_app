@@ -1,6 +1,5 @@
 import 'dart:async';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
-import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:get/get.dart';
 
@@ -37,12 +36,15 @@ class NativeAdController extends GetxController {
         templateType: TemplateType.medium,
         mainBackgroundColor: themeData?.whiteColor,
         callToActionTextStyle: NativeTemplateTextStyle(
+          textColor: themeData?.whiteColor,
+          backgroundColor: themeData?.primaryColor,
+          style: NativeTemplateFontStyle.bold,
           size: 16.0,
+          
         ),
         primaryTextStyle: NativeTemplateTextStyle(
           textColor: themeData?.blackColor,
         ),
-        
       ),
     )..load();
   }

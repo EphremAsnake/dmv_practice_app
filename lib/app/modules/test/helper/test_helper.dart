@@ -1,24 +1,28 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/data/models/result/result.dart';
-import 'package:drivingexam/app/data/models/test/test.dart';
+import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class TestHelper {
+  final themeData = Get.find<ThemeController>().themeData.value;
+  final usStateController = Get.find<UsStatesController>();
   Color getBorderColor(bool isAnswerSelected, bool isChoiceSelected,
       bool wasAnswerdCorrectly, int choiceId, int answerId) {
     Color borderColor;
     if (isAnswerSelected) {
       if (isChoiceSelected) {
-        borderColor =
-            wasAnswerdCorrectly ? const Color(0xFF016A70) : Colors.red;
+        borderColor = wasAnswerdCorrectly
+            ? themeData!.primaryColor
+            : themeData!.errorColor;
       } else {
         borderColor = answerId == choiceId
-            ? const Color(0xFF016A70)
-            : const Color.fromARGB(255, 216, 216, 216);
+            ? themeData!.primaryColor
+            : themeData!.grayTextColor;
       }
     } else {
-      borderColor = isChoiceSelected
-          ? const Color(0xFF016A70)
-          : const Color.fromARGB(255, 216, 216, 216);
+      borderColor =
+          isChoiceSelected ? themeData!.primaryColor : themeData!.grayTextColor;
     }
     return borderColor;
   }
@@ -36,9 +40,9 @@ class TestHelper {
     return errors;
   }
 
-  bool passedOrFailed(List<Result> result, Tests test) {
+  bool passedOrFailed(List<Result> result) {
     int correctAnswers = countCorrectAnswersFromResult(result);
-    if (correctAnswers > test.passingScore) {
+    if (correctAnswers > (usStateController.state?.passingScore ?? 0)) {
       return true;
     } else {
       return false;
@@ -51,20 +55,11 @@ class TestHelper {
     if (isAnswerSelected) {
       if (isChoiceSelected) {
         icon = wasAnswerdCorrectly
-            ? const Icon(
-                Icons.check,
-                color: Colors.white,
-              )
-            : const Icon(
-                Icons.close,
-                color: Colors.white,
-              );
+            ? Icon(Icons.check, color: themeData?.whiteColor)
+            : Icon(Icons.close, color: themeData?.whiteColor);
       } else {
         icon = answerId == choiceId
-            ? const Icon(
-                Icons.check,
-                color: Colors.white,
-              )
+            ? Icon(Icons.check, color: themeData?.whiteColor)
             : null;
       }
       return icon;

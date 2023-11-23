@@ -1,12 +1,16 @@
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
+import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
+import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:shimmer/shimmer.dart';
 
 class HomePageTopCard extends StatelessWidget {
   HomePageTopCard({
     super.key,
   });
+  final UsStatesController usStateController = Get.find();
   final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
@@ -41,12 +45,45 @@ class HomePageTopCard extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                Text(
-                  "Virginia Driver's Examination",
-                  style: TextStyle(
-                      color: themeData!.blackColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+                GetBuilder<UsStatesController>(
+                  init: usStateController,
+                  initState: (_) {},
+                  builder: (_) {
+                    if (usStateController.cacheStateHandler.apiState ==
+                        ApiState.loading) {
+                      return Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: SizedBox(
+                          width: MediaQuery.of(context).size.width,
+                          height: 20,
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
+                            child: Container(
+                              width: double.infinity,
+                              height: double.infinity,
+                              color: themeData!.whiteColor,
+                            ),
+                          ),
+                        ),
+                      );
+                    } else if (usStateController.cacheStateHandler.apiState ==
+                        ApiState.success) {
+                      return Text(
+                        "${usStateController.state?.name} Driver's Examination",
+                        style: TextStyle(
+                            color: themeData!.blackColor,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
+                      );
+                    } else if (usStateController.cacheStateHandler.apiState ==
+                        ApiState.error) {
+                      return Text(
+                          'Error: ${usStateController.apiStateHandler.error}');
+                    } else {
+                      return const SizedBox();
+                    }
+                  },
                 ),
                 const SizedBox(
                   height: 8,
