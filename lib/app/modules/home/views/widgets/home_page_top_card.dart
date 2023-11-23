@@ -1,35 +1,36 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
 
 class HomePageTopCard extends StatelessWidget {
-  const HomePageTopCard({
+  HomePageTopCard({
     super.key,
   });
-
+  final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Color.fromARGB(255, 238, 237, 237),
+              color: themeData!.shadowColor,
               spreadRadius: 2,
               blurRadius: 10,
-              offset: Offset(0, 8), // horizontal, vertical offset
+              offset: const Offset(0, 8), // horizontal, vertical offset
             ),
             BoxShadow(
-              color: Color.fromARGB(255, 238, 237, 237),
+              color: themeData!.shadowColor,
               spreadRadius: 2,
               blurRadius: 10,
-              offset: Offset(0, -8), // horizontal, vertical offset
+              offset: const Offset(0, -8), // horizontal, vertical offset
             ),
           ],
         ),
         width: MediaQuery.of(context).size.width,
-        height: 215,
+        height: 185,
         child: Card(
           elevation: 0,
           child: Padding(
@@ -40,34 +41,24 @@ class HomePageTopCard extends StatelessWidget {
                 const SizedBox(
                   height: 20,
                 ),
-                const Text(
+                Text(
                   "Virginia Driver's Examination",
                   style: TextStyle(
-                      color: Color.fromARGB(255, 0, 0, 0),
+                      color: themeData!.blackColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
                   height: 8,
                 ),
-                const Text(
-                  "(From the 2021 Virginia driver handbook)",
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 179, 179, 179),
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 4,
-                ),
                 const Divider(),
                 const SizedBox(
                   height: 4,
                 ),
-                const Text(
+                Text(
                   "Want To Practice Traffic Signs First ?",
                   style: TextStyle(
-                      color: Color(0xFF016A70),
+                      color: themeData!.primaryColor,
                       fontSize: 14,
                       fontWeight: FontWeight.bold),
                 ),
@@ -83,28 +74,31 @@ class HomePageTopCard extends StatelessWidget {
                       },
                       child: Container(
                         decoration: BoxDecoration(
-                          color: const Color(0xFF016A70),
+                          color: themeData!.primaryColor,
                           border: Border.all(
-                            color: const Color(0xFF016A70),
+                            color: themeData!.primaryColor,
                           ),
                           borderRadius: BorderRadius.circular(30),
                         ),
-                        child: const Padding(
-                          padding: EdgeInsets.symmetric(
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
                               vertical: 15.0, horizontal: 15),
                           child: Row(
                             children: [
                               LineIcon.play(
                                 size: 20.0,
-                                color: Colors.white,
+                                color: themeData!.whiteColor,
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 5,
                               ),
-                              Text("Start Practicing",
-                                  style: TextStyle(
-                                      color: Colors.white,
-                                      fontWeight: FontWeight.bold))
+                              Text(
+                                "Start Practicing",
+                                style: TextStyle(
+                                  color: themeData!.whiteColor,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
                             ],
                           ),
                         ),
@@ -112,7 +106,6 @@ class HomePageTopCard extends StatelessWidget {
                     ),
                   ],
                 ),
-             
               ],
             ),
           ),

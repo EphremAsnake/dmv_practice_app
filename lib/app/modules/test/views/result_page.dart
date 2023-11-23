@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
@@ -8,13 +9,14 @@ import 'package:get/get.dart';
 
 class TestResult extends StatelessWidget {
   TestResult({super.key});
-
+  final themeData = Get.find<ThemeController>().themeData.value;
   final TestController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     int incorrectAnswers =
         TestHelper().countErrorsFromResult(controller.results);
-    bool passed =  TestHelper().passedOrFailed(controller.results, controller.tests!);
+    bool passed =
+        TestHelper().passedOrFailed(controller.results, controller.tests!);
     controller.playConfetti();
     return Scaffold(
       body: SafeArea(
@@ -34,13 +36,12 @@ class TestResult extends StatelessWidget {
                       width: 50,
                       height: 50,
                       decoration: BoxDecoration(
-                        color: Colors.white,
+                        color: themeData?.whiteColor,
                         shape: BoxShape.rectangle,
                         borderRadius: BorderRadius.circular(10),
                         boxShadow: [
                           BoxShadow(
-                            color: const Color.fromARGB(255, 214, 214, 214)
-                                .withOpacity(0.5),
+                            color: themeData!.shadowColor.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 1,
                             offset: const Offset(
@@ -48,15 +49,15 @@ class TestResult extends StatelessWidget {
                           ),
                         ],
                       ),
-                      child: const Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 10.0),
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
                         child: SizedBox(
                           width: 1,
                           height: 1,
                           child: Center(
                             child: Icon(
                               Icons.home_outlined,
-                              color: Colors.grey,
+                              color: themeData!.grayTextColor,
                               size: 32,
                             ),
                           ),
@@ -65,12 +66,12 @@ class TestResult extends StatelessWidget {
                     ),
                   ),
                 ),
-                const HomeAD(),
+                HomeAD(),
               ],
             ),
-            passed 
-             ? PassedWidget(incorrectAnswers: incorrectAnswers)
-             : FailedWidget(incorrectAnswers: incorrectAnswers)
+            passed
+                ? PassedWidget(incorrectAnswers: incorrectAnswers)
+                : FailedWidget(incorrectAnswers: incorrectAnswers)
           ],
         ),
       ),

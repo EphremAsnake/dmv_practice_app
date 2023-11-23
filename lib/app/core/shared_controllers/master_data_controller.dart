@@ -6,6 +6,7 @@ import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handle
 import 'package:drivingexam/app/core/shared_controllers/master_data_http_attribuites.dart';
 import 'package:drivingexam/app/data/models/configs/configs.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/helper/app_colors.dart';
 import 'package:drivingexam/app/utils/keys/keys.dart';
 import 'package:get/get.dart';
 
@@ -14,6 +15,7 @@ class MasterDataController extends GetxController {
   CacheStorageService cacheStorageService = CacheStorageService();
   Configs? configs;
   final apiStateHandler = ApiStateHandler<Configs>();
+  Rx<ThemeDataModel?> themeData = Rx<ThemeDataModel?>(null);
 
   //get master data from API
   Future getMasterData() async {

@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:drivingexam/app/core/core_dependency.dart';
-import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
-import 'package:drivingexam/app/utils/helper/app_colors.dart';
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/utils/helper/inital_route_determiner.dart';
 import 'package:drivingexam/app/utils/helper/internet_connectivity.dart';
 import 'package:drivingexam/app/utils/helper/master_data_helper.dart';
@@ -23,7 +22,11 @@ void main() async {
   //injecting http dependency
   CoreDependencyCreator.init();
   //getting app's master data
-  MasterDataHelper().getMasterData();
+  await MasterDataHelper().getMasterData();
+
+  //setting app theme
+  final themeController = Get.put(ThemeController());
+  themeController.getThemeData();
 
   //determining if the app's initial route
   String initialRoute = await determineInitialRoute();
@@ -44,6 +47,7 @@ void main() async {
           debugShowCheckedModeBanner: false,
           title: "Driving Exam",
           initialRoute: initialRoute,
+          theme: ThemeData.light(), // Set a default theme
           getPages: AppPages.routes,
         );
       },

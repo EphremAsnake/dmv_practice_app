@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
 import 'package:drivingexam/app/modules/study_signs/views/widgets/study_signs_detail_modal.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
@@ -9,11 +10,12 @@ import 'package:get/get.dart';
 import '../controllers/study_signs_controller.dart';
 
 class StudySignsView extends GetView<StudySignsController> {
-  const StudySignsView({Key? key}) : super(key: key);
+  StudySignsView({Key? key}) : super(key: key);
+  final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 248, 248, 248),
+      backgroundColor: themeData?.backgroundColor,
       body: SafeArea(
         child: GetBuilder<StudySignsController>(
           initState: (_) {},
@@ -40,14 +42,13 @@ class StudySignsView extends GetView<StudySignsController> {
                             width: 50,
                             height: 50,
                             decoration: BoxDecoration(
-                              color: Colors.white,
+                              color: themeData?.whiteColor,
                               shape: BoxShape.rectangle,
                               borderRadius: BorderRadius.circular(10),
                               boxShadow: [
                                 BoxShadow(
                                   color:
-                                      const Color.fromARGB(255, 214, 214, 214)
-                                          .withOpacity(0.5),
+                                      themeData!.shadowColor.withOpacity(0.5),
                                   spreadRadius: 2,
                                   blurRadius: 1,
                                   offset: const Offset(
@@ -71,7 +72,7 @@ class StudySignsView extends GetView<StudySignsController> {
                           ),
                         ),
                       ),
-                      const HomeAD(),
+                      HomeAD(),
                     ],
                   ),
                   const SizedBox(
@@ -98,14 +99,13 @@ class StudySignsView extends GetView<StudySignsController> {
                             padding: const EdgeInsets.all(10.0),
                             child: Container(
                               decoration: BoxDecoration(
-                                color: Colors.white,
+                                color: themeData!.whiteColor,
                                 shape: BoxShape.rectangle,
                                 borderRadius: BorderRadius.circular(10),
                                 boxShadow: [
                                   BoxShadow(
                                     color:
-                                        const Color.fromARGB(255, 214, 214, 214)
-                                            .withOpacity(0.5),
+                                        themeData!.shadowColor.withOpacity(0.5),
                                     spreadRadius: 2,
                                     blurRadius: 1,
                                     offset: const Offset(
@@ -132,8 +132,8 @@ class StudySignsView extends GetView<StudySignsController> {
                                           .signsStudy
                                           .signsAndDescriptions[index]
                                           .name,
-                                      style: const TextStyle(
-                                        color: Color.fromARGB(255, 70, 70, 70),
+                                      style: TextStyle(
+                                        color: themeData?.blackColor,
                                         fontSize: 17,
                                       ),
                                     ),

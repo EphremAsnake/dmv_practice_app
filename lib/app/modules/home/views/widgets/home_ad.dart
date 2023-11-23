@@ -1,10 +1,12 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class HomeAD extends StatelessWidget {
-  const HomeAD({
+  HomeAD({
     super.key,
   });
-
+  final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -12,7 +14,7 @@ class HomeAD extends StatelessWidget {
       child: Container(
         height: 60,
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: themeData!.whiteColor,
           shape: BoxShape.rectangle,
           borderRadius: BorderRadius.circular(10),
         ),
@@ -21,28 +23,35 @@ class HomeAD extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text(
+              Text(
                 "Ace Your DMV Written Test with",
-                style: TextStyle(fontSize: 12),
+                style: TextStyle(
+                  fontSize: 12,
+                  color: themeData!.blackColor,
+                ),
               ),
               const SizedBox(
                 height: 4,
               ),
               Container(
                 decoration: BoxDecoration(
-                  color: const Color(0xFF016A70).withOpacity(0.5),
+                  color: themeData?.primaryColor,
                   border: Border.all(
-                    color: const Color(0xFF016A70).withOpacity(0.5),
+                    color: themeData!.primaryColor.withOpacity(0.5),
                   ),
                   borderRadius: BorderRadius.circular(4),
                 ),
-                child: const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2.0, horizontal: 15),
-                  child: Text("Cheat Sheet",
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 12)),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(vertical: 2.0, horizontal: 15),
+                  child: Text(
+                    "Cheat Sheet",
+                    style: TextStyle(
+                      color: themeData!.whiteColor,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                    ),
+                  ),
                 ),
               ),
             ],

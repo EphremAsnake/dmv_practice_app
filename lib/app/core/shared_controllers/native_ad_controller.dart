@@ -1,7 +1,10 @@
 import 'dart:async';
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:get/get.dart';
+
+final themeData = Get.find<ThemeController>().themeData.value;
 
 class NativeAdController extends GetxController {
   NativeAd? nativeAd;
@@ -10,7 +13,6 @@ class NativeAdController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    // Create the ad objects and load ads.
     loadAd();
     startAdRefresher();
   }
@@ -33,13 +35,14 @@ class NativeAdController extends GetxController {
       nativeTemplateStyle: NativeTemplateStyle(
         cornerRadius: 20.0,
         templateType: TemplateType.medium,
-        mainBackgroundColor: const Color.fromARGB(255, 255, 255, 255),
+        mainBackgroundColor: themeData?.whiteColor,
         callToActionTextStyle: NativeTemplateTextStyle(
           size: 16.0,
         ),
         primaryTextStyle: NativeTemplateTextStyle(
-          textColor: Colors.black38,
+          textColor: themeData?.blackColor,
         ),
+        
       ),
     )..load();
   }

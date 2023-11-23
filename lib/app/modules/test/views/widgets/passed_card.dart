@@ -1,15 +1,16 @@
 import 'package:confetti/confetti.dart';
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class PassedWidget extends StatelessWidget {
-   PassedWidget({
+  PassedWidget({
     super.key,
     required this.incorrectAnswers,
   });
-
+  final themeData = Get.find<ThemeController>().themeData.value;
   final int incorrectAnswers;
   final TestController controller = Get.find();
   @override
@@ -17,19 +18,19 @@ class PassedWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Container(
-        decoration: const BoxDecoration(
+        decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: Color.fromARGB(255, 238, 237, 237),
+              color: themeData!.shadowColor,
               spreadRadius: 2,
               blurRadius: 10,
-              offset: Offset(0, 8), // horizontal, vertical offset
+              offset: const Offset(0, 8), // horizontal, vertical offset
             ),
             BoxShadow(
-              color: Color.fromARGB(255, 238, 237, 237),
+              color: themeData!.shadowColor,
               spreadRadius: 2,
               blurRadius: 10,
-              offset: Offset(0, -8), // horizontal, vertical offset
+              offset: const Offset(0, -8), // horizontal, vertical offset
             ),
           ],
         ),
@@ -46,10 +47,10 @@ class PassedWidget extends StatelessWidget {
                 width: 200,
                 height: 200,
               ),
-              const Text(
+              Text(
                 "You Passed!",
                 style: TextStyle(
-                    color: Color(0xFF016A70),
+                    color: themeData!.primaryColor,
                     fontSize: 28,
                     fontWeight: FontWeight.bold),
               ),
@@ -58,8 +59,11 @@ class PassedWidget extends StatelessWidget {
               ),
               Text(
                 "You have made $incorrectAnswers errors out of 35 questions",
-                style: const TextStyle(
-                    fontSize: 16, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: themeData?.blackColor,
+                ),
               ),
               GetBuilder<TestController>(
                 builder: (controller) => ConfettiWidget(
@@ -82,14 +86,14 @@ class PassedWidget extends StatelessWidget {
                 child: Container(
                   width: 70.w,
                   decoration: BoxDecoration(
-                    color: const Color(0xFF016A70),
+                    color: themeData?.primaryColor,
                     border: Border.all(
-                      color: const Color(0xFF016A70),
+                      color: themeData!.primaryColor,
                     ),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -99,7 +103,7 @@ class PassedWidget extends StatelessWidget {
                             child: Text(
                               "Go To Next Test",
                               style: TextStyle(
-                                color: Colors.white,
+                                color: themeData?.whiteColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -118,14 +122,14 @@ class PassedWidget extends StatelessWidget {
                 child: Container(
                   width: 70.w,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 248, 248, 248),
+                    color: themeData?.whiteColor,
                     border: Border.all(
-                      color: const Color.fromARGB(255, 248, 248, 248),
+                      color: themeData!.whiteColor,
                     ),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -135,7 +139,7 @@ class PassedWidget extends StatelessWidget {
                             child: Text(
                               "Back To Incorrect & Skipped(28)",
                               style: TextStyle(
-                                color: Color(0xFF016A70),
+                                color: themeData?.primaryColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
@@ -154,14 +158,14 @@ class PassedWidget extends StatelessWidget {
                 child: Container(
                   width: 70.w,
                   decoration: BoxDecoration(
-                    color: const Color.fromARGB(255, 248, 248, 248),
+                    color: themeData?.whiteColor,
                     border: Border.all(
-                      color: const Color.fromARGB(255, 248, 248, 248),
+                      color: themeData!.whiteColor,
                     ),
                     borderRadius: BorderRadius.circular(5),
                   ),
-                  child: const Padding(
-                    padding: EdgeInsets.symmetric(
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
                         vertical: 15.0, horizontal: 15),
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -171,7 +175,7 @@ class PassedWidget extends StatelessWidget {
                             child: Text(
                               "Restart Test",
                               style: TextStyle(
-                                color: Color(0xFF016A70),
+                                color: themeData?.primaryColor,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),

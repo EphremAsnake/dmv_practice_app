@@ -1,9 +1,11 @@
 import 'package:drivingexam/app/core/shared_controllers/pdf_reader_controller.dart';
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
+final themeData = Get.find<ThemeController>().themeData.value;
 class PDFReader extends StatelessWidget {
   final String pdfTitle;
   final String pdfPath;
@@ -16,11 +18,12 @@ class PDFReader extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        backgroundColor: const Color(0xFF016A70),
+        backgroundColor: themeData?.primaryColor,
         elevation: 0,
         title: Text(pdfTitle),
         leading: IconButton(
-          icon: Icon(Icons.chevron_left, color: Colors.white, size: 25.sp),
+          icon: Icon(Icons.chevron_left,
+              color: themeData?.whiteColor, size: 25.sp),
           onPressed: () {
             Get.back();
           },
@@ -41,8 +44,8 @@ class PDFReader extends StatelessWidget {
               numberPickerConfirmWidget: const Text(
                 "Confirm",
               ),
-              pickerButtonColor: const Color(0xFF016A70),
-              indicatorBackground: const Color(0xFF016A70),
+              pickerButtonColor: themeData?.primaryColor,
+              indicatorBackground: themeData!.primaryColor,
             );
           }
         },

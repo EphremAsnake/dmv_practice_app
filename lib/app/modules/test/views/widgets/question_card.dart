@@ -1,5 +1,6 @@
 // ignore: must_be_immutable
 import 'package:drivingexam/app/core/shared_controllers/native_ad_controller.dart';
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/data/models/test/test.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
@@ -12,6 +13,7 @@ class QuestionCard extends StatelessWidget {
   final Question question;
   final int index;
   final NativeAdController nativeAdcontroller = Get.put(NativeAdController());
+  final themeData = Get.find<ThemeController>().themeData.value;
   QuestionCard({
     super.key,
     required this.question,
@@ -26,19 +28,19 @@ class QuestionCard extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(10.0),
             child: Container(
-              decoration: const BoxDecoration(
+              decoration: BoxDecoration(
                 boxShadow: [
                   BoxShadow(
-                    color: Color.fromARGB(255, 238, 237, 237),
+                    color: themeData!.shadowColor,
                     spreadRadius: 2,
                     blurRadius: 10,
-                    offset: Offset(0, 8), // horizontal, vertical offset
+                    offset: const Offset(0, 8), // horizontal, vertical offset
                   ),
                   BoxShadow(
-                    color: Color.fromARGB(255, 238, 237, 237),
+                    color: themeData!.shadowColor,
                     spreadRadius: 2,
                     blurRadius: 10,
-                    offset: Offset(0, -8), // horizontal, vertical offset
+                    offset: const Offset(0, -8), // horizontal, vertical offset
                   ),
                 ],
               ),
@@ -52,12 +54,12 @@ class QuestionCard extends StatelessWidget {
                       const SizedBox(
                         height: 10,
                       ),
-                      const Padding(
-                        padding: EdgeInsets.all(10.0),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
                         child: Text(
                           "Select an answer",
                           style: TextStyle(
-                              color: Color.fromARGB(255, 189, 187, 187),
+                              color: themeData?.lightGrey,
                               fontSize: 16,
                               fontWeight: FontWeight.bold),
                         ),
@@ -66,8 +68,8 @@ class QuestionCard extends StatelessWidget {
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
                           "${index + 1}. ${question.question}",
-                          style: const TextStyle(
-                              color: Color.fromARGB(255, 24, 24, 24),
+                          style: TextStyle(
+                              color: themeData?.blackColor,
                               fontSize: 18,
                               fontWeight: FontWeight.bold),
                         ),
@@ -107,8 +109,7 @@ class QuestionCard extends StatelessWidget {
                                   padding: const EdgeInsets.all(8.0),
                                   child: ListTile(
                                     splashColor:
-                                        const Color.fromARGB(255, 179, 232, 235)
-                                            .withOpacity(0.5),
+                                        themeData!.splashColor.withOpacity(0.5),
                                     title: Text(choice.text),
                                     leading: Container(
                                       width: 30,
@@ -181,7 +182,7 @@ class QuestionCard extends StatelessWidget {
                             padding: const EdgeInsets.all(10.0),
                             child: Card(
                               elevation: 0,
-                              color: const Color.fromARGB(255, 248, 248, 248),
+                              color:  themeData?.whiteColor,
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Text(

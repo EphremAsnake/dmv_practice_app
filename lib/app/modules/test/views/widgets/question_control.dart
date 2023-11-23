@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -11,7 +12,7 @@ class QuestionController extends StatelessWidget {
 
   final List<Widget> pages;
   final TestController controller = Get.find();
-
+  final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -36,28 +37,28 @@ class QuestionController extends StatelessWidget {
                   child: Container(
                     width: 150,
                     decoration: BoxDecoration(
-                      color: const Color.fromARGB(255, 248, 248, 248),
+                      color: themeData?.whiteColor,
                       border: Border.all(
-                        color: const Color.fromARGB(255, 248, 248, 248),
+                        color: themeData!.whiteColor,
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: const Padding(
-                      padding:
-                          EdgeInsets.symmetric(vertical: 15.0, horizontal: 15),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15.0, horizontal: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
                           LineIcon.chevronLeft(
                             size: 20.0,
-                            color: Color(0xFF016A70),
+                            color: themeData?.primaryColor,
                           ),
-                          SizedBox(
+                          const SizedBox(
                             width: 5,
                           ),
                           Text("Previous",
                               style: TextStyle(
-                                  color: Color(0xFF016A70),
+                                  color: themeData?.primaryColor,
                                   fontWeight: FontWeight.bold)),
                         ],
                       ),
@@ -78,9 +79,9 @@ class QuestionController extends StatelessWidget {
                   child: Container(
                     width: 150,
                     decoration: BoxDecoration(
-                      color: const Color(0xFF016A70),
+                      color: themeData?.primaryColor,
                       border: Border.all(
-                        color: const Color(0xFF016A70),
+                        color: themeData!.primaryColor,
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
@@ -96,17 +97,17 @@ class QuestionController extends StatelessWidget {
                                       controller.tests?.questions.length
                                   ? "Finish"
                                   : "Next",
-                              style: const TextStyle(
-                                  color: Colors.white,
+                              style: TextStyle(
+                                  color: themeData?.whiteColor,
                                   fontWeight: FontWeight.bold),
                             ),
                           ),
                           const SizedBox(
                             width: 5,
                           ),
-                          const LineIcon.chevronRight(
+                          LineIcon.chevronRight(
                             size: 20.0,
-                            color: Colors.white,
+                            color: themeData?.whiteColor,
                           ),
                         ],
                       ),

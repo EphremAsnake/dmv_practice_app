@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 import 'package:drivingexam/app/utils/shared_widgets/pdf_reader.dart';
@@ -9,9 +10,9 @@ class ReadManual extends StatelessWidget {
   ReadManual({
     super.key,
   });
-  
-  final UsStatesController controller = Get.find();
 
+  final UsStatesController controller = Get.find();
+  final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
     controller.readStateData();
@@ -31,7 +32,7 @@ class ReadManual extends StatelessWidget {
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
-                  color: Colors.white,
+                  color: themeData!.whiteColor,
                 ),
               ),
             ),
@@ -46,19 +47,20 @@ class ReadManual extends StatelessWidget {
                     pdfPath: controller.state!.dmvManualLink));
               },
               child: Container(
-                decoration: const BoxDecoration(
+                decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
-                      color: Color.fromARGB(255, 238, 237, 237),
+                      color: themeData!.shadowColor,
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, 8), // horizontal, vertical offset
+                      offset: const Offset(0, 8), // horizontal, vertical offset
                     ),
                     BoxShadow(
-                      color: Color.fromARGB(255, 238, 237, 237),
+                      color: themeData!.shadowColor,
                       spreadRadius: 2,
                       blurRadius: 10,
-                      offset: Offset(0, -8), // horizontal, vertical offset
+                      offset:
+                          const Offset(0, -8), // horizontal, vertical offset
                     ),
                   ],
                 ),
@@ -82,17 +84,17 @@ class ReadManual extends StatelessWidget {
                             ),
                             Text(
                               "Read ${controller.state!.name}'s Drivers Manual",
-                              style: const TextStyle(
-                                color: Color(0xFF016A70),
+                              style: TextStyle(
+                                color: themeData!.primaryColor,
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
                           ],
                         ),
-                        const Icon(
+                        Icon(
                           Icons.chevron_right,
-                          color: Color(0xFF016A70),
+                          color: themeData!.primaryColor,
                           size: 30,
                         ),
                       ],

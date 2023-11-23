@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
 import 'package:drivingexam/app/modules/test/views/widgets/test_widgets_export.dart';
 import 'package:drivingexam/app/modules/test/views/widgets/view_progress.dart';
@@ -7,12 +8,12 @@ import 'package:get/get.dart';
 import '../controllers/test_controller.dart';
 
 class TestView extends GetView<TestController> {
-  const TestView({Key? key}) : super(key: key);
-
+  TestView({Key? key}) : super(key: key);
+  final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color.fromARGB(255, 248, 248, 248),
+      backgroundColor: themeData?.backgroundColor,
       body: GetBuilder<TestController>(
         builder: (controller) {
           if (controller.apiStateHandler.apiState == ApiState.loading) {
@@ -43,7 +44,8 @@ class TestView extends GetView<TestController> {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Padding(
-                            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 10.0),
                             child: GestureDetector(
                               onTap: () {
                                 Get.back();
@@ -52,14 +54,13 @@ class TestView extends GetView<TestController> {
                                 width: 50,
                                 height: 50,
                                 decoration: BoxDecoration(
-                                  color: Colors.white,
+                                  color: themeData?.whiteColor,
                                   shape: BoxShape.rectangle,
                                   borderRadius: BorderRadius.circular(10),
                                   boxShadow: [
                                     BoxShadow(
-                                      color:
-                                          const Color.fromARGB(255, 214, 214, 214)
-                                              .withOpacity(0.5),
+                                      color: themeData!.shadowColor
+                                          .withOpacity(0.5),
                                       spreadRadius: 2,
                                       blurRadius: 1,
                                       offset: const Offset(
@@ -68,7 +69,8 @@ class TestView extends GetView<TestController> {
                                   ],
                                 ),
                                 child: const Padding(
-                                  padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.0),
                                   child: SizedBox(
                                     width: 1,
                                     height: 1,
@@ -83,7 +85,7 @@ class TestView extends GetView<TestController> {
                               ),
                             ),
                           ),
-                          const HomeAD(),
+                           HomeAD(),
                         ],
                       ),
                       const SizedBox(
@@ -95,7 +97,7 @@ class TestView extends GetView<TestController> {
                         child: ProgressCard(result: controller.results),
                       ),
                       SizedBox(
-                        height:  MediaQuery.of(context).size.height * 1.5,
+                        height: MediaQuery.of(context).size.height * 1.5,
                         child: PageView.builder(
                           itemCount: questionPages.length,
                           itemBuilder: (context, index) {

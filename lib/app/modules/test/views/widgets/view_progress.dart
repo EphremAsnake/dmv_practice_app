@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/data/models/result/result.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:flutter/material.dart';
@@ -10,23 +11,24 @@ class ProgressCard extends StatelessWidget {
     required this.result,
     super.key,
   });
+  final themeData = Get.find<ThemeController>().themeData.value;
   final TestController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Container(
-      decoration: const BoxDecoration(
+      decoration: BoxDecoration(
         boxShadow: [
           BoxShadow(
-            color: Color.fromARGB(255, 238, 237, 237),
+            color: themeData!.shadowColor,
             spreadRadius: 2,
             blurRadius: 10,
-            offset: Offset(0, 8), // horizontal, vertical offset
+            offset: const Offset(0, 8), // horizontal, vertical offset
           ),
           BoxShadow(
-            color: Color.fromARGB(255, 238, 237, 237),
+            color: themeData!.shadowColor,
             spreadRadius: 2,
             blurRadius: 10,
-            offset: Offset(0, -8), // horizontal, vertical offset
+            offset: const Offset(0, -8), // horizontal, vertical offset
           ),
         ],
       ),
@@ -53,16 +55,15 @@ class ProgressCard extends StatelessWidget {
                           height: 40,
                           child: Card(
                             color: result[index].isCorrect == false
-                                ? const Color.fromARGB(255, 255, 17, 0)
-                                    .withOpacity(0.5)
-                                : const Color(0xFF016A70).withOpacity(0.5),
+                                ? themeData?.errorColor.withOpacity(0.5)
+                                : themeData?.primaryColor.withOpacity(0.5),
                             child: Center(
                               child: Text(
                                 number.toString(),
-                                style: const TextStyle(
+                                style: TextStyle(
                                   fontSize: 16,
                                   fontWeight: FontWeight.bold,
-                                  color: Colors.white,
+                                  color: themeData?.whiteColor,
                                 ),
                               ),
                             ),
@@ -89,20 +90,20 @@ class ProgressCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Pass Mark",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: themeData?.blackColor,
                           ),
                         ),
                         Text(
                           controller.tests!.passingScore.toString(),
-                          style: const TextStyle(
+                          style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: themeData?.blackColor,
                           ),
                         ),
                       ],
@@ -116,21 +117,21 @@ class ProgressCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Correct",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: themeData?.blackColor,
                           ),
                         ),
                         Obx(
                           () => Text(
                             controller.correctAnswersCount.toString(),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: themeData?.blackColor,
                             ),
                           ),
                         ),
@@ -145,21 +146,21 @@ class ProgressCard extends StatelessWidget {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
+                        Text(
                           "Incorrect & Skipped",
                           style: TextStyle(
                             fontSize: 16,
                             fontWeight: FontWeight.bold,
-                            color: Colors.black,
+                            color: themeData?.blackColor,
                           ),
                         ),
                         Obx(
                           () => Text(
                             controller.incorrectAnswersCount.toString(),
-                            style: const TextStyle(
+                            style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
-                              color: Colors.black,
+                              color: themeData?.blackColor,
                             ),
                           ),
                         ),

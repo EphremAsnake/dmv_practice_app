@@ -1,8 +1,10 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/data/models/signs_study/signs_study.dart';
 import 'package:drivingexam/app/utils/keys/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+final themeData = Get.find<ThemeController>().themeData.value;
 void showSignsDetailModal(SignsAndDescription item) {
   Get.dialog(
     AlertDialog(
@@ -24,8 +26,8 @@ void showSignsDetailModal(SignsAndDescription item) {
               Expanded(
                 child: Text(
                   item.name,
-                  style: const TextStyle(
-                      color: Color(0xFF016A70),
+                  style: TextStyle(
+                      color: themeData?.primaryColor,
                       fontSize: 18,
                       fontWeight: FontWeight.bold),
                 ),
@@ -37,6 +39,10 @@ void showSignsDetailModal(SignsAndDescription item) {
             child: Text(
               item.description,
               textAlign: TextAlign.justify,
+              style: TextStyle(
+                color: themeData?.blackColor,
+                fontSize: 16,
+              ),
             ),
           ),
         ],
@@ -47,10 +53,10 @@ void showSignsDetailModal(SignsAndDescription item) {
             // Close the modal
             Get.back();
           },
-          child: const Text(
+          child: Text(
             'CLOSE',
             style: TextStyle(
-                color: Color(0xFF016A70),
+                color: themeData?.primaryColor,
                 fontSize: 16,
                 fontWeight: FontWeight.bold),
           ),

@@ -13,14 +13,14 @@ part 'app_routes.dart';
 
 class AppPages {
   AppPages._();
-  
+
   static const INITIAL = Routes.HOME;
   static const FIRST_RUN_INITIAL = Routes.US_STATES;
 
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () => const HomeView(),
+      page: () =>  HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -30,12 +30,12 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.TEST,
-      page: () => const TestView(),
+      page: () => TestView(),
       binding: TestBinding(),
     ),
     GetPage(
       name: _Paths.STUDY_SIGNS,
-      page: () => const StudySignsView(),
+      page: () => StudySignsView(),
       binding: StudySignsBinding(),
     ),
   ];

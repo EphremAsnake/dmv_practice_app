@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/home_page_top_card.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/read_manual.dart';
@@ -7,11 +8,12 @@ import 'package:line_icons/line_icon.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
-  const HomeView({Key? key}) : super(key: key);
+  HomeView({Key? key}) : super(key: key);
+  final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffF8F8F8),
+      backgroundColor: themeData?.backgroundColor,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -29,13 +31,12 @@ class HomeView extends GetView<HomeController> {
                     width: 50,
                     height: 50,
                     decoration: BoxDecoration(
-                      color: Colors.white,
+                      color: themeData?.whiteColor,
                       shape: BoxShape.rectangle,
                       borderRadius: BorderRadius.circular(10),
                       boxShadow: [
                         BoxShadow(
-                          color: const Color.fromARGB(255, 214, 214, 214)
-                              .withOpacity(0.5),
+                          color: themeData!.shadowColor.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 1,
                           offset:
@@ -55,10 +56,10 @@ class HomeView extends GetView<HomeController> {
                     ),
                   ),
                 ),
-                const HomeAD(),
+                HomeAD(),
               ],
             ),
-            const HomePageTopCard(),
+            HomePageTopCard(),
             ReadManual(),
             const SizedBox(height: 5),
             Expanded(
@@ -73,20 +74,20 @@ class HomeView extends GetView<HomeController> {
                       },
                       child: Center(
                         child: Container(
-                          decoration: const BoxDecoration(
+                          decoration: BoxDecoration(
                             boxShadow: [
                               BoxShadow(
-                                color: Color.fromARGB(255, 238, 237, 237),
+                                color: themeData!.shadowColor,
                                 spreadRadius: 2,
                                 blurRadius: 10,
-                                offset:
-                                    Offset(0, 8), // horizontal, vertical offset
+                                offset: const Offset(
+                                    0, 8), // horizontal, vertical offset
                               ),
                               BoxShadow(
-                                color: Color.fromARGB(255, 238, 237, 237),
+                                color: themeData!.shadowColor,
                                 spreadRadius: 2,
                                 blurRadius: 10,
-                                offset: Offset(
+                                offset: const Offset(
                                     0, -8), // horizontal, vertical offset
                               ),
                             ],
@@ -101,22 +102,20 @@ class HomeView extends GetView<HomeController> {
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
                                   const SizedBox(height: 5),
-                                  const Row(
+                                  Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
                                     children: [
                                       Text(
                                         "40 QUESTIONS",
                                         style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 155, 154, 154),
+                                          color: themeData?.lightGrey,
                                         ),
                                       ),
                                       Text(
                                         "PASSING SCORE 32",
                                         style: TextStyle(
-                                          color: Color.fromARGB(
-                                              255, 155, 154, 154),
+                                          color: themeData?.lightGrey,
                                         ),
                                       ),
                                     ],
@@ -124,8 +123,8 @@ class HomeView extends GetView<HomeController> {
                                   const SizedBox(height: 10),
                                   Text(
                                     "Practice Test ${index + 1}",
-                                    style: const TextStyle(
-                                      color: Color.fromARGB(255, 0, 0, 0),
+                                    style: TextStyle(
+                                      color: themeData?.blackColor,
                                       fontSize: 22,
                                       fontWeight: FontWeight.bold,
                                     ),
@@ -136,30 +135,30 @@ class HomeView extends GetView<HomeController> {
                                     crossAxisAlignment:
                                         CrossAxisAlignment.center,
                                     children: [
-                                      const Row(
+                                      Row(
                                         children: [
                                           LineIcon.timesCircle(
                                             size: 20.0,
-                                            color: Color(0xFF016A70),
+                                            color: themeData?.primaryColor,
                                           ),
-                                          SizedBox(width: 5),
+                                          const SizedBox(width: 5),
                                           Text(
                                             "8 Mistakes Allowed",
                                             style: TextStyle(
-                                                color: Color(0xFF016A70)),
+                                                color: themeData?.primaryColor),
                                           ),
                                         ],
                                       ),
                                       Container(
                                         decoration: BoxDecoration(
                                           border: Border.all(
-                                            color: const Color(0xFF016A70),
+                                            color: themeData!.primaryColor,
                                           ),
                                           borderRadius:
                                               BorderRadius.circular(20),
                                         ),
-                                        child: const Padding(
-                                          padding: EdgeInsets.symmetric(
+                                        child: Padding(
+                                          padding: const EdgeInsets.symmetric(
                                             vertical: 8.0,
                                             horizontal: 15,
                                           ),
@@ -167,13 +166,14 @@ class HomeView extends GetView<HomeController> {
                                             children: [
                                               LineIcon.playCircle(
                                                 size: 20.0,
-                                                color: Color(0xFF016A70),
+                                                color: themeData?.primaryColor,
                                               ),
-                                              SizedBox(width: 5),
+                                              const SizedBox(width: 5),
                                               Text(
                                                 "Start",
                                                 style: TextStyle(
-                                                    color: Color(0xFF016A70)),
+                                                    color: themeData
+                                                        ?.primaryColor),
                                               ),
                                             ],
                                           ),
@@ -198,4 +198,3 @@ class HomeView extends GetView<HomeController> {
     );
   }
 }
-
