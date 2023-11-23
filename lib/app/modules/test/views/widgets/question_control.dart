@@ -67,14 +67,14 @@ class QuestionController extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    if (controller.showAnswer.value == true) {
-                      controller.showQuestionAnswer(
-                          controller.choiceId,
-                          controller.tests!
-                              .questions[controller.currentPageIndex.value]);
-                    } else {
+                    // if (controller.showAnswer.value == true) {
+                    //   controller.showQuestionAnswer(
+                    //       controller.choiceId,
+                    //       controller.tests!
+                    //           .questions[controller.currentPageIndex.value]);
+                    // } else {
                       controller.goToNextQuestion(pages.length);
-                    }
+                    //}
                   },
                   child: Container(
                     width: 150,

@@ -138,7 +138,7 @@ class HomeView extends GetView<HomeController> {
                                           "Practice Test ${index + 1}",
                                           style: TextStyle(
                                             color: themeData?.blackColor,
-                                            fontSize: 22,
+                                            fontSize: 20,
                                             fontWeight: FontWeight.bold,
                                           ),
                                         ),
@@ -157,7 +157,7 @@ class HomeView extends GetView<HomeController> {
                                                 ),
                                                 const SizedBox(width: 5),
                                                 Text(
-                                                  "8 Mistakes Allowed",
+                                                  "${usStatesController.cacheStateHandler.data!.numberOfQuestions - usStatesController.cacheStateHandler.data!.passingScore} Mistakes Allowed",
                                                   style: TextStyle(
                                                       color: themeData
                                                           ?.primaryColor),

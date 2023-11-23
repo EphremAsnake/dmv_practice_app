@@ -75,13 +75,16 @@ class QuestionCard extends StatelessWidget {
                         ),
                       ),
                       if (question.imageUrl != null)
-                        Padding(
+                        Center(
+                          child: Padding(
                             padding: const EdgeInsets.all(10.0),
                             child: Image.network(
                               "${Keys.baseurl}${question.imageUrl!}",
                               width: 100,
                               height: 100,
-                            )),
+                            ),
+                          ),
+                        ),
                       Flexible(
                         flex: 3,
                         child: ListView.builder(
@@ -165,6 +168,13 @@ class QuestionCard extends StatelessWidget {
                                             .first;
                                         controller.choiceId = selectedAnswer.id;
 
+                                        //
+                                        controller.showQuestionAnswer(
+                                            controller.choiceId,
+                                            controller.tests!.questions[
+                                                controller
+                                                    .currentPageIndex.value]);
+
                                         controller.update();
                                       }
                                     },
@@ -182,7 +192,7 @@ class QuestionCard extends StatelessWidget {
                             padding: const EdgeInsets.all(10.0),
                             child: Card(
                               elevation: 0,
-                              color:  themeData?.whiteColor,
+                              color: themeData?.whiteColor,
                               child: Padding(
                                 padding: const EdgeInsets.all(10.0),
                                 child: Text(
