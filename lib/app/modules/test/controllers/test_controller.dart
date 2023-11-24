@@ -62,14 +62,10 @@ class TestController extends GetxController {
       // Update state with success and response data
       apiStateHandler.setSuccess(tests!);
       update();
-    } on HttpException catch (ex) {
+    } catch (ex) {
       // Update state with error message
-      HttpException(HandleHttpException().handleHttpResponse(ex));
-      apiStateHandler.setError(ex.toString());
-      update();
-    } catch (error) {
-      // Update state with error message
-      apiStateHandler.setError(error.toString());
+      String errorMessage = await HandleHttpException().getExceptionString(ex);
+      apiStateHandler.setError(errorMessage);
       update();
     }
   }

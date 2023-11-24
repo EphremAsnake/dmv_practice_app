@@ -3,6 +3,7 @@ import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
 import 'package:drivingexam/app/modules/test/views/widgets/test_widgets_export.dart';
 import 'package:drivingexam/app/modules/test/views/widgets/view_progress.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/test_controller.dart';
@@ -85,7 +86,7 @@ class TestView extends GetView<TestController> {
                               ),
                             ),
                           ),
-                           HomeAD(),
+                          HomeAD(),
                         ],
                       ),
                       const SizedBox(
@@ -118,9 +119,23 @@ class TestView extends GetView<TestController> {
               ),
             );
           } else if (controller.apiStateHandler.apiState == ApiState.error) {
-            return Text('Error: ${controller.apiStateHandler.error}');
+            return RefreshErrorWidget(
+              assetImage: "assets/images/error.png",
+              errorMessage: controller.apiStateHandler.error.toString(),
+              onRefresh: () async {
+                controller.fetchData();
+                controller.update();
+              },
+            );
           } else {
-            return const SizedBox();
+            return RefreshErrorWidget(
+              assetImage: "assets/images/error.png",
+              errorMessage: controller.apiStateHandler.error.toString(),
+              onRefresh: () async {
+                controller.fetchData();
+                controller.update();
+              },
+            );
           }
         },
       ),

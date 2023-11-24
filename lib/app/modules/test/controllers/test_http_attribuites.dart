@@ -5,7 +5,7 @@ class TestHttpAttributes extends HttpClientAttributeOptions {
   TestHttpAttributes()
       : super(
           baseUrl: Keys.baseurl,
-          url: "/tests/test1.json",
+          url: "/testss/test1.json",
           connectionTimeout: 30,
           contentType: 'application/json',
           method: HttpMethod.GET,

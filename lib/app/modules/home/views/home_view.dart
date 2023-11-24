@@ -4,6 +4,7 @@ import 'package:drivingexam/app/modules/home/views/widgets/home_page_top_card.da
 import 'package:drivingexam/app/modules/home/views/widgets/read_manual.dart';
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
@@ -212,10 +213,23 @@ class HomeView extends GetView<HomeController> {
                   );
                 } else if (usStatesController.cacheStateHandler.apiState ==
                     ApiState.error) {
-                  return Text(
-                      'Error: ${usStatesController.cacheStateHandler.error}');
+                  return RefreshErrorWidget(
+                    assetImage: "assets/images/error.png",
+                    errorMessage: "Unknown Error Occurred",
+                    onRefresh: () async {
+                      usStatesController.fetchData();
+                      usStatesController.update();
+                    },
+                  );
                 } else {
-                  return const SizedBox();
+                  return RefreshErrorWidget(
+                    assetImage: "assets/images/error.png",
+                    errorMessage: "Unknown Error Occurred",
+                    onRefresh: () async {
+                      usStatesController.fetchData();
+                      usStatesController.update();
+                    },
+                  );
                 }
               },
             ),

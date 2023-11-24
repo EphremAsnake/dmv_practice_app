@@ -25,7 +25,7 @@ class MasterDataController extends GetxController {
       cacheStorageService.saveData(Keys.configsCacheKey, result);
       update();
     } on HttpException catch (ex) {
-      HttpException(HandleHttpException().handleHttpResponse(ex));
+      HandleHttpException().getExceptionString(ex);
     }
   }
 

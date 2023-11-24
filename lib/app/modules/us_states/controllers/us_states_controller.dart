@@ -39,8 +39,8 @@ class UsStatesController extends GetxController {
       update();
     } on HttpException catch (ex) {
       // Update state with error message
-      HttpException(HandleHttpException().handleHttpResponse(ex));
-      apiStateHandler.setError(ex.toString());
+      String errorMessage = await HandleHttpException().getExceptionString(ex);
+      apiStateHandler.setError(errorMessage);
       update();
     } catch (error) {
       // Update state with error message

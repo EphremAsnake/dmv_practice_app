@@ -37,7 +37,7 @@ class HttpServiceImpl implements HttpService {
           break;
       }
     } on Exception catch (e) {
-      String message = HandleHttpException().handleHttpResponse(e);
+      String message = await HandleHttpException().getExceptionString(e);
       customSnackBar(title: 'Error', body: message);
     }
     return null;

@@ -37,8 +37,8 @@ class PDFController extends GetxController {
       update();
     } on HttpException catch (ex) {
       // Update state with error message
-      String exceptionMessage = HandleHttpException().handleHttpResponse(ex);
-      customSnackBar(title: 'Error', body: exceptionMessage);
+      String errorMessage = await HandleHttpException().getExceptionString(ex);
+      customSnackBar(title: 'Error', body: errorMessage);
       isError.value = true;
       isLoading.value = false;
       update();

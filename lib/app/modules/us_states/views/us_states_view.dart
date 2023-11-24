@@ -1,6 +1,7 @@
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:line_icons/line_icon.dart';
@@ -156,9 +157,23 @@ class UsStatesView extends GetView<UsStatesController> {
                 ],
               );
             } else if (controller.apiStateHandler.apiState == ApiState.error) {
-              return Text('Error: ${controller.apiStateHandler.error}');
+              return RefreshErrorWidget(
+                assetImage: "assets/images/error.png",
+                errorMessage: controller.apiStateHandler.error.toString(),
+                onRefresh: () async {
+                  controller.fetchData();
+                  controller.update();
+                },
+              );
             } else {
-              return const SizedBox();
+               return RefreshErrorWidget(
+                assetImage: "assets/images/error.png",
+                errorMessage: "Unknown Error Occurred",
+                onRefresh: () async {
+                  controller.fetchData();
+                  controller.update();
+                },
+              );
             }
           },
         ),
