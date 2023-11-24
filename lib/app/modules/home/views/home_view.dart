@@ -3,6 +3,7 @@ import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/home_page_top_card.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/read_manual.dart';
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
+import 'package:drivingexam/app/utils/extensions/title_case_extension.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:flutter/material.dart';
@@ -75,141 +76,181 @@ class HomeView extends GetView<HomeController> {
                   return const Center(child: CircularProgressIndicator());
                 } else if (usStatesController.cacheStateHandler.apiState ==
                     ApiState.success) {
-                  return Expanded(
-                    child: ListView.builder(
-                      itemCount: 5,
-                      itemBuilder: (BuildContext context, int index) {
-                        return Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: GestureDetector(
-                            onTap: () {
-                              Get.toNamed("/test");
-                            },
-                            child: Center(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  boxShadow: [
-                                    BoxShadow(
-                                      color: themeData!.shadowColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 10,
-                                      offset: const Offset(
-                                          0, 8), // horizontal, vertical offset
-                                    ),
-                                    BoxShadow(
-                                      color: themeData!.shadowColor,
-                                      spreadRadius: 2,
-                                      blurRadius: 10,
-                                      offset: const Offset(
-                                          0, -8), // horizontal, vertical offset
-                                    ),
-                                  ],
-                                ),
-                                width: MediaQuery.of(context).size.width,
-                                height: 130,
-                                child: Card(
-                                  elevation: 0,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        const SizedBox(height: 5),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          children: [
-                                            Text(
-                                              "${usStatesController.cacheStateHandler.data!.numberOfQuestions.toString()} QUESTIONS",
-                                              style: TextStyle(
-                                                color: themeData?.blackColor,
+                  return GetBuilder<HomeController>(
+                    init: HomeController(),
+                    initState: (_) {},
+                    builder: (_) {
+                      if (controller.apiStateHandler.apiState ==
+                          ApiState.loading) {
+                        return const Center(child: CircularProgressIndicator());
+                      } else if (controller.apiStateHandler.apiState ==
+                          ApiState.success) {
+                        return Expanded(
+                          child: ListView.builder(
+                            itemCount:
+                                controller.apiStateHandler.data!.tests.length,
+                            itemBuilder: (BuildContext context, int index) {
+                              return Padding(
+                                padding: const EdgeInsets.all(10.0),
+                                child: GestureDetector(
+                                  onTap: () {
+                                    Get.toNamed("/test");
+                                  },
+                                  child: Center(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        boxShadow: [
+                                          BoxShadow(
+                                            color: themeData!.shadowColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 10,
+                                            offset: const Offset(0,
+                                                8), // horizontal, vertical offset
+                                          ),
+                                          BoxShadow(
+                                            color: themeData!.shadowColor,
+                                            spreadRadius: 2,
+                                            blurRadius: 10,
+                                            offset: const Offset(0,
+                                                -8), // horizontal, vertical offset
+                                          ),
+                                        ],
+                                      ),
+                                      width: MediaQuery.of(context).size.width,
+                                      height: 130,
+                                      child: Card(
+                                        elevation: 0,
+                                        child: Padding(
+                                          padding: const EdgeInsets.all(8.0),
+                                          child: Column(
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              const SizedBox(height: 5),
+                                              Row(
+                                                  mainAxisAlignment:
+                                                      MainAxisAlignment
+                                                          .spaceBetween,
+                                                  children: [
+                                                    Text(
+                                                      "${usStatesController.cacheStateHandler.data!.numberOfQuestions.toString()} QUESTIONS",
+                                                      style: TextStyle(
+                                                        color: themeData
+                                                            ?.blackColor,
+                                                      ),
+                                                    ),
+                                                    Text(
+                                                      "PASSING SCORE ${usStatesController.cacheStateHandler.data!.passingScore.toString()}",
+                                                      style: TextStyle(
+                                                        color: themeData
+                                                            ?.blackColor,
+                                                      ),
+                                                    ),
+                                                  ]),
+                                              const SizedBox(height: 10),
+                                              Text(
+                                                controller.apiStateHandler.data!
+                                                    .tests[index].name
+                                                    .toTitleCase(),
+                                                style: TextStyle(
+                                                  color: themeData?.blackColor,
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
                                               ),
-                                            ),
-                                            Text(
-                                              "PASSING SCORE ${usStatesController.cacheStateHandler.data!.passingScore.toString()}",
-                                              style: TextStyle(
-                                                color: themeData?.blackColor,
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                crossAxisAlignment:
+                                                    CrossAxisAlignment.center,
+                                                children: [
+                                                  Row(
+                                                    children: [
+                                                      LineIcon.timesCircle(
+                                                        size: 20.0,
+                                                        color: themeData
+                                                            ?.primaryColor,
+                                                      ),
+                                                      const SizedBox(width: 5),
+                                                      Text(
+                                                        "${usStatesController.cacheStateHandler.data!.numberOfQuestions - usStatesController.cacheStateHandler.data!.passingScore} Mistakes Allowed",
+                                                        style: TextStyle(
+                                                            color: themeData
+                                                                ?.primaryColor),
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  Container(
+                                                    decoration: BoxDecoration(
+                                                      border: Border.all(
+                                                        color: themeData!
+                                                            .primaryColor,
+                                                      ),
+                                                      borderRadius:
+                                                          BorderRadius.circular(
+                                                              20),
+                                                    ),
+                                                    child: Padding(
+                                                      padding: const EdgeInsets
+                                                          .symmetric(
+                                                        vertical: 8.0,
+                                                        horizontal: 15,
+                                                      ),
+                                                      child: Row(
+                                                        children: [
+                                                          LineIcon.playCircle(
+                                                            size: 20.0,
+                                                            color: themeData
+                                                                ?.primaryColor,
+                                                          ),
+                                                          const SizedBox(
+                                                              width: 5),
+                                                          Text(
+                                                            "Start",
+                                                            style: TextStyle(
+                                                                color: themeData
+                                                                    ?.primaryColor),
+                                                          ),
+                                                        ],
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ],
                                               ),
-                                            ),
-                                          ],
-                                        ),
-                                        const SizedBox(height: 10),
-                                        Text(
-                                          "Practice Test ${index + 1}",
-                                          style: TextStyle(
-                                            color: themeData?.blackColor,
-                                            fontSize: 20,
-                                            fontWeight: FontWeight.bold,
+                                            ],
                                           ),
                                         ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.spaceBetween,
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.center,
-                                          children: [
-                                            Row(
-                                              children: [
-                                                LineIcon.timesCircle(
-                                                  size: 20.0,
-                                                  color:
-                                                      themeData?.primaryColor,
-                                                ),
-                                                const SizedBox(width: 5),
-                                                Text(
-                                                  "${usStatesController.cacheStateHandler.data!.numberOfQuestions - usStatesController.cacheStateHandler.data!.passingScore} Mistakes Allowed",
-                                                  style: TextStyle(
-                                                      color: themeData
-                                                          ?.primaryColor),
-                                                ),
-                                              ],
-                                            ),
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                border: Border.all(
-                                                  color:
-                                                      themeData!.primaryColor,
-                                                ),
-                                                borderRadius:
-                                                    BorderRadius.circular(20),
-                                              ),
-                                              child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                  vertical: 8.0,
-                                                  horizontal: 15,
-                                                ),
-                                                child: Row(
-                                                  children: [
-                                                    LineIcon.playCircle(
-                                                      size: 20.0,
-                                                      color: themeData
-                                                          ?.primaryColor,
-                                                    ),
-                                                    const SizedBox(width: 5),
-                                                    Text(
-                                                      "Start",
-                                                      style: TextStyle(
-                                                          color: themeData
-                                                              ?.primaryColor),
-                                                    ),
-                                                  ],
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ],
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
                           ),
                         );
-                      },
-                    ),
+                      } else if (usStatesController
+                              .cacheStateHandler.apiState ==
+                          ApiState.error) {
+                        return RefreshErrorWidget(
+                          assetImage: "assets/images/error.png",
+                          errorMessage: "Unknown Error Occurred",
+                          onRefresh: () async {
+                            usStatesController.fetchData();
+                            usStatesController.update();
+                          },
+                        );
+                      } else {
+                        return RefreshErrorWidget(
+                          assetImage: "assets/images/error.png",
+                          errorMessage: "Unknown Error Occurred",
+                          onRefresh: () async {
+                            usStatesController.fetchData();
+                            usStatesController.update();
+                          },
+                        );
+                      }
+                    },
                   );
                 } else if (usStatesController.cacheStateHandler.apiState ==
                     ApiState.error) {

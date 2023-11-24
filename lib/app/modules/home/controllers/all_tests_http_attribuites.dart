@@ -1,11 +1,11 @@
 import 'package:drivingexam/app/core/http_client/htttp_attrib_options.dart';
 import 'package:drivingexam/app/utils/keys/keys.dart';
 
-class TestHttpAttributes extends HttpClientAttributeOptions {
-  TestHttpAttributes()
+class AllTestsHttpAttributes extends HttpClientAttributeOptions {
+  AllTestsHttpAttributes()
       : super(
           baseUrl: Keys.baseurl,
-          url: "/tests/test1.json",
+          url: "/tests_urls/all_tests.json",
           connectionTimeout: 30,
           contentType: 'application/json',
           method: HttpMethod.GET,

@@ -24,20 +24,19 @@ class RefreshErrorWidget extends StatelessWidget {
       child: RefreshIndicator(
         onRefresh: onRefresh,
         child: ListView(
-          physics: BouncingScrollPhysics(),
           shrinkWrap: true,
           children: [
             const SizedBox(height: 30),
             Image.asset(
               assetImage,
-              height: 100,
+              height: 120,
             ),
             Text(
               errorMessage,
               style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: themeData?.primaryColor,
                   fontSize:
-                      SizerUtil.deviceType == DeviceType.mobile ? 10.sp : 9.sp,
+                      SizerUtil.deviceType == DeviceType.mobile ? 16.sp : 16.sp,
                   fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
             ),
@@ -47,7 +46,7 @@ class RefreshErrorWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: themeData?.blackColor.withOpacity(0.4),
                   fontSize:
-                      SizerUtil.deviceType == DeviceType.mobile ? 9.sp : 7.sp,
+                      SizerUtil.deviceType == DeviceType.mobile ? 14.sp : 16.sp,
                   fontWeight: FontWeight.w400),
               textAlign: TextAlign.center,
             ),
