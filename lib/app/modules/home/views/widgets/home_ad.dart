@@ -1,5 +1,6 @@
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
+import 'package:drivingexam/app/modules/home/helpers/home_helpers.dart';
 import 'package:drivingexam/app/utils/extensions/title_case_extension.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 import 'package:flutter/material.dart';
@@ -62,23 +63,36 @@ class HomeAD extends StatelessWidget {
                       const SizedBox(
                         height: 4,
                       ),
-                      Container(
-                        decoration: BoxDecoration(
-                          color: themeData?.primaryColor,
-                          border: Border.all(
-                            color: themeData!.primaryColor.withOpacity(0.5),
+                      GestureDetector(
+                        onTap: () {
+                          if (masterDataController.configs!.houseAd.typeApp ==
+                              true) {
+                            HomeHelpers()
+                                .openStores("com.iyaffle.rangoli", "585027354");
+                          } else {
+                            HomeHelpers().launchWebUrl(masterDataController
+                                .configs!.houseAd.androidUrl);
+                          }
+                        },
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: themeData?.primaryColor,
+                            border: Border.all(
+                              color: themeData!.primaryColor.withOpacity(0.5),
+                            ),
+                            borderRadius: BorderRadius.circular(4),
                           ),
-                          borderRadius: BorderRadius.circular(4),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 2.0, horizontal: 15),
-                          child: Text(
-                            masterDataController.configs!.houseAd.buttonText.toTitleCase(),
-                            style: TextStyle(
-                              color: themeData!.whiteColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 12,
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2.0, horizontal: 15),
+                            child: Text(
+                              masterDataController.configs!.houseAd.buttonText
+                                  .toTitleCase(),
+                              style: TextStyle(
+                                color: themeData!.whiteColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 12,
+                              ),
                             ),
                           ),
                         ),

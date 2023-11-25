@@ -94,6 +94,7 @@ class TestController extends GetxController {
     isSelectingAnswerEnabled.value = true;
     showAnswer.value = true;
     showDescription.value = false;
+    
   }
 
   //going to next page after user sees the answer and press the next button
@@ -124,13 +125,13 @@ class TestController extends GetxController {
     //adding result object to result list
     results.add(result);
     setAnswersCount();
-
+   
     isAnswerSelected.value = true;
     isSelectingAnswerEnabled.value = false;
     showAnswer.value = false;
     showDescription.value = true;
   }
-
+  
   // go to previous question and remove previous answer
   goToPreviousQuestion() {
     //resting question values
@@ -149,8 +150,8 @@ class TestController extends GetxController {
 
   //setting correct answer count
   setAnswersCount() {
-    correctAnswersCount.value = testHelper.countErrorsFromResult(results);
+    correctAnswersCount.value = testHelper.countCorrectAnswersFromResult(results);
     incorrectAnswersCount.value =
-        testHelper.countCorrectAnswersFromResult(results);
+        testHelper.countErrorsFromResult(results);
   }
 }

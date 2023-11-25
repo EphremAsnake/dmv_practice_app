@@ -21,6 +21,7 @@ dependencies:
   easy_pdf_viewer: ^1.0.7
   shimmer: ^3.0.0
   url_launcher: ^6.2.1
+  store_redirect: ^2.0.1
   
 
 

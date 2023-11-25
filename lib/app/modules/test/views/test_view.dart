@@ -97,8 +97,11 @@ class TestView extends GetView<TestController> {
                         visible: controller.showProgress.value,
                         child: ProgressCard(result: controller.results),
                       ),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 1.5,
+                      ConstrainedBox(
+                        constraints: BoxConstraints(
+                            maxHeight:
+                                MediaQuery.of(context).size.height * 1.5),
+                        //height: MediaQuery.of(context).size.height * 1.5,
                         child: PageView.builder(
                           itemCount: questionPages.length,
                           itemBuilder: (context, index) {
