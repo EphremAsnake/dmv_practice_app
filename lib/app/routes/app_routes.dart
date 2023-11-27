@@ -7,6 +7,7 @@ abstract class Routes {
   static const US_STATES = _Paths.US_STATES;
   static const TEST = _Paths.TEST;
   static const STUDY_SIGNS = _Paths.STUDY_SIGNS;
+
 }
 
 abstract class _Paths {
@@ -15,4 +16,5 @@ abstract class _Paths {
   static const US_STATES = '/us-states';
   static const TEST = '/test';
   static const STUDY_SIGNS = '/study-signs';
+
 }

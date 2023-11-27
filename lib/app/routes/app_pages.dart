@@ -1,5 +1,4 @@
 import 'package:get/get.dart';
-
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/study_signs/bindings/study_signs_binding.dart';
@@ -38,5 +37,6 @@ class AppPages {
       page: () => StudySignsView(),
       binding: StudySignsBinding(),
     ),
+    
   ];
 }

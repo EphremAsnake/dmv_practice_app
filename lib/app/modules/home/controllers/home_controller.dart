@@ -37,4 +37,12 @@ class HomeController extends GetxController {
       update();
     }
   }
+
+   // Reactive variable to track the modal state
+  RxBool isModalOpen = false.obs;
+
+  // Method to toggle the modal state
+  void toggleModal() {
+    isModalOpen.toggle();
+  }
 }

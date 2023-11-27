@@ -9,6 +9,7 @@ import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:sizer/sizer.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -30,32 +31,96 @@ class HomeView extends GetView<HomeController> {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Container(
-                    width: 50,
-                    height: 50,
-                    decoration: BoxDecoration(
-                      color: themeData?.whiteColor,
-                      shape: BoxShape.rectangle,
-                      borderRadius: BorderRadius.circular(10),
-                      boxShadow: [
-                        BoxShadow(
-                          color: themeData!.shadowColor.withOpacity(0.5),
-                          spreadRadius: 2,
-                          blurRadius: 1,
-                          offset:
-                              const Offset(0, 1), // horizontal, vertical offset
+                GestureDetector(
+                  onTap: () {
+                    Get.bottomSheet(
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal:  10.0),
+                        child: Container(
+                          height: 40.h,
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.start,
+                            children: [
+                              const SizedBox(height: 20),
+                              Text(
+                                "Settings",
+                                style: TextStyle(
+                                  color: themeData?.primaryColor,
+                                  fontSize: 20,
+                                  fontWeight: FontWeight.bold,
+                                ),
+                              ),
+                              const SizedBox(height: 5),
+                              const Divider(),
+                              const SizedBox(height: 5),
+                              const Card(
+                                elevation: 0,
+                                borderOnForeground: true,
+                                child: ListTile(
+                                  title: Text("Change State"),
+                                  trailing: Icon(Icons.chevron_right),
+                                   leading:  Icon(Icons.flag_outlined),
+                                ),
+                              ),
+                              const Card(
+                                elevation: 0,
+                                borderOnForeground: true,
+                                child: ListTile(
+                                  title: Text("About"),
+                                  trailing: Icon(Icons.chevron_right),
+                                  leading:  Icon(Icons.info_outline),
+                                ),
+                              ),
+                              const Card(
+                                elevation: 0,
+                                borderOnForeground: true,
+                                child: ListTile(
+                                  title: Text("Share "),
+                                  trailing: Icon(Icons.chevron_right),
+                                   leading:  Icon(Icons.share_outlined),
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: SizedBox(
-                        width: 1,
-                        height: 1,
-                        child: Image.asset(
-                          "assets/images/menu.png",
+                      ),
+                      backgroundColor: themeData?.backgroundColor,
+                      elevation: 0,
+                      shape: const RoundedRectangleBorder(
+                        borderRadius: BorderRadius.only(
+                            topLeft: Radius.circular(10),
+                            topRight: Radius.circular(10)),
+                      ),
+                      enableDrag: true,
+                    );
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Container(
+                      width: 50,
+                      height: 50,
+                      decoration: BoxDecoration(
+                        color: themeData?.whiteColor,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(10),
+                        boxShadow: [
+                          BoxShadow(
+                            color: themeData!.shadowColor.withOpacity(0.5),
+                            spreadRadius: 2,
+                            blurRadius: 1,
+                            offset: const Offset(
+                                0, 1), // horizontal, vertical offset
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SizedBox(
+                          width: 1,
+                          height: 1,
+                          child: Image.asset(
+                            "assets/images/menu.png",
+                          ),
                         ),
                       ),
                     ),
@@ -90,10 +155,14 @@ class HomeView extends GetView<HomeController> {
                                 controller.apiStateHandler.data!.tests.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
-                                  padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 10.0, vertical: 5.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    Get.toNamed("/test",arguments: {'test_url': controller.apiStateHandler.data!.tests[index].url});
+                                    Get.toNamed("/test", arguments: {
+                                      'test_url': controller.apiStateHandler
+                                          .data!.tests[index].url
+                                    });
                                   },
                                   child: Center(
                                     child: Container(
@@ -120,7 +189,8 @@ class HomeView extends GetView<HomeController> {
                                       child: Card(
                                         elevation: 0,
                                         child: Padding(
-                                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                                          padding: const EdgeInsets.symmetric(
+                                              horizontal: 10.0),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,
