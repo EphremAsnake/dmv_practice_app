@@ -81,7 +81,12 @@ class QuestionController extends StatelessWidget {
                     } else if (controller.showAdCounter.value == 3) {
                       await InterstitialAdManager().showInterstitialAd();
                       controller.goToNextQuestion(pages.length);
+                      //loading ad for next use
+                      InterstitialAdManager().loadAd();
+                      //reset AD counter value
+                      controller.showAdCounter.value = 0;
                     } else {
+                      
                       controller.goToNextQuestion(pages.length);
                     }
                     //}

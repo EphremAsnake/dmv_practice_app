@@ -41,40 +41,39 @@ class HomeAD extends StatelessWidget {
           if (masterDataController.configs!.houseAd.show == true) {
             return Padding(
               padding: const EdgeInsets.all(10.0),
-              child: Container(
-                height: 60,
-                decoration: BoxDecoration(
-                  color: themeData!.whiteColor,
-                  shape: BoxShape.rectangle,
-                  borderRadius: BorderRadius.circular(10),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        masterDataController.configs!.houseAd.title,
-                        style: TextStyle(
-                          fontSize: 12,
-                          color: themeData!.blackColor,
+              child: GestureDetector(
+                onTap: () {
+                  if (masterDataController.configs!.houseAd.typeApp == true) {
+                    HomeHelpers()
+                        .openStores("com.iyaffle.rangoli", "585027354");
+                  } else {
+                    HomeHelpers().launchWebUrl(
+                        masterDataController.configs!.houseAd.androidUrl);
+                  }
+                },
+                child: Container(
+                  height: 60,
+                  decoration: BoxDecoration(
+                    color: themeData!.whiteColor,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(10),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          masterDataController.configs!.houseAd.title,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: themeData!.blackColor,
+                          ),
                         ),
-                      ),
-                      const SizedBox(
-                        height: 4,
-                      ),
-                      GestureDetector(
-                        onTap: () {
-                          if (masterDataController.configs!.houseAd.typeApp ==
-                              true) {
-                            HomeHelpers()
-                                .openStores("com.iyaffle.rangoli", "585027354");
-                          } else {
-                            HomeHelpers().launchWebUrl(masterDataController
-                                .configs!.houseAd.androidUrl);
-                          }
-                        },
-                        child: Container(
+                        const SizedBox(
+                          height: 4,
+                        ),
+                        Container(
                           decoration: BoxDecoration(
                             color: themeData?.primaryColor,
                             border: Border.all(
@@ -96,8 +95,8 @@ class HomeAD extends StatelessWidget {
                             ),
                           ),
                         ),
-                      ),
-                    ],
+                      ],
+                    ),
                   ),
                 ),
               ),
