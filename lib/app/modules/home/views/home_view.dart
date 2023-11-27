@@ -66,7 +66,6 @@ class HomeView extends GetView<HomeController> {
             ),
             HomePageTopCard(),
             ReadManual(),
-            const SizedBox(height: 5),
             GetBuilder<UsStatesController>(
               init: UsStatesController(),
               initState: (_) {},
@@ -91,10 +90,10 @@ class HomeView extends GetView<HomeController> {
                                 controller.apiStateHandler.data!.tests.length,
                             itemBuilder: (BuildContext context, int index) {
                               return Padding(
-                                padding: const EdgeInsets.all(10.0),
+                                  padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
                                 child: GestureDetector(
                                   onTap: () {
-                                    Get.toNamed("/test");
+                                    Get.toNamed("/test",arguments: {'test_url': controller.apiStateHandler.data!.tests[index].url});
                                   },
                                   child: Center(
                                     child: Container(
@@ -121,7 +120,7 @@ class HomeView extends GetView<HomeController> {
                                       child: Card(
                                         elevation: 0,
                                         child: Padding(
-                                          padding: const EdgeInsets.all(8.0),
+                                           padding: const EdgeInsets.symmetric(horizontal: 10.0),
                                           child: Column(
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.start,

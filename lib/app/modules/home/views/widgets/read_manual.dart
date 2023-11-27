@@ -23,7 +23,7 @@ class ReadManual extends StatelessWidget {
       builder: (_) {
         if (controller.cacheStateHandler.apiState == ApiState.loading) {
           return Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
             child: SizedBox(
               width: MediaQuery.of(context).size.width,
               height: 70,

@@ -9,6 +9,9 @@ class InterstitialAdManager {
 
   // Loads an interstitial ad.
   void loadAd() {
+
+
+    
     InterstitialAd.load(
         adUnitId: adUnitId,
         request: const AdRequest(),
@@ -17,7 +20,6 @@ class InterstitialAdManager {
           onAdLoaded: (ad) {
             // Keep a reference to the ad so you can show it later.
             _interstitialAd = ad;
-            showInterstitialAd();
           },
           // Called when an ad request failed.
           onAdFailedToLoad: (LoadAdError error) {
@@ -26,7 +28,7 @@ class InterstitialAdManager {
         ));
   }
 
-  void showInterstitialAd() {
+  Future<void> showInterstitialAd() async{
     if (_interstitialAd == null) {
       return;
     }
@@ -40,7 +42,7 @@ class InterstitialAdManager {
         // loadAd();
       },
     );
-    _interstitialAd!.show();
+     _interstitialAd!.show();
     _interstitialAd = null;
   }
 }

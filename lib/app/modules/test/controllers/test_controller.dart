@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 import 'package:confetti/confetti.dart';
 import 'package:drivingexam/app/core/http_client/http_service.dart';
 import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
@@ -8,6 +7,7 @@ import 'package:drivingexam/app/data/models/test/test.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_http_attribuites.dart';
 import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
 import 'package:drivingexam/app/modules/test/views/result_page.dart';
+import 'package:drivingexam/app/utils/helper/Interstitial_ad_manager.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 import 'package:get/get.dart';
 
@@ -27,14 +27,20 @@ class TestController extends GetxController {
   Rx<int> incorrectAnswersCount = 0.obs;
   Rx<int> correctAnswersCount = 0.obs;
   TestHelper testHelper = TestHelper();
+  String testUrl;
+  Rx<int> showAdCounter = 0.obs;
+
+  TestController(this.testUrl);
 
   final apiStateHandler = ApiStateHandler<Tests>();
+
   var httpService = Get.find<HttpService>();
 
   @override
   void onInit() {
     fetchData();
     confettiController = ConfettiController();
+    InterstitialAdManager().loadAd();
     super.onInit();
   }
 
@@ -54,8 +60,9 @@ class TestController extends GetxController {
   void fetchData() async {
     apiStateHandler.setLoading();
     try {
-      dynamic response =
-          await httpService.sendHttpRequest(TestHttpAttributes());
+      TestHttpAttributes testHttpAttributes = TestHttpAttributes();
+      testHttpAttributes.url = testUrl;
+      dynamic response = await httpService.sendHttpRequest(testHttpAttributes);
 
       final result = jsonDecode(response.body);
       tests = Tests.fromJson(result);
@@ -94,7 +101,6 @@ class TestController extends GetxController {
     isSelectingAnswerEnabled.value = true;
     showAnswer.value = true;
     showDescription.value = false;
-    
   }
 
   //going to next page after user sees the answer and press the next button
@@ -102,8 +108,12 @@ class TestController extends GetxController {
     if (currentPageIndex.value < pagesLength - 1) {
       nextPage();
       resetQuestionValues();
+
       //incrementing page number
       questionPageNumber.value = questionPageNumber.value + 1;
+
+      //incrementing show ad counter
+      showAdCounter.value = showAdCounter.value + 1;
     } else {
       Get.to(TestResult())?.then((_) {
         playConfetti();
@@ -125,13 +135,13 @@ class TestController extends GetxController {
     //adding result object to result list
     results.add(result);
     setAnswersCount();
-   
+
     isAnswerSelected.value = true;
     isSelectingAnswerEnabled.value = false;
     showAnswer.value = false;
     showDescription.value = true;
   }
-  
+
   // go to previous question and remove previous answer
   goToPreviousQuestion() {
     //resting question values
@@ -150,8 +160,8 @@ class TestController extends GetxController {
 
   //setting correct answer count
   setAnswersCount() {
-    correctAnswersCount.value = testHelper.countCorrectAnswersFromResult(results);
-    incorrectAnswersCount.value =
-        testHelper.countErrorsFromResult(results);
+    correctAnswersCount.value =
+        testHelper.countCorrectAnswersFromResult(results);
+    incorrectAnswersCount.value = testHelper.countErrorsFromResult(results);
   }
 }

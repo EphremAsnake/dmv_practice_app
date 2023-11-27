@@ -1,5 +1,7 @@
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
+import 'package:drivingexam/app/utils/helper/Interstitial_ad_manager.dart';
+import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
@@ -66,14 +68,22 @@ class QuestionController extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
+                  onTap: () async {
                     // if (controller.showAnswer.value == true) {
                     //   controller.showQuestionAnswer(
                     //       controller.choiceId,
                     //       controller.tests!
                     //           .questions[controller.currentPageIndex.value]);
                     // } else {
+                    if (controller.choiceId == 0) {
+                      customSnackBar(
+                          title: "Error", body: "Please Select Answer");
+                    } else if (controller.showAdCounter.value == 3) {
+                      await InterstitialAdManager().showInterstitialAd();
                       controller.goToNextQuestion(pages.length);
+                    } else {
+                      controller.goToNextQuestion(pages.length);
+                    }
                     //}
                   },
                   child: Container(

@@ -13,7 +13,7 @@ import 'package:sizer/sizer.dart';
 class QuestionCard extends StatelessWidget {
   final Question question;
   final int index;
-  final NativeAdController nativeAdcontroller = Get.put(NativeAdController());
+  final NativeAdController nativeAdController = Get.put(NativeAdController());
   final themeData = Get.find<ThemeController>().themeData.value;
   QuestionCard({
     super.key,
@@ -93,6 +93,9 @@ class QuestionCard extends StatelessWidget {
                         itemCount: question.choices.length,
                         itemBuilder: (context, index) {
                           final choice = question.choices[index];
+                          // if (controller.wasPreviousButtonPressed.value) {
+                          //   choice.selected = false;
+                          // }
                           return Obx(
                             () => Padding(
                               padding: const EdgeInsets.all(8.0),
@@ -213,7 +216,7 @@ class QuestionCard extends StatelessWidget {
                       ),
                     ),
                     GetBuilder<NativeAdController>(
-                      init: nativeAdcontroller,
+                      init: nativeAdController,
                       builder: (_) {
                         return buildNativeAd();
                       },
