@@ -1,4 +1,7 @@
 import 'package:get/get.dart';
+
+import '../modules/about/bindings/about_binding.dart';
+import '../modules/about/views/about_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/study_signs/bindings/study_signs_binding.dart';
@@ -19,7 +22,7 @@ class AppPages {
   static final routes = [
     GetPage(
       name: _Paths.HOME,
-      page: () =>  HomeView(),
+      page: () => HomeView(),
       binding: HomeBinding(),
     ),
     GetPage(
@@ -37,6 +40,10 @@ class AppPages {
       page: () => StudySignsView(),
       binding: StudySignsBinding(),
     ),
-    
+    GetPage(
+      name: _Paths.ABOUT,
+      page: () =>  AboutView(),
+      binding: AboutBinding(),
+    ),
   ];
 }

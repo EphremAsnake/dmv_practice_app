@@ -3,6 +3,7 @@ import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
 import 'package:drivingexam/app/modules/test/views/widgets/test_widgets_export.dart';
 import 'package:drivingexam/app/modules/test/views/widgets/view_progress.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/shared_widgets/custom_progress_indicator.dart';
 import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +19,7 @@ class TestView extends GetView<TestController> {
       body: GetBuilder<TestController>(
         builder: (controller) {
           if (controller.apiStateHandler.apiState == ApiState.loading) {
-            return const Center(child: CircularProgressIndicator());
+            return  Center(child: CustomProgressIndicator());
           } else if (controller.apiStateHandler.apiState == ApiState.success) {
             final List<Widget> questionPages = [
               for (int index = 0;

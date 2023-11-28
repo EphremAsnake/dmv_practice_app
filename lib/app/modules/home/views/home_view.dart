@@ -1,15 +1,14 @@
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
-import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
-import 'package:drivingexam/app/modules/home/views/widgets/home_page_top_card.dart';
-import 'package:drivingexam/app/modules/home/views/widgets/read_manual.dart';
+import 'package:drivingexam/app/modules/home/views/widgets/home_widgets_exports.dart';
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:drivingexam/app/utils/extensions/title_case_extension.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/shared_widgets/custom_progress_indicator.dart';
 import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
-import 'package:sizer/sizer.dart';
+import 'package:shimmer/shimmer.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -35,54 +34,8 @@ class HomeView extends GetView<HomeController> {
                   onTap: () {
                     Get.bottomSheet(
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal:  10.0),
-                        child: Container(
-                          height: 40.h,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              const SizedBox(height: 20),
-                              Text(
-                                "Settings",
-                                style: TextStyle(
-                                  color: themeData?.primaryColor,
-                                  fontSize: 20,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                              const SizedBox(height: 5),
-                              const Divider(),
-                              const SizedBox(height: 5),
-                              const Card(
-                                elevation: 0,
-                                borderOnForeground: true,
-                                child: ListTile(
-                                  title: Text("Change State"),
-                                  trailing: Icon(Icons.chevron_right),
-                                   leading:  Icon(Icons.flag_outlined),
-                                ),
-                              ),
-                              const Card(
-                                elevation: 0,
-                                borderOnForeground: true,
-                                child: ListTile(
-                                  title: Text("About"),
-                                  trailing: Icon(Icons.chevron_right),
-                                  leading:  Icon(Icons.info_outline),
-                                ),
-                              ),
-                              const Card(
-                                elevation: 0,
-                                borderOnForeground: true,
-                                child: ListTile(
-                                  title: Text("Share "),
-                                  trailing: Icon(Icons.chevron_right),
-                                   leading:  Icon(Icons.share_outlined),
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        child: Settings(themeData: themeData),
                       ),
                       backgroundColor: themeData?.backgroundColor,
                       elevation: 0,
@@ -137,7 +90,7 @@ class HomeView extends GetView<HomeController> {
               builder: (_) {
                 if (usStatesController.cacheStateHandler.apiState ==
                     ApiState.loading) {
-                  return const Center(child: CircularProgressIndicator());
+                  return Center(child: CustomProgressIndicator());
                 } else if (usStatesController.cacheStateHandler.apiState ==
                     ApiState.success) {
                   return GetBuilder<HomeController>(
@@ -146,7 +99,27 @@ class HomeView extends GetView<HomeController> {
                     builder: (_) {
                       if (controller.apiStateHandler.apiState ==
                           ApiState.loading) {
-                        return const Center(child: CircularProgressIndicator());
+                        return Shimmer.fromColors(
+                          baseColor: Colors.grey[300]!,
+                          highlightColor: Colors.grey[100]!,
+                          child: Expanded(
+                            child: ListView.builder(
+                              shrinkWrap: true,
+                              itemCount: 4,
+                              itemBuilder: (BuildContext context, int index) {
+                                return Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      horizontal: 10.0, vertical: 5),
+                                  child: Container(
+                                    width: double.infinity,
+                                    height: 130,
+                                    color: themeData!.whiteColor,
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        );
                       } else if (controller.apiStateHandler.apiState ==
                           ApiState.success) {
                         return Expanded(

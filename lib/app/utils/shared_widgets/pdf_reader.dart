@@ -1,5 +1,6 @@
 import 'package:drivingexam/app/core/shared_controllers/pdf_reader_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
+import 'package:drivingexam/app/utils/shared_widgets/custom_progress_indicator.dart';
 import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,7 +35,7 @@ class PDFReader extends StatelessWidget {
         initState: (_) {},
         builder: (_) {
           if (controller.isLoading.value == true) {
-            return const Center(child: CircularProgressIndicator());
+            return  Center(child: CustomProgressIndicator());
           } else {
             return PDFViewer(
               scrollDirection: Axis.vertical,
@@ -46,6 +47,7 @@ class PDFReader extends StatelessWidget {
               ),
               pickerButtonColor: themeData?.primaryColor,
               indicatorBackground: themeData!.primaryColor,
+              progressIndicator: CustomProgressIndicator(),
             );
           }
         },

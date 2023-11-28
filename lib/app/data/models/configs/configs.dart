@@ -8,23 +8,27 @@ class Configs {
     Settings settings;
     AppConfig appConfig;
     HouseAd houseAd;
+    String aboutApp;
 
     Configs({
         required this.settings,
         required this.appConfig,
         required this.houseAd,
+        required this.aboutApp,
     });
 
     factory Configs.fromJson(Map<String, dynamic> json) => Configs(
         settings: Settings.fromJson(json["settings"]),
         appConfig: AppConfig.fromJson(json["app_config"]),
         houseAd: HouseAd.fromJson(json["house_ad"]),
+        aboutApp: json["about_app"]
     );
 
     Map<String, dynamic> toJson() => {
         "settings": settings.toJson(),
         "app_config": appConfig.toJson(),
         "house_ad": houseAd.toJson(),
+        "about_app": aboutApp,
     };
 }
 
