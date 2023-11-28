@@ -29,7 +29,7 @@ class QuestionCard extends StatelessWidget {
       children: [
         Expanded(
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.symmetric(vertical: 5,horizontal: 2),
             child: Container(
               decoration: BoxDecoration(
                 boxShadow: [
@@ -54,32 +54,23 @@ class QuestionCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      height: 10,
+                      height: 2,
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Text(
-                        "Select an answer",
-                        style: TextStyle(
-                            color: themeData?.blackColor.withOpacity(0.5),
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold),
-                      ),
-                    ),
+                    
                     Padding(
                       padding: const EdgeInsets.all(10.0),
                       child: Text(
                         "${index + 1}. ${question.question}",
                         style: TextStyle(
                             color: themeData?.blackColor,
-                            fontSize: 18,
+                            fontSize: 11.sp,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
                     if (question.imageUrl != null)
                       Center(
                         child: Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(0.0),
                           child: Image.network(
                             "${Keys.baseurl}${question.imageUrl!}",
                             width: 100,
@@ -100,7 +91,7 @@ class QuestionCard extends StatelessWidget {
                           // }
                           return Obx(
                             () => Padding(
-                              padding: const EdgeInsets.all(8.0),
+                              padding: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 10),
                               child: Container(
                                 decoration: BoxDecoration(
                                   border: Border.all(
@@ -115,24 +106,21 @@ class QuestionCard extends StatelessWidget {
                                   borderRadius: BorderRadius.circular(8),
                                 ),
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.all(6.0),
                                   child: ListTile(
+                                    visualDensity: const VisualDensity(horizontal: 0, vertical: -4),
+                                    dense: true,
+                                    contentPadding: const EdgeInsets.all(0),
                                     splashColor:
                                         themeData!.splashColor.withOpacity(0.5),
                                     title: Text(choice.text),
-                                    leading: Container(
-                                      width: 30,
-                                      height: 30,
-                                      decoration: BoxDecoration(
-                                        shape: BoxShape.circle,
-                                        color: TestHelper().getBorderColor(
-                                            controller.isAnswerSelected.value,
-                                            choice.selected,
-                                            controller
-                                                .wasAnsweredCorrectly.value,
-                                            choice.id,
-                                            question.answerId),
-                                        border: Border.all(
+                                    leading: Padding(
+                                      padding: const EdgeInsets.only(left: 5.0),
+                                      child: Container(
+                                        width: 25,
+                                        height: 25,
+                                        decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
                                           color: TestHelper().getBorderColor(
                                               controller.isAnswerSelected.value,
                                               choice.selected,
@@ -140,21 +128,30 @@ class QuestionCard extends StatelessWidget {
                                                   .wasAnsweredCorrectly.value,
                                               choice.id,
                                               question.answerId),
-                                          width: 2,
+                                          border: Border.all(
+                                            color: TestHelper().getBorderColor(
+                                                controller.isAnswerSelected.value,
+                                                choice.selected,
+                                                controller
+                                                    .wasAnsweredCorrectly.value,
+                                                choice.id,
+                                                question.answerId),
+                                            width: 2,
+                                          ),
                                         ),
-                                      ),
-                                      child: Center(
-                                        child: TestHelper()
-                                                .getCheckedOrWrongIcon(
-                                                    controller
-                                                        .isAnswerSelected.value,
-                                                    choice.selected,
-                                                    controller
-                                                        .wasAnsweredCorrectly
-                                                        .value,
-                                                    choice.id,
-                                                    question.answerId) ??
-                                            const SizedBox.shrink(),
+                                        child: Center(
+                                          child: TestHelper()
+                                                  .getCheckedOrWrongIcon(
+                                                      controller
+                                                          .isAnswerSelected.value,
+                                                      choice.selected,
+                                                      controller
+                                                          .wasAnsweredCorrectly
+                                                          .value,
+                                                      choice.id,
+                                                      question.answerId) ??
+                                              const SizedBox.shrink(),
+                                        ),
                                       ),
                                     ),
                                     onTap: () {

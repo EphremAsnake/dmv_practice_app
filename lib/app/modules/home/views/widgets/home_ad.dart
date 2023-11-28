@@ -63,12 +63,16 @@ class HomeAD extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(
-                          masterDataController.configs!.houseAd.title,
-                          style: TextStyle(
-                            fontSize: 12,
-                            color: themeData!.blackColor,
-                          ),
+                        Row(
+                          children: [
+                            Text(
+                              masterDataController.configs!.houseAd.title,
+                              style: TextStyle(
+                                fontSize: 12,
+                                color: themeData!.blackColor,
+                              ),
+                            ),
+                          ],
                         ),
                         const SizedBox(
                           height: 4,

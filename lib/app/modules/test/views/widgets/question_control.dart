@@ -5,6 +5,7 @@ import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
+import 'package:sizer/sizer.dart';
 
 class QuestionController extends StatelessWidget {
   QuestionController({
@@ -18,14 +19,14 @@ class QuestionController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.only( left: 0.0,right: 0.0, top: 5.0),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        height: 100,
+        height: 8.h,
         child: Card(
           elevation: 0,
           child: Padding(
-            padding: const EdgeInsets.all(10.0),
+            padding: const EdgeInsets.all(5.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -43,7 +44,7 @@ class QuestionController extends StatelessWidget {
                     }
                   },
                   child: Container(
-                    width: 150,
+                    width: 45.w,
                     decoration: BoxDecoration(
                       color: themeData?.backgroundColor,
                       border: Border.all(
@@ -53,7 +54,7 @@ class QuestionController extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 15.0, horizontal: 15),
+                          vertical: 10.0, horizontal: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -97,7 +98,7 @@ class QuestionController extends StatelessWidget {
                     //}
                   },
                   child: Container(
-                    width: 150,
+                    width: 45.w,
                     decoration: BoxDecoration(
                       color: themeData?.primaryColor,
                       border: Border.all(
@@ -107,7 +108,7 @@ class QuestionController extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 15.0, horizontal: 15),
+                          vertical: 10.0, horizontal: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [

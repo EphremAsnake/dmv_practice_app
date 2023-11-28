@@ -3,6 +3,7 @@ import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:sizer/sizer.dart';
 
 class QuestionProgress extends StatelessWidget {
   QuestionProgress({
@@ -18,7 +19,7 @@ class QuestionProgress extends StatelessWidget {
     }
     return Center(
       child: Padding(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Container(
           decoration: BoxDecoration(
             color: themeData!.whiteColor,
@@ -38,77 +39,74 @@ class QuestionProgress extends StatelessWidget {
             ],
           ),
           width: MediaQuery.of(context).size.width,
-          height: 120,
-          child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Card(
-              elevation: 0,
-              child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Obx(() => Text(
-                          "Question ${controller.questionPageNumber.value}/${controller.apiStateHandler.data!.questions.length}",
-                          style: TextStyle(
-                              color: themeData?.blackColor,
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold),
-                        )),
-                    const SizedBox(
-                      height: 10,
+          height: 9.h,
+          child: Card(
+            elevation: 0,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 5),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Obx(() => Text(
+                        "Question ${controller.questionPageNumber.value}/${controller.apiStateHandler.data!.questions.length}",
+                        style: TextStyle(
+                            color: themeData?.blackColor,
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
+                      )),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  Container(
+                    height: 8,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(5),
+                      color: themeData?.grayTextColor,
                     ),
-                    Container(
-                      height: 10,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(5),
-                        color: themeData?.grayTextColor,
-                      ),
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(5),
-                        child: Obx(() => LinearProgressIndicator(
-                              value: controller.questionPageNumber /
-                                  controller.test!.questions.length,
-                              minHeight: 10,
-                              backgroundColor: Colors.transparent,
-                              valueColor: AlwaysStoppedAnimation<Color>(
-                                themeData!.primaryColor,
-                              ),
-                            )),
-                      ),
+                    child: ClipRRect(
+                      borderRadius: BorderRadius.circular(5),
+                      child: Obx(() => LinearProgressIndicator(
+                            value: controller.questionPageNumber /
+                                controller.test!.questions.length,
+                            minHeight: 10,
+                            backgroundColor: Colors.transparent,
+                            valueColor: AlwaysStoppedAnimation<Color>(
+                              themeData!.primaryColor,
+                            ),
+                          )),
                     ),
-                    const SizedBox(
-                      height: 10,
-                    ),
-                    GestureDetector(
-                      onTap: () {
-                        if (controller.results.isEmpty) {
-                          customSnackBar(
-                            title: "Information",
-                            body:
-                                "Please make some progress to view your progress",
-                          );
-                        } else {
-                          controller.showProgress.value =
-                              !controller.showProgress.value;
-                          controller.update();
-                        }
-                      },
-                      child: Obx(
-                        () => Text(
-                          controller.showProgress.value
-                              ? "Hide Progress"
-                              : "View Progress",
-                          style: TextStyle(
-                              color: themeData!.primaryColor,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ),
+                  ),
+                  const SizedBox(
+                    height: 4,
+                  ),
+                  GestureDetector(
+                    onTap: () {
+                      if (controller.results.isEmpty) {
+                        customSnackBar(
+                          title: "Information",
+                          body:
+                              "Please make some progress to view your progress",
+                        );
+                      } else {
+                        controller.showProgress.value =
+                            !controller.showProgress.value;
+                        controller.update();
+                      }
+                    },
+                    child: Obx(
+                      () => Text(
+                        controller.showProgress.value
+                            ? "Hide Progress"
+                            : "View Progress",
+                        style: TextStyle(
+                            color: themeData!.primaryColor,
+                            fontSize: 13,
+                            fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

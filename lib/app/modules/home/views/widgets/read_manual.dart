@@ -41,7 +41,7 @@ class ReadManual extends StatelessWidget {
         } else if (controller.cacheStateHandler.apiState == ApiState.success) {
           if (controller.state != null) {
             return Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              padding: const EdgeInsets.symmetric(horizontal: 5.0),
               child: GestureDetector(
                 onTap: () {
                   Get.to(() => PDFReader(
@@ -53,22 +53,22 @@ class ReadManual extends StatelessWidget {
                     boxShadow: [
                       BoxShadow(
                         color: themeData!.shadowColor,
-                        spreadRadius: 2,
-                        blurRadius: 10,
+                        spreadRadius: 1,
+                        blurRadius: 5,
                         offset:
-                            const Offset(0, 8), // horizontal, vertical offset
+                            const Offset(0, 2), // horizontal, vertical offset
                       ),
                       BoxShadow(
                         color: themeData!.shadowColor,
-                        spreadRadius: 2,
-                        blurRadius: 10,
+                        spreadRadius: 1,
+                        blurRadius: 5,
                         offset:
-                            const Offset(0, -8), // horizontal, vertical offset
+                            const Offset(0, -2), // horizontal, vertical offset
                       ),
                     ],
                   ),
                   width: MediaQuery.of(context).size.width,
-                  height: 70,
+                  height: 6.h,
                   child: Card(
                     elevation: 0,
                     child: Padding(
@@ -79,7 +79,7 @@ class ReadManual extends StatelessWidget {
                           Row(
                             children: [
                               SizedBox(
-                                height: 80,
+                                height: 45,
                                 child: Image.asset(
                                   "assets/images/manual.png",
                                   fit: BoxFit.contain,
@@ -89,7 +89,7 @@ class ReadManual extends StatelessWidget {
                                 "Read ${controller.state!.name}'s Drivers Manual",
                                 style: TextStyle(
                                   color: themeData!.primaryColor,
-                                  fontSize: 12.sp,
+                                  fontSize: 11.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),

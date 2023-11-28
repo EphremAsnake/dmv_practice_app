@@ -3,7 +3,6 @@ import 'package:drivingexam/app/modules/home/views/widgets/home_widgets_exports.
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:drivingexam/app/utils/extensions/title_case_extension.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
-import 'package:drivingexam/app/utils/shared_widgets/custom_progress_indicator.dart';
 import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +24,7 @@ class HomeView extends GetView<HomeController> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(
-              height: 20,
+              height: 5,
             ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -34,7 +33,7 @@ class HomeView extends GetView<HomeController> {
                   onTap: () {
                     Get.bottomSheet(
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Settings(themeData: themeData),
                       ),
                       backgroundColor: themeData?.backgroundColor,
@@ -48,7 +47,7 @@ class HomeView extends GetView<HomeController> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(10.0),
+                    padding: const EdgeInsets.all(5.0),
                     child: Container(
                       width: 50,
                       height: 50,
@@ -67,12 +66,13 @@ class HomeView extends GetView<HomeController> {
                         ],
                       ),
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(12.0),
                         child: SizedBox(
                           width: 1,
                           height: 1,
                           child: Image.asset(
                             "assets/images/menu.png",
+                         
                           ),
                         ),
                       ),
@@ -104,7 +104,7 @@ class HomeView extends GetView<HomeController> {
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0, vertical: 5),
+                                      horizontal: 5.0, vertical: 2),
                                   child: Container(
                                     width: double.infinity,
                                     height: 130,
@@ -135,7 +135,7 @@ class HomeView extends GetView<HomeController> {
                                         (BuildContext context, int index) {
                                       return Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 10.0, vertical: 5),
+                                            horizontal: 5.0, vertical: 2),
                                         child: Container(
                                           width: double.infinity,
                                           height: 130,
@@ -156,7 +156,7 @@ class HomeView extends GetView<HomeController> {
                                       (BuildContext context, int index) {
                                     return Padding(
                                       padding: const EdgeInsets.symmetric(
-                                          horizontal: 10.0, vertical: 5.0),
+                                          horizontal: 5.0, vertical: 2.0),
                                       child: GestureDetector(
                                         onTap: () {
                                           Get.toNamed("/test", arguments: {
@@ -176,21 +176,21 @@ class HomeView extends GetView<HomeController> {
                                                   spreadRadius: 2,
                                                   blurRadius: 10,
                                                   offset: const Offset(0,
-                                                      8), // horizontal, vertical offset
+                                                      4), // horizontal, vertical offset
                                                 ),
                                                 BoxShadow(
                                                   color: themeData!.shadowColor,
                                                   spreadRadius: 2,
                                                   blurRadius: 10,
                                                   offset: const Offset(0,
-                                                      -8), // horizontal, vertical offset
+                                                      -4), // horizontal, vertical offset
                                                 ),
                                               ],
                                             ),
                                             width: MediaQuery.of(context)
                                                 .size
                                                 .width,
-                                            height: 130,
+                                            height: 110,
                                             child: Card(
                                               elevation: 0,
                                               child: Padding(
@@ -201,7 +201,7 @@ class HomeView extends GetView<HomeController> {
                                                   crossAxisAlignment:
                                                       CrossAxisAlignment.start,
                                                   children: [
-                                                    const SizedBox(height: 5),
+                                                    const SizedBox(height: 7),
                                                     Row(
                                                         mainAxisAlignment:
                                                             MainAxisAlignment
@@ -233,7 +233,7 @@ class HomeView extends GetView<HomeController> {
                                                       style: TextStyle(
                                                         color: themeData
                                                             ?.blackColor,
-                                                        fontSize: 20,
+                                                        fontSize: 18,
                                                         fontWeight:
                                                             FontWeight.bold,
                                                       ),
@@ -260,7 +260,7 @@ class HomeView extends GetView<HomeController> {
                                                               "${usStatesController.cacheStateHandler.data!.numberOfQuestions - usStatesController.cacheStateHandler.data!.passingScore} Mistakes Allowed",
                                                               style: TextStyle(
                                                                   color: themeData
-                                                                      ?.primaryColor),
+                                                                      ?.primaryColor,fontSize: 14,),
                                                             ),
                                                           ],
                                                         ),
@@ -280,8 +280,8 @@ class HomeView extends GetView<HomeController> {
                                                             padding:
                                                                 const EdgeInsets
                                                                     .symmetric(
-                                                              vertical: 8.0,
-                                                              horizontal: 15,
+                                                              vertical: 4.0,
+                                                              horizontal: 8,
                                                             ),
                                                             child: Row(
                                                               children: [

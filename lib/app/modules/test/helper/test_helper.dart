@@ -55,11 +55,11 @@ class TestHelper {
     if (isAnswerSelected) {
       if (isChoiceSelected) {
         icon = wasAnswerdCorrectly
-            ? Icon(Icons.check, color: themeData?.whiteColor)
-            : Icon(Icons.close, color: themeData?.whiteColor);
+            ? Icon(Icons.check, color: themeData?.whiteColor,size: 18,)
+            : Icon(Icons.close, color: themeData?.whiteColor,size: 18);
       } else {
         icon = answerId == choiceId
-            ? Icon(Icons.check, color: themeData?.whiteColor)
+            ? Icon(Icons.check, color: themeData?.whiteColor,size: 18)
             : null;
       }
       return icon;

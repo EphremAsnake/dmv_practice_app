@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:sizer/sizer.dart';
 
 class HomePageTopCard extends StatelessWidget {
   HomePageTopCard({
@@ -15,7 +16,7 @@ class HomePageTopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 10.0,vertical: 5.0),
+      padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 0.0),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -34,7 +35,7 @@ class HomePageTopCard extends StatelessWidget {
           ],
         ),
         width: MediaQuery.of(context).size.width,
-        height: 185,
+        height: 17.h,
         child: Card(
           elevation: 0,
           child: Padding(
@@ -43,7 +44,7 @@ class HomePageTopCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(
-                  height: 20,
+                  height: 5,
                 ),
                 GetBuilder<UsStatesController>(
                   init: usStateController,
@@ -73,7 +74,7 @@ class HomePageTopCard extends StatelessWidget {
                         "${usStateController.state?.name} Driver's Examination",
                         style: TextStyle(
                             color: themeData!.blackColor,
-                            fontSize: 18,
+                            fontSize: 16,
                             fontWeight: FontWeight.bold),
                       );
                     } else if (usStateController.cacheStateHandler.apiState ==
@@ -86,11 +87,11 @@ class HomePageTopCard extends StatelessWidget {
                   },
                 ),
                 const SizedBox(
-                  height: 8,
+                  height: 2,
                 ),
                 const Divider(),
                 const SizedBox(
-                  height: 4,
+                  height: 2,
                 ),
                 Text(
                   "Want To Practice Traffic Signs First ?",
@@ -100,7 +101,7 @@ class HomePageTopCard extends StatelessWidget {
                       fontWeight: FontWeight.bold),
                 ),
                 const SizedBox(
-                  height: 12,
+                  height: 6,
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.end,
@@ -119,7 +120,7 @@ class HomePageTopCard extends StatelessWidget {
                         ),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              vertical: 15.0, horizontal: 15),
+                              vertical: 10.0, horizontal: 15),
                           child: Row(
                             children: [
                               LineIcon.play(
@@ -134,6 +135,7 @@ class HomePageTopCard extends StatelessWidget {
                                 style: TextStyle(
                                   color: themeData!.whiteColor,
                                   fontWeight: FontWeight.bold,
+                                  fontSize: 12,
                                 ),
                               ),
                             ],

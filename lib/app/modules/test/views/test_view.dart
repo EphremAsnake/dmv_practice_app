@@ -38,90 +38,92 @@ class TestView extends GetView<TestController> {
               return SafeArea(
                 child: SizedBox(
                   height: MediaQuery.of(context).size.height,
-                  child: SingleChildScrollView(
-                    child: Column(
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        const SizedBox(
-                          height: 20,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 10.0),
-                              child: GestureDetector(
-                                onTap: () {
-                                  Get.back();
-                                },
-                                child: Container(
-                                  width: 50,
-                                  height: 50,
-                                  decoration: BoxDecoration(
-                                    color: themeData?.whiteColor,
-                                    shape: BoxShape.rectangle,
-                                    borderRadius: BorderRadius.circular(10),
-                                    boxShadow: [
-                                      BoxShadow(
-                                        color: themeData!.shadowColor
-                                            .withOpacity(0.5),
-                                        spreadRadius: 2,
-                                        blurRadius: 1,
-                                        offset: const Offset(0,
-                                            1), // horizontal, vertical offset
-                                      ),
-                                    ],
-                                  ),
-                                  child: const Padding(
-                                    padding:
-                                        EdgeInsets.symmetric(horizontal: 10.0),
-                                    child: SizedBox(
-                                      width: 1,
-                                      height: 1,
-                                      child: Center(
-                                        child: Icon(
-                                          Icons.chevron_left_outlined,
-                                          size: 32,
-                                        ),
+                  child: Column(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      const SizedBox(
+                        height: 5,
+                      ),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Padding(
+                            padding:
+                                const EdgeInsets.symmetric(horizontal: 5.0),
+                            child: GestureDetector(
+                              onTap: () {
+                                Get.back();
+                              },
+                              child: Container(
+                                width: 50,
+                                height: 50,
+                                decoration: BoxDecoration(
+                                  color: themeData?.whiteColor,
+                                  shape: BoxShape.rectangle,
+                                  borderRadius: BorderRadius.circular(10),
+                                  boxShadow: [
+                                    BoxShadow(
+                                      color: themeData!.shadowColor
+                                          .withOpacity(0.5),
+                                      spreadRadius: 2,
+                                      blurRadius: 1,
+                                      offset: const Offset(0,
+                                          1), // horizontal, vertical offset
+                                    ),
+                                  ],
+                                ),
+                                child: const Padding(
+                                  padding:
+                                      EdgeInsets.symmetric(horizontal: 10.0),
+                                  child: SizedBox(
+                                    width: 1,
+                                    height: 1,
+                                    child: Center(
+                                      child: Icon(
+                                        Icons.chevron_left_outlined,
+                                        size: 32,
                                       ),
                                     ),
                                   ),
                                 ),
                               ),
                             ),
-                            HomeAD(),
+                          ),
+                          HomeAD(),
+                        ],
+                      ),
+                    
+                      QuestionProgress(),
+                      Obx(() => Visibility(
+                            visible: controller.showProgress.value,
+                            child: ProgressCard(result: controller.results),
+                          )),
+                      SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            ConstrainedBox(
+                              constraints: BoxConstraints(
+                                  maxHeight:
+                                      MediaQuery.of(context).size.height * 0.7),
+                              //height: MediaQuery.of(context).size.height * 1.5,
+                              child: PageView.builder(
+                                itemCount: questionPages.length,
+                                itemBuilder: (context, index) {
+                                  return Obx(() => questionPages[
+                                      controller.currentPageIndex.value]);
+                                },
+                                onPageChanged: (index) {
+                                  controller.currentPageIndex.value = index;
+                                },
+                                physics:
+                                    const NeverScrollableScrollPhysics(), // Disable swiping between pages
+                              ),
+                            ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 10,
-                        ),
-                        QuestionProgress(),
-                        Obx(() => Visibility(
-                              visible: controller.showProgress.value,
-                              child: ProgressCard(result: controller.results),
-                            )),
-                        ConstrainedBox(
-                          constraints: BoxConstraints(
-                              maxHeight:
-                                  MediaQuery.of(context).size.height * 1.5),
-                          //height: MediaQuery.of(context).size.height * 1.5,
-                          child: PageView.builder(
-                            itemCount: questionPages.length,
-                            itemBuilder: (context, index) {
-                              return Obx(() => questionPages[
-                                  controller.currentPageIndex.value]);
-                            },
-                            onPageChanged: (index) {
-                              controller.currentPageIndex.value = index;
-                            },
-                            physics:
-                                const NeverScrollableScrollPhysics(), // Disable swiping between pages
-                          ),
-                        ),
-                        QuestionController(pages: questionPages),
-                      ],
-                    ),
+                      ),
+                      Expanded(child: QuestionController(pages: questionPages)),
+                    ],
                   ),
                 ),
               );
