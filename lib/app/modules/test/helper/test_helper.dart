@@ -34,10 +34,10 @@ class TestHelper {
   }
 
   int countCorrectAnswersFromResult(List<Result> result) {
-    int errors =
+    int correctAnswers =
         result.where((element) => element.isCorrect == true).toList().length;
 
-    return errors;
+    return correctAnswers;
   }
 
   bool passedOrFailed(List<Result> result) {

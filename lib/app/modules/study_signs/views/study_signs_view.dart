@@ -4,6 +4,7 @@ import 'package:drivingexam/app/modules/study_signs/views/widgets/study_signs_de
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 import 'package:drivingexam/app/utils/keys/keys.dart';
 import 'package:drivingexam/app/utils/shared_widgets/custom_progress_indicator.dart';
+import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -15,14 +16,14 @@ class StudySignsView extends GetView<StudySignsController> {
   final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
-    return Scaffold( 
+    return Scaffold(
       backgroundColor: themeData?.backgroundColor,
       body: SafeArea(
         child: GetBuilder<StudySignsController>(
           initState: (_) {},
           builder: (_) {
             if (controller.apiStateHandler.apiState == ApiState.loading) {
-              return  Center(child: CustomProgressIndicator());
+              return Center(child: CustomProgressIndicator());
             } else if (controller.apiStateHandler.apiState ==
                 ApiState.success) {
               return Column(
@@ -150,9 +151,23 @@ class StudySignsView extends GetView<StudySignsController> {
                 ],
               );
             } else if (controller.apiStateHandler.apiState == ApiState.error) {
-              return Text('Error: ${controller.apiStateHandler.error}');
+              return RefreshErrorWidget(
+                assetImage: "assets/images/error.png",
+                errorMessage: controller.apiStateHandler.error!,
+                onRefresh: () async {
+                  controller.fetchData();
+                  controller.update();
+                },
+              );
             } else {
-              return const SizedBox();
+              return RefreshErrorWidget(
+                assetImage: "assets/images/error.png",
+                errorMessage: "Unknown Error Occured",
+                onRefresh: () async {
+                  controller.fetchData();
+                  controller.update();
+                },
+              );
             }
           },
         ),

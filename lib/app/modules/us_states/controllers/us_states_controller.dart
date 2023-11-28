@@ -1,5 +1,5 @@
 import 'dart:convert';
-import 'dart:io';
+
 import 'package:drivingexam/app/core/cache/local_storage.dart';
 import 'package:drivingexam/app/core/http_client/http_service.dart';
 import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
@@ -25,7 +25,7 @@ class UsStatesController extends GetxController {
   final cacheStateHandler = ApiStateHandler<State>();
   var httpService = Get.find<HttpService>();
 
-  void fetchData() async {
+  Future<void> fetchData() async {
     apiStateHandler.setLoading();
     try {
       dynamic response =

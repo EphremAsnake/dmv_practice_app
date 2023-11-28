@@ -31,7 +31,13 @@ class QuestionController extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    if (controller.currentPageIndex.value > 0) {
+                    //only runs in first question and a user already have answered the answer.
+                    if (controller.currentPageIndex.value == 0 &&
+                        controller.results.isNotEmpty) {
+                      controller.goToPreviousQuestion();
+                      controller.results.clear();
+                      //only runs in  if the  question is not the first question.
+                    } else if (controller.currentPageIndex.value > 0) {
                       controller.previousPage();
                       controller.goToPreviousQuestion();
                     }
@@ -78,7 +84,7 @@ class QuestionController extends StatelessWidget {
                     if (controller.choiceId == 0) {
                       customSnackBar(
                           title: "Error", body: "Please Select Answer");
-                    } else if (controller.showAdCounter.value == 3) {
+                    } else if (controller.showAdCounter.value == 8) {
                       await InterstitialAdManager().showInterstitialAd();
                       controller.goToNextQuestion(pages.length);
                       //loading ad for next use
@@ -86,7 +92,6 @@ class QuestionController extends StatelessWidget {
                       //reset AD counter value
                       controller.showAdCounter.value = 0;
                     } else {
-                      
                       controller.goToNextQuestion(pages.length);
                     }
                     //}
@@ -109,7 +114,7 @@ class QuestionController extends StatelessWidget {
                           Obx(
                             () => Text(
                               controller.questionPageNumber.value ==
-                                      controller.tests?.questions.length
+                                      controller.test?.questions.length
                                   ? "Finish"
                                   : "Next",
                               style: TextStyle(

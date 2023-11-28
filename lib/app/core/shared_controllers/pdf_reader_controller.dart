@@ -6,7 +6,7 @@ import 'package:easy_pdf_viewer/easy_pdf_viewer.dart';
 import 'package:get/get.dart';
 
 class PDFController extends GetxController {
-  late PDFDocument document;
+  PDFDocument? document;
   String pdfPath;
   Rx<bool> isLoading = false.obs;
   Rx<bool> isError = false.obs;

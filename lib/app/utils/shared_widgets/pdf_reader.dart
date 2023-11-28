@@ -7,6 +7,7 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 final themeData = Get.find<ThemeController>().themeData.value;
+
 class PDFReader extends StatelessWidget {
   final String pdfTitle;
   final String pdfPath;
@@ -35,20 +36,24 @@ class PDFReader extends StatelessWidget {
         initState: (_) {},
         builder: (_) {
           if (controller.isLoading.value == true) {
-            return  Center(child: CustomProgressIndicator());
+            return Center(child: CustomProgressIndicator());
           } else {
-            return PDFViewer(
-              scrollDirection: Axis.vertical,
-              document: controller.document,
-              lazyLoad: false,
-              zoomSteps: 1,
-              numberPickerConfirmWidget: const Text(
-                "Confirm",
-              ),
-              pickerButtonColor: themeData?.primaryColor,
-              indicatorBackground: themeData!.primaryColor,
-              progressIndicator: CustomProgressIndicator(),
-            );
+            if (controller.document != null) {
+              return PDFViewer(
+                scrollDirection: Axis.vertical,
+                document: controller.document!,
+                lazyLoad: false,
+                zoomSteps: 1,
+                numberPickerConfirmWidget: const Text(
+                  "Confirm",
+                ),
+                pickerButtonColor: themeData?.primaryColor,
+                indicatorBackground: themeData!.primaryColor,
+                progressIndicator: CustomProgressIndicator(),
+              );
+            } else {
+              return const SizedBox.shrink();
+            }
           }
         },
       ),

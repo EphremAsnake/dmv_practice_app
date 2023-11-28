@@ -25,7 +25,7 @@ class AboutView extends GetView<AboutController> {
           builder: (_) {
             if (masterDataController.apiStateHandler.apiState ==
                 ApiState.loading) {
-              return  Center(
+              return Center(
                 child: CustomProgressIndicator(),
               );
             } else if (masterDataController.apiStateHandler.apiState ==
@@ -80,37 +80,31 @@ class AboutView extends GetView<AboutController> {
                         HomeAD(),
                       ],
                     ),
-                    Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Container(
-                        decoration: BoxDecoration(
-                          boxShadow: [
-                            BoxShadow(
-                              color: themeData!.shadowColor,
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              offset: const Offset(
-                                  0, 8), // horizontal, vertical offset
-                            ),
-                            BoxShadow(
-                              color: themeData!.shadowColor,
-                              spreadRadius: 2,
-                              blurRadius: 10,
-                              offset: const Offset(
-                                  0, -8), // horizontal, vertical offset
-                            ),
-                          ],
-                        ),
-                        width: MediaQuery.of(context).size.width,
+                    Expanded(
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
                         child: Card(
                           elevation: 0,
                           child: Padding(
-                            padding:  EdgeInsets.symmetric(horizontal:  10.0, vertical: 40.0.sp),
-                            child: Text(
-                              masterDataController.configs!.aboutApp,
-                              textAlign: TextAlign.justify,
-                              style: TextStyle(
-                                  color: themeData?.blackColor, fontSize: 16),
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 40.0.sp),
+                            child: Column(
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    masterDataController.configs!.aboutApp,
+                                    textAlign: TextAlign.justify,
+                                    style: TextStyle(
+                                        color: themeData?.blackColor,
+                                        fontSize: 16),
+                                  ),
+                                ),
+                                Text(
+                                  "Copyright © ${DateTime.now().year} DMV Practice APP. All Rights Reserved.",
+                                  textAlign: TextAlign.justify,
+                                  style: TextStyle(color: themeData?.primaryColor),
+                                )
+                              ],
                             ),
                           ),
                         ),

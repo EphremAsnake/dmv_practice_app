@@ -14,168 +14,165 @@ class FailedWidget extends StatelessWidget {
   final TestController controller = Get.find();
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(10.0),
-      child: Container(
-        decoration: BoxDecoration(
-          boxShadow: [
-            BoxShadow(
-              color: themeData!.shadowColor,
-              spreadRadius: 2,
-              blurRadius: 10,
-              offset: const Offset(0, 8),
-            ),
-            BoxShadow(
-              color: themeData!.shadowColor,
-              spreadRadius: 2,
-              blurRadius: 10,
-              offset: const Offset(0, -8),
-            ),
-          ],
-        ),
-        width: MediaQuery.of(context).size.width,
-        child: Card(
-          elevation: 0,
-          child: Column(
-            children: [
-              const SizedBox(
-                height: 10,
+    return Center(
+      child: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Container(
+          decoration: BoxDecoration(
+            boxShadow: [
+              BoxShadow(
+                color: themeData!.shadowColor.withOpacity(0.5),
+                spreadRadius:  0.5,
+                blurRadius: 0.5,
+                offset: const Offset(0, -1),
               ),
-              Image.asset(
-                "assets/images/lose.png",
-                width: 200,
-                height: 200,
-              ),
-              Text(
-                "You Failed!",
-                style: TextStyle(
-                    color: themeData!.errorColor,
-                    fontSize: 28,
-                    fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              Text(
-                "You have made $incorrectAnswers errors out of 35 questions",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: themeData?.blackColor,
+            ],
+          ),
+          width: MediaQuery.of(context).size.width,
+          child: Card(
+            elevation: 0,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const SizedBox(
+                  height: 10,
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 70.w,
-                  decoration: BoxDecoration(
-                    color: themeData!.primaryColor,
-                    border: Border.all(
-                      color: themeData!.primaryColor,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
+                Image.asset(
+                  "assets/images/lose.png",
+                  width: 200,
+                  height: 200,
+                ),
+                Text(
+                  "You Failed!",
+                  style: TextStyle(
+                      color: themeData!.errorColor,
+                      fontSize: 28,
+                      fontWeight: FontWeight.bold),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Text(
+                  "You have made $incorrectAnswers errors out of 35 questions",
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: themeData?.blackColor,
                   ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Expanded(
+                ),
+                const SizedBox(
+                  height: 30,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 70.w,
+                    decoration: BoxDecoration(
+                      color: themeData!.primaryColor,
+                      border: Border.all(
+                        color: themeData!.primaryColor,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
+                    ),
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15.0, horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
                             child: Text(
-                              "Go To Next Test",
+                              "GO TO NEXT TEST",
                               style: TextStyle(
                                 color: themeData!.whiteColor,
                                 fontWeight: FontWeight.bold,
+                                 fontSize: 9.5.sp
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 70.w,
-                  decoration: BoxDecoration(
-                    color: themeData!.lightGrey,
-                    border: Border.all(
-                      color: themeData!.whiteColor,
+                const SizedBox(
+                  height: 30,
+                ),
+                GestureDetector(
+                  onTap: () {},
+                  child: Container(
+                    width: 70.w,
+                    decoration: BoxDecoration(
+                      color: themeData!.lightGrey.withOpacity(0.6),
+                      border: Border.all(
+                        color: themeData!.whiteColor,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15.0, horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
                             child: Text(
-                              "Back To Incorrect & Skipped(28)",
+                              "BACK TO INCORRECT & SKIPPED(28)",
                               style: TextStyle(
                                 color: themeData!.primaryColor,
                                 fontWeight: FontWeight.bold,
+                                fontSize: 9.5.sp
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 70.w,
-                  decoration: BoxDecoration(
-                    color: themeData!.whiteColor,
-                    border: Border.all(
-                      color: themeData!.whiteColor,
+                const SizedBox(
+                  height: 30,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    Get.toNamed("/test",
+                        arguments: {'test_url': controller.testUrl});
+                  },
+                  child: Container(
+                    width: 70.w,
+                    decoration: BoxDecoration(
+                     color: themeData!.lightGrey.withOpacity(0.6),
+                      border: Border.all(
+                        color: themeData!.whiteColor,
+                      ),
+                      borderRadius: BorderRadius.circular(5),
                     ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Expanded(
+                    child: Padding(
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 15.0, horizontal: 15),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          Center(
                             child: Text(
-                              "Restart Test",
+                              "RESTART TEST",
                               style: TextStyle(
                                 color: themeData!.primaryColor,
                                 fontWeight: FontWeight.bold,
+                                 fontSize: 9.5.sp
                               ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   ),
                 ),
-              ),
-              const SizedBox(
-                height: 50,
-              ),
-            ],
+                const SizedBox(
+                  height: 50,
+                ),
+              ],
+            ),
           ),
         ),
       ),

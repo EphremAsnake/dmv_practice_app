@@ -129,7 +129,11 @@ class ProgressCard extends StatelessWidget {
                         ),
                         Obx(
                           () => Text(
-                            controller.correctAnswersCount.toString(),
+                            result
+                                .where((element) => element.isCorrect == true)
+                                .toList()
+                                .length
+                                .toString(),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,
@@ -158,7 +162,11 @@ class ProgressCard extends StatelessWidget {
                         ),
                         Obx(
                           () => Text(
-                            controller.incorrectAnswersCount.toString(),
+                            result
+                                .where((element) => element.isCorrect == false)
+                                .toList()
+                                .length
+                                .toString(),
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.bold,

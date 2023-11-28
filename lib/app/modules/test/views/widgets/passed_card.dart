@@ -21,16 +21,10 @@ class PassedWidget extends StatelessWidget {
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(
-              color: themeData!.shadowColor,
-              spreadRadius: 2,
-              blurRadius: 10,
-              offset: const Offset(0, 8), // horizontal, vertical offset
-            ),
-            BoxShadow(
-              color: themeData!.shadowColor,
-              spreadRadius: 2,
-              blurRadius: 10,
-              offset: const Offset(0, -8), // horizontal, vertical offset
+              color: themeData!.shadowColor.withOpacity(0.5),
+              spreadRadius: 0.5,
+              blurRadius: 0.5,
+              offset: const Offset(0, -1),
             ),
           ],
         ),
@@ -38,6 +32,7 @@ class PassedWidget extends StatelessWidget {
         child: Card(
           elevation: 0,
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(
                 height: 10,
@@ -86,7 +81,7 @@ class PassedWidget extends StatelessWidget {
                 child: Container(
                   width: 70.w,
                   decoration: BoxDecoration(
-                    color: themeData?.primaryColor,
+                    color: themeData!.primaryColor,
                     border: Border.all(
                       color: themeData!.primaryColor,
                     ),
@@ -99,14 +94,12 @@ class PassedWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: Expanded(
-                            child: Text(
-                              "Go To Next Test",
-                              style: TextStyle(
-                                color: themeData?.whiteColor,
+                          child: Text(
+                            "GO TO NEXT TEST",
+                            style: TextStyle(
+                                color: themeData!.whiteColor,
                                 fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                                fontSize: 9.5.sp),
                           ),
                         ),
                       ],
@@ -122,7 +115,7 @@ class PassedWidget extends StatelessWidget {
                 child: Container(
                   width: 70.w,
                   decoration: BoxDecoration(
-                    color: themeData?.whiteColor,
+                    color: themeData!.lightGrey.withOpacity(0.6),
                     border: Border.all(
                       color: themeData!.whiteColor,
                     ),
@@ -135,14 +128,12 @@ class PassedWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: Expanded(
-                            child: Text(
-                              "Back To Incorrect & Skipped(28)",
-                              style: TextStyle(
-                                color: themeData?.primaryColor,
+                          child: Text(
+                            "BACK TO INCORRECT & SKIPPED(28)",
+                            style: TextStyle(
+                                color: themeData!.primaryColor,
                                 fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                                fontSize: 9.5.sp),
                           ),
                         ),
                       ],
@@ -154,11 +145,14 @@ class PassedWidget extends StatelessWidget {
                 height: 30,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Get.toNamed("/test",
+                      arguments: {'test_url': controller.testUrl});
+                },
                 child: Container(
                   width: 70.w,
                   decoration: BoxDecoration(
-                    color: themeData?.whiteColor,
+                    color: themeData!.lightGrey.withOpacity(0.6),
                     border: Border.all(
                       color: themeData!.whiteColor,
                     ),
@@ -171,14 +165,12 @@ class PassedWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: Expanded(
-                            child: Text(
-                              "Restart Test",
-                              style: TextStyle(
-                                color: themeData?.primaryColor,
+                          child: Text(
+                            "RESTART TEST",
+                            style: TextStyle(
+                                color: themeData!.primaryColor,
                                 fontWeight: FontWeight.bold,
-                              ),
-                            ),
+                                fontSize: 9.5.sp),
                           ),
                         ),
                       ],

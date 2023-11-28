@@ -1,19 +1,19 @@
 import 'dart:convert';
 
-Tests testsFromJson(String str) => Tests.fromJson(json.decode(str));
+Test testsFromJson(String str) => Test.fromJson(json.decode(str));
 
-String testsToJson(Tests data) => json.encode(data.toJson());
+String testsToJson(Test data) => json.encode(data.toJson());
 
-class Tests {
+class Test {
   int id;
   List<Question> questions;
 
-  Tests({
+  Test({
     required this.id,
     required this.questions,
   });
 
-  factory Tests.fromJson(Map<String, dynamic> json) => Tests(
+  factory Test.fromJson(Map<String, dynamic> json) => Test(
         id: json["id"],
         questions: List<Question>.from(
             json["questions"].map((x) => Question.fromJson(x))),

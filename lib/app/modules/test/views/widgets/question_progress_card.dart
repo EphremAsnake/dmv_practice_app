@@ -1,5 +1,6 @@
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
+import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -12,6 +13,9 @@ class QuestionProgress extends StatelessWidget {
   final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
+    if (controller.results.isEmpty) {
+      controller.showProgress.value = false;
+    }
     return Center(
       child: Padding(
         padding: const EdgeInsets.all(10.0),
@@ -65,7 +69,7 @@ class QuestionProgress extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                         child: Obx(() => LinearProgressIndicator(
                               value: controller.questionPageNumber /
-                                  controller.tests!.questions.length,
+                                  controller.test!.questions.length,
                               minHeight: 10,
                               backgroundColor: Colors.transparent,
                               valueColor: AlwaysStoppedAnimation<Color>(
@@ -80,11 +84,10 @@ class QuestionProgress extends StatelessWidget {
                     GestureDetector(
                       onTap: () {
                         if (controller.results.isEmpty) {
-                          Get.snackbar(
-                            "Info",
-                            "Please make some progress to view your progress",
-                            duration: const Duration(seconds: 3),
-                            snackPosition: SnackPosition.BOTTOM,
+                          customSnackBar(
+                            title: "Information",
+                            body:
+                                "Please make some progress to view your progress",
                           );
                         } else {
                           controller.showProgress.value =

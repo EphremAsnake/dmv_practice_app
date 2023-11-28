@@ -23,11 +23,11 @@ class HomeAD extends StatelessWidget {
           return Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10.0),
             child: SizedBox(
-              width: MediaQuery.of(context).size.width,
+              width: MediaQuery.of(context).size.width / 2,
               height: 60,
               child: Shimmer.fromColors(
                 baseColor: Colors.grey[300]!,
-                highlightColor: Colors.grey[100]!,
+                highlightColor: const Color.fromARGB(255, 255, 255, 255)!,
                 child: Container(
                   width: double.infinity,
                   height: double.infinity,
@@ -106,7 +106,7 @@ class HomeAD extends StatelessWidget {
           }
         } else if (masterDataController.apiStateHandler.apiState ==
             ApiState.error) {
-          return Text('Error: ${masterDataController.apiStateHandler.error}');
+          return const SizedBox();
         } else {
           return const SizedBox();
         }

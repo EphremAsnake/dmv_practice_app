@@ -15,7 +15,7 @@ class TestController extends GetxController {
   var currentPageIndex = 0.obs;
   int choiceId = 0;
   Rx<bool> isAnswerSelected = false.obs;
-  Tests? tests;
+  Test? test;
   Rx<bool> wasAnsweredCorrectly = false.obs;
   Rx<bool> isSelectingAnswerEnabled = true.obs;
   Rx<bool> showAnswer = true.obs;
@@ -24,16 +24,15 @@ class TestController extends GetxController {
   List<Result> results = <Result>[].obs;
   Rx<int> questionPageNumber = 1.obs;
   Rx<bool> showDescription = false.obs;
-  Rx<int> incorrectAnswersCount = 0.obs;
-  Rx<int> correctAnswersCount = 0.obs;
   TestHelper testHelper = TestHelper();
   String testUrl;
   Rx<int> showAdCounter = 0.obs;
+  Rx<bool> isLastQuestionPageBackButtonEnabled = false.obs;
+  Question? question;
 
   TestController(this.testUrl);
 
-  final apiStateHandler = ApiStateHandler<Tests>();
-
+  final apiStateHandler = ApiStateHandler<Test>();
   var httpService = Get.find<HttpService>();
 
   @override
@@ -65,9 +64,9 @@ class TestController extends GetxController {
       dynamic response = await httpService.sendHttpRequest(testHttpAttributes);
 
       final result = jsonDecode(response.body);
-      tests = Tests.fromJson(result);
+      test = Test.fromJson(result);
       // Update state with success and response data
-      apiStateHandler.setSuccess(tests!);
+      apiStateHandler.setSuccess(test!);
       update();
     } catch (ex) {
       // Update state with error message
@@ -114,10 +113,16 @@ class TestController extends GetxController {
 
       //incrementing show ad counter
       showAdCounter.value = showAdCounter.value + 1;
+
+      //setting selected question value to false
+      for (int i = 0; i < question!.choices.length; i++) {
+        question?.choices[i].selected = false;
+      }
     } else {
       Get.to(TestResult())?.then((_) {
         playConfetti();
       });
+      isLastQuestionPageBackButtonEnabled.value = true;
     }
   }
 
@@ -134,7 +139,6 @@ class TestController extends GetxController {
 
     //adding result object to result list
     results.add(result);
-    setAnswersCount();
 
     isAnswerSelected.value = true;
     isSelectingAnswerEnabled.value = false;
@@ -146,22 +150,42 @@ class TestController extends GetxController {
   goToPreviousQuestion() {
     //resting question values
     resetQuestionValues();
-    setAnswersCount();
-    //removing the last item from list
-    results.removeAt(results.length - 1);
 
+    //removing the last item from list
+    if (results.isNotEmpty) {
+      results.removeAt(results.length - 1);
+    }
     //setting default to show button if the last item reached
     if (results.isEmpty) {
       showProgress.value = false;
     }
     //decrementing  page number
     questionPageNumber.value = questionPageNumber.value - 1;
+
+    //decrementing show ad counter
+    showAdCounter.value = showAdCounter.value - 1;
   }
 
-  //setting correct answer count
-  setAnswersCount() {
-    correctAnswersCount.value =
-        testHelper.countCorrectAnswersFromResult(results);
-    incorrectAnswersCount.value = testHelper.countErrorsFromResult(results);
+  resetControllerValues() {
+    currentPageIndex.value = 0;
+    choiceId = 0;
+    isAnswerSelected.value = false;
+    wasAnsweredCorrectly.value = false;
+    isSelectingAnswerEnabled.value = true;
+    showAnswer.value = true;
+    showProgress.value = false;
+    results = <Result>[];
+    questionPageNumber.value = 1;
+    showDescription.value = false;
+    showAdCounter.value = 0;
+  }
+
+  Future<bool> onWillPop() async {
+    if (isLastQuestionPageBackButtonEnabled.value == true) {
+      resetControllerValues();
+      return true;
+    } else {
+      return false;
+    }
   }
 }

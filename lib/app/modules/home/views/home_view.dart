@@ -84,25 +84,20 @@ class HomeView extends GetView<HomeController> {
             ),
             HomePageTopCard(),
             ReadManual(),
-            GetBuilder<UsStatesController>(
-              init: UsStatesController(),
-              initState: (_) {},
-              builder: (_) {
-                if (usStatesController.cacheStateHandler.apiState ==
-                    ApiState.loading) {
-                  return Center(child: CustomProgressIndicator());
-                } else if (usStatesController.cacheStateHandler.apiState ==
-                    ApiState.success) {
-                  return GetBuilder<HomeController>(
-                    init: HomeController(),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  GetBuilder<UsStatesController>(
+                    init: UsStatesController(),
                     initState: (_) {},
                     builder: (_) {
-                      if (controller.apiStateHandler.apiState ==
+                      if (usStatesController.cacheStateHandler.apiState ==
                           ApiState.loading) {
-                        return Shimmer.fromColors(
-                          baseColor: Colors.grey[300]!,
-                          highlightColor: Colors.grey[100]!,
-                          child: Expanded(
+                        return Expanded(
+                          child: Shimmer.fromColors(
+                            baseColor: Colors.grey[300]!,
+                            highlightColor: Colors.grey[100]!,
                             child: ListView.builder(
                               shrinkWrap: true,
                               itemCount: 4,
@@ -120,156 +115,228 @@ class HomeView extends GetView<HomeController> {
                             ),
                           ),
                         );
-                      } else if (controller.apiStateHandler.apiState ==
+                      } else if (usStatesController
+                              .cacheStateHandler.apiState ==
                           ApiState.success) {
-                        return Expanded(
-                          child: ListView.builder(
-                            itemCount:
-                                controller.apiStateHandler.data!.tests.length,
-                            itemBuilder: (BuildContext context, int index) {
-                              return Padding(
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 10.0, vertical: 5.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Get.toNamed("/test", arguments: {
-                                      'test_url': controller.apiStateHandler
-                                          .data!.tests[index].url
-                                    });
-                                  },
-                                  child: Center(
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                            color: themeData!.shadowColor,
-                                            spreadRadius: 2,
-                                            blurRadius: 10,
-                                            offset: const Offset(0,
-                                                8), // horizontal, vertical offset
-                                          ),
-                                          BoxShadow(
-                                            color: themeData!.shadowColor,
-                                            spreadRadius: 2,
-                                            blurRadius: 10,
-                                            offset: const Offset(0,
-                                                -8), // horizontal, vertical offset
-                                          ),
-                                        ],
-                                      ),
-                                      width: MediaQuery.of(context).size.width,
-                                      height: 130,
-                                      child: Card(
-                                        elevation: 0,
-                                        child: Padding(
-                                          padding: const EdgeInsets.symmetric(
-                                              horizontal: 10.0),
-                                          child: Column(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.start,
-                                            children: [
-                                              const SizedBox(height: 5),
-                                              Row(
-                                                  mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .spaceBetween,
-                                                  children: [
-                                                    Text(
-                                                      "${usStatesController.cacheStateHandler.data!.numberOfQuestions.toString()} QUESTIONS",
-                                                      style: TextStyle(
-                                                        color: themeData
-                                                            ?.blackColor,
-                                                      ),
-                                                    ),
-                                                    Text(
-                                                      "PASSING SCORE ${usStatesController.cacheStateHandler.data!.passingScore.toString()}",
-                                                      style: TextStyle(
-                                                        color: themeData
-                                                            ?.blackColor,
-                                                      ),
-                                                    ),
-                                                  ]),
-                                              const SizedBox(height: 10),
-                                              Text(
-                                                controller.apiStateHandler.data!
-                                                    .tests[index].name
-                                                    .toTitleCase(),
-                                                style: TextStyle(
-                                                  color: themeData?.blackColor,
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                              Row(
-                                                mainAxisAlignment:
-                                                    MainAxisAlignment
-                                                        .spaceBetween,
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.center,
-                                                children: [
-                                                  Row(
-                                                    children: [
-                                                      LineIcon.timesCircle(
-                                                        size: 20.0,
-                                                        color: themeData
-                                                            ?.primaryColor,
-                                                      ),
-                                                      const SizedBox(width: 5),
-                                                      Text(
-                                                        "${usStatesController.cacheStateHandler.data!.numberOfQuestions - usStatesController.cacheStateHandler.data!.passingScore} Mistakes Allowed",
-                                                        style: TextStyle(
-                                                            color: themeData
-                                                                ?.primaryColor),
-                                                      ),
-                                                    ],
-                                                  ),
-                                                  Container(
-                                                    decoration: BoxDecoration(
-                                                      border: Border.all(
-                                                        color: themeData!
-                                                            .primaryColor,
-                                                      ),
-                                                      borderRadius:
-                                                          BorderRadius.circular(
-                                                              20),
-                                                    ),
-                                                    child: Padding(
-                                                      padding: const EdgeInsets
-                                                          .symmetric(
-                                                        vertical: 8.0,
-                                                        horizontal: 15,
-                                                      ),
-                                                      child: Row(
-                                                        children: [
-                                                          LineIcon.playCircle(
-                                                            size: 20.0,
-                                                            color: themeData
-                                                                ?.primaryColor,
-                                                          ),
-                                                          const SizedBox(
-                                                              width: 5),
-                                                          Text(
-                                                            "Start",
-                                                            style: TextStyle(
-                                                                color: themeData
-                                                                    ?.primaryColor),
-                                                          ),
-                                                        ],
-                                                      ),
-                                                    ),
-                                                  ),
-                                                ],
-                                              ),
-                                            ],
-                                          ),
+                        return GetBuilder<HomeController>(
+                          init: HomeController(),
+                          initState: (_) {},
+                          builder: (_) {
+                            if (controller.apiStateHandler.apiState ==
+                                ApiState.loading) {
+                              return Expanded(
+                                child: Shimmer.fromColors(
+                                  baseColor: Colors.grey[300]!,
+                                  highlightColor: Colors.grey[100]!,
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    itemCount: 4,
+                                    itemBuilder:
+                                        (BuildContext context, int index) {
+                                      return Padding(
+                                        padding: const EdgeInsets.symmetric(
+                                            horizontal: 10.0, vertical: 5),
+                                        child: Container(
+                                          width: double.infinity,
+                                          height: 130,
+                                          color: themeData!.whiteColor,
                                         ),
-                                      ),
-                                    ),
+                                      );
+                                    },
                                   ),
                                 ),
                               );
-                            },
-                          ),
+                            } else if (controller.apiStateHandler.apiState ==
+                                ApiState.success) {
+                              return Expanded(
+                                child: ListView.builder(
+                                  itemCount: controller
+                                      .apiStateHandler.data!.tests.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          horizontal: 10.0, vertical: 5.0),
+                                      child: GestureDetector(
+                                        onTap: () {
+                                          Get.toNamed("/test", arguments: {
+                                            'test_url': controller
+                                                .apiStateHandler
+                                                .data!
+                                                .tests[index]
+                                                .url
+                                          });
+                                        },
+                                        child: Center(
+                                          child: Container(
+                                            decoration: BoxDecoration(
+                                              boxShadow: [
+                                                BoxShadow(
+                                                  color: themeData!.shadowColor,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 10,
+                                                  offset: const Offset(0,
+                                                      8), // horizontal, vertical offset
+                                                ),
+                                                BoxShadow(
+                                                  color: themeData!.shadowColor,
+                                                  spreadRadius: 2,
+                                                  blurRadius: 10,
+                                                  offset: const Offset(0,
+                                                      -8), // horizontal, vertical offset
+                                                ),
+                                              ],
+                                            ),
+                                            width: MediaQuery.of(context)
+                                                .size
+                                                .width,
+                                            height: 130,
+                                            child: Card(
+                                              elevation: 0,
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10.0),
+                                                child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    const SizedBox(height: 5),
+                                                    Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceBetween,
+                                                        children: [
+                                                          Text(
+                                                            "${usStatesController.cacheStateHandler.data!.numberOfQuestions.toString()} QUESTIONS",
+                                                            style: TextStyle(
+                                                              color: themeData
+                                                                  ?.blackColor,
+                                                            ),
+                                                          ),
+                                                          Text(
+                                                            "PASSING SCORE ${usStatesController.cacheStateHandler.data!.passingScore.toString()}",
+                                                            style: TextStyle(
+                                                              color: themeData
+                                                                  ?.blackColor,
+                                                            ),
+                                                          ),
+                                                        ]),
+                                                    const SizedBox(height: 10),
+                                                    Text(
+                                                      controller
+                                                          .apiStateHandler
+                                                          .data!
+                                                          .tests[index]
+                                                          .name
+                                                          .toTitleCase(),
+                                                      style: TextStyle(
+                                                        color: themeData
+                                                            ?.blackColor,
+                                                        fontSize: 20,
+                                                        fontWeight:
+                                                            FontWeight.bold,
+                                                      ),
+                                                    ),
+                                                    Row(
+                                                      mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .spaceBetween,
+                                                      crossAxisAlignment:
+                                                          CrossAxisAlignment
+                                                              .center,
+                                                      children: [
+                                                        Row(
+                                                          children: [
+                                                            LineIcon
+                                                                .timesCircle(
+                                                              size: 20.0,
+                                                              color: themeData
+                                                                  ?.primaryColor,
+                                                            ),
+                                                            const SizedBox(
+                                                                width: 5),
+                                                            Text(
+                                                              "${usStatesController.cacheStateHandler.data!.numberOfQuestions - usStatesController.cacheStateHandler.data!.passingScore} Mistakes Allowed",
+                                                              style: TextStyle(
+                                                                  color: themeData
+                                                                      ?.primaryColor),
+                                                            ),
+                                                          ],
+                                                        ),
+                                                        Container(
+                                                          decoration:
+                                                              BoxDecoration(
+                                                            border: Border.all(
+                                                              color: themeData!
+                                                                  .primaryColor,
+                                                            ),
+                                                            borderRadius:
+                                                                BorderRadius
+                                                                    .circular(
+                                                                        20),
+                                                          ),
+                                                          child: Padding(
+                                                            padding:
+                                                                const EdgeInsets
+                                                                    .symmetric(
+                                                              vertical: 8.0,
+                                                              horizontal: 15,
+                                                            ),
+                                                            child: Row(
+                                                              children: [
+                                                                LineIcon
+                                                                    .playCircle(
+                                                                  size: 20.0,
+                                                                  color: themeData
+                                                                      ?.primaryColor,
+                                                                ),
+                                                                const SizedBox(
+                                                                    width: 5),
+                                                                Text(
+                                                                  "Start",
+                                                                  style: TextStyle(
+                                                                      color: themeData
+                                                                          ?.primaryColor),
+                                                                ),
+                                                              ],
+                                                            ),
+                                                          ),
+                                                        ),
+                                                      ],
+                                                    ),
+                                                  ],
+                                                ),
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                ),
+                              );
+                            } else if (controller.apiStateHandler.apiState ==
+                                ApiState.error) {
+                              return RefreshErrorWidget(
+                                assetImage: "assets/images/error.png",
+                                errorMessage: controller.apiStateHandler.error!,
+                                onRefresh: () async {
+                                  controller.fetchData();
+                                  controller.update();
+                                },
+                              );
+                            } else {
+                              return RefreshErrorWidget(
+                                assetImage: "assets/images/error.png",
+                                errorMessage: "Unknown Error Occurred",
+                                onRefresh: () async {
+                                  controller.fetchData();
+                                  controller.update();
+                                },
+                              );
+                            }
+                          },
                         );
                       } else if (usStatesController
                               .cacheStateHandler.apiState ==
@@ -279,6 +346,8 @@ class HomeView extends GetView<HomeController> {
                           errorMessage: "Unknown Error Occurred",
                           onRefresh: () async {
                             usStatesController.fetchData();
+                            usStatesController.savedStateData();
+                            usStatesController.readStateData();
                             usStatesController.update();
                           },
                         );
@@ -288,33 +357,16 @@ class HomeView extends GetView<HomeController> {
                           errorMessage: "Unknown Error Occurred",
                           onRefresh: () async {
                             usStatesController.fetchData();
+                            usStatesController.savedStateData();
+                            usStatesController.readStateData();
                             usStatesController.update();
                           },
                         );
                       }
                     },
-                  );
-                } else if (usStatesController.cacheStateHandler.apiState ==
-                    ApiState.error) {
-                  return RefreshErrorWidget(
-                    assetImage: "assets/images/error.png",
-                    errorMessage: "Unknown Error Occurred",
-                    onRefresh: () async {
-                      usStatesController.fetchData();
-                      usStatesController.update();
-                    },
-                  );
-                } else {
-                  return RefreshErrorWidget(
-                    assetImage: "assets/images/error.png",
-                    errorMessage: "Unknown Error Occurred",
-                    onRefresh: () async {
-                      usStatesController.fetchData();
-                      usStatesController.update();
-                    },
-                  );
-                }
-              },
+                  ),
+                ],
+              ),
             ),
           ],
         ),

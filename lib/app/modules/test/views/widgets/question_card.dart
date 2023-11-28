@@ -21,8 +21,10 @@ class QuestionCard extends StatelessWidget {
     required this.index,
   });
   final TestController controller = Get.find();
+
   @override
   Widget build(BuildContext context) {
+    controller.question = question;
     return Column(
       children: [
         Expanded(
@@ -59,7 +61,7 @@ class QuestionCard extends StatelessWidget {
                       child: Text(
                         "Select an answer",
                         style: TextStyle(
-                            color: themeData?.lightGrey,
+                            color: themeData?.blackColor.withOpacity(0.5),
                             fontSize: 16,
                             fontWeight: FontWeight.bold),
                       ),
@@ -177,7 +179,7 @@ class QuestionCard extends StatelessWidget {
                                         //checking answer
                                         controller.showQuestionAnswer(
                                             controller.choiceId,
-                                            controller.tests!.questions[
+                                            controller.test!.questions[
                                                 controller
                                                     .currentPageIndex.value]);
 
@@ -208,7 +210,7 @@ class QuestionCard extends StatelessWidget {
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
                                     color: themeData?.blackColor,
-                                    fontSize: 13.sp),
+                                    fontSize: 12.sp),
                               ),
                             ),
                           ),

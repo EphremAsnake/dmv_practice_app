@@ -56,7 +56,7 @@ class TestResult extends StatelessWidget {
                           child: Center(
                             child: Icon(
                               Icons.home_outlined,
-                              color: themeData!.grayTextColor,
+                              color: themeData!.blackColor.withOpacity(0.4),
                               size: 32,
                             ),
                           ),
@@ -68,9 +68,14 @@ class TestResult extends StatelessWidget {
                 HomeAD(),
               ],
             ),
+            const SizedBox(
+              height: 10,
+            ),
             passed
-                ? PassedWidget(incorrectAnswers: incorrectAnswers)
-                : FailedWidget(incorrectAnswers: incorrectAnswers)
+                ? Expanded(
+                    child: PassedWidget(incorrectAnswers: incorrectAnswers))
+                : Expanded(
+                    child: FailedWidget(incorrectAnswers: incorrectAnswers))
           ],
         ),
       ),

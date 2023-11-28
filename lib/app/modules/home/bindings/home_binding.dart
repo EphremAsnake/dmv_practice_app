@@ -7,7 +7,7 @@ class HomeBinding extends Bindings {
   @override
   void dependencies() {
     Get.lazyPut<HomeController>(
-      () => HomeController(),
+      () => HomeController(), fenix: true
     );
     final MasterDataController masterDataController = Get.find();
     masterDataController.readMasterData();

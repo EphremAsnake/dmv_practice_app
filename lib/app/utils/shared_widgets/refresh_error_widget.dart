@@ -36,7 +36,7 @@ class RefreshErrorWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: themeData?.primaryColor,
                   fontSize:
-                      SizerUtil.deviceType == DeviceType.mobile ? 16.sp : 16.sp,
+                      SizerUtil.deviceType == DeviceType.mobile ? 14.sp : 16.sp,
                   fontWeight: FontWeight.w600),
               textAlign: TextAlign.center,
             ),
@@ -46,7 +46,7 @@ class RefreshErrorWidget extends StatelessWidget {
               style: Theme.of(context).textTheme.headlineSmall!.copyWith(
                   color: themeData?.blackColor.withOpacity(0.4),
                   fontSize:
-                      SizerUtil.deviceType == DeviceType.mobile ? 14.sp : 16.sp,
+                      SizerUtil.deviceType == DeviceType.mobile ? 13.sp : 16.sp,
                   fontWeight: FontWeight.w400),
               textAlign: TextAlign.center,
             ),
