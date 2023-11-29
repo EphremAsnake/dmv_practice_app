@@ -75,17 +75,13 @@ class QuestionCard extends StatelessWidget {
                           ),
                         ),
                       ),
-                    Flexible(
-                      flex: 3,
+                    Expanded(
                       child: ListView.builder(
                         shrinkWrap: true,
                         physics: const NeverScrollableScrollPhysics(),
                         itemCount: question.choices.length,
                         itemBuilder: (context, index) {
                           final choice = question.choices[index];
-                          // if (controller.wasPreviousButtonPressed.value) {
-                          //   choice.selected = false;
-                          // }
                           return Obx(
                             () => Padding(
                               padding: const EdgeInsets.symmetric(vertical: 4.0,horizontal: 10),
@@ -166,9 +162,9 @@ class QuestionCard extends StatelessWidget {
                                             .where((element) =>
                                                 element.selected == true)
                                             .first;
-
+                    
                                         controller.choiceId = selectedAnswer.id;
-
+                    
                                         //
                                         //checking answer
                                         controller.showQuestionAnswer(
@@ -176,7 +172,7 @@ class QuestionCard extends StatelessWidget {
                                             controller.test!.questions[
                                                 controller
                                                     .currentPageIndex.value]);
-
+                    
                                         controller.update();
                                       }
                                     },

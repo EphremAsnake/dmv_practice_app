@@ -39,11 +39,16 @@ class TestView extends GetView<TestController> {
               ];
 
               return SafeArea(
-                child: Column(
-                  children: [
-                    Expanded(
-                      child: SingleChildScrollView(
+                child: SizedBox(
+                  height: MediaQuery.of(context).size.height,
+                  child: Column(
+                    
+                    mainAxisSize: MainAxisSize.max,
+                    children: [
+                      Expanded(
                         child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.stretch,
+                          mainAxisSize: MainAxisSize.max,
                           children: [
                             const SizedBox(
                               height: 5,
@@ -52,8 +57,8 @@ class TestView extends GetView<TestController> {
                               mainAxisAlignment: MainAxisAlignment.spaceBetween,
                               children: [
                                 Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 5.0),
+                                  padding:
+                                      const EdgeInsets.symmetric(horizontal: 5.0),
                                   child: GestureDetector(
                                     onTap: () {
                                       Get.back();
@@ -99,50 +104,43 @@ class TestView extends GetView<TestController> {
                             QuestionProgress(),
                             Obx(() => Visibility(
                                   visible: controller.showProgress.value,
-                                  child:
-                                      ProgressCard(result: controller.results),
+                                  child: ProgressCard(result: controller.results),
                                 )),
-                            Container(
-                              child: Column(
-                                children: [
-                                  // ConstrainedBox(
-                                  //   constraints: BoxConstraints(
-                                  //       maxHeight:
-                                  //           MediaQuery.of(context).size.height * 0.7),
-                                  //   //height: MediaQuery.of(context).size.height * 1.5,
-                                  Expanded(
-                                    child: PageView.builder(
-                                      itemCount: questionPages.length,
-                                      itemBuilder: (context, index) {
-                                        return Obx(() => questionPages[
-                                            controller.currentPageIndex.value]);
-                                      },
-                                      onPageChanged: (index) {
-                                        controller.currentPageIndex.value =
-                                            index;
-                                      },
-                                      physics:
-                                          const NeverScrollableScrollPhysics(), // Disable swiping between pages
-                                    ),
-                                  ),
-
-                                  Expanded(
-                                    child: GetBuilder<NativeAdController>(
-                                      init: nativeAdController,
-                                      builder: (_) {
-                                        return buildNativeAd();
-                                      },
-                                    ),
-                                  ),
-                                ],
+                
+                            // ConstrainedBox(
+                            //   constraints: BoxConstraints(
+                            //       maxHeight:
+                            //           MediaQuery.of(context).size.height * 0.7),
+                            //   //height: MediaQuery.of(context).size.height * 1.5,
+                            Expanded(
+                              child: PageView.builder(
+                                itemCount: questionPages.length,
+                                itemBuilder: (context, index) {
+                                  return Obx(() => questionPages[
+                                      controller.currentPageIndex.value]);
+                                },
+                                onPageChanged: (index) {
+                                  controller.currentPageIndex.value = index;
+                                },
+                                physics:
+                                    const NeverScrollableScrollPhysics(), // Disable swiping between pages
+                              ),
+                            ),
+                
+                            Expanded(
+                              child: GetBuilder<NativeAdController>(
+                                init: nativeAdController,
+                                builder: (_) {
+                                  return buildNativeAd();
+                                },
                               ),
                             ),
                           ],
                         ),
                       ),
-                    ),
-                    QuestionController(pages: questionPages),
-                  ],
+                      QuestionController(pages: questionPages),
+                    ],
+                  ),
                 ),
               );
             } else if (controller.apiStateHandler.apiState == ApiState.error) {
