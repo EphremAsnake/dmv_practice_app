@@ -1,11 +1,9 @@
 // ignore: must_be_immutable
-import 'package:drivingexam/app/core/shared_controllers/native_ad_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/data/models/test/test.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
 import 'package:drivingexam/app/utils/keys/keys.dart';
-import 'package:drivingexam/app/utils/shared_widgets/native_ad.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -13,7 +11,6 @@ import 'package:sizer/sizer.dart';
 class QuestionCard extends StatelessWidget {
   final Question question;
   final int index;
-  final NativeAdController nativeAdController = Get.put(NativeAdController());
   final themeData = Get.find<ThemeController>().themeData.value;
   QuestionCard({
     super.key,
@@ -113,7 +110,7 @@ class QuestionCard extends StatelessWidget {
                                     contentPadding: const EdgeInsets.all(0),
                                     splashColor:
                                         themeData!.splashColor.withOpacity(0.5),
-                                    title: Text(choice.text),
+                                    title: Text(choice.text,style: TextStyle(fontSize: 10.5.sp),),
                                     leading: Padding(
                                       padding: const EdgeInsets.only(left: 5.0),
                                       child: Container(
@@ -195,10 +192,10 @@ class QuestionCard extends StatelessWidget {
                       () => Visibility(
                         visible: controller.showDescription.value,
                         child: Padding(
-                          padding: const EdgeInsets.all(10.0),
+                          padding: const EdgeInsets.all(5.0),
                           child: Card(
                             elevation: 0,
-                            color: themeData?.whiteColor,
+                            color: themeData?.primaryColor.withOpacity(0.1),
                             child: Padding(
                               padding: const EdgeInsets.symmetric(
                                   horizontal: 10.0, vertical: 15),
@@ -207,19 +204,14 @@ class QuestionCard extends StatelessWidget {
                                 textAlign: TextAlign.justify,
                                 style: TextStyle(
                                     color: themeData?.blackColor,
-                                    fontSize: 12.sp),
+                                    fontSize: 10.5.sp),
                               ),
                             ),
                           ),
                         ),
                       ),
                     ),
-                    GetBuilder<NativeAdController>(
-                      init: nativeAdController,
-                      builder: (_) {
-                        return buildNativeAd();
-                      },
-                    ),
+                  
                   ],
                 ),
               ),

@@ -53,7 +53,7 @@ class HomePageTopCard extends StatelessWidget {
                     if (usStateController.cacheStateHandler.apiState ==
                         ApiState.loading) {
                       return Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 0.0),
                         child: SizedBox(
                           width: MediaQuery.of(context).size.width,
                           height: 20,
@@ -127,10 +127,10 @@ class HomePageTopCard extends StatelessWidget {
                                 size: 20.0,
                                 color: themeData!.whiteColor,
                               ),
-                              const SizedBox(
+                              const SizedBox( 
                                 width: 5,
                               ),
-                              Text(
+                              Text(  
                                 "Start Practicing",
                                 style: TextStyle(
                                   color: themeData!.whiteColor,

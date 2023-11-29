@@ -72,14 +72,16 @@ class HomeView extends GetView<HomeController> {
                           height: 1,
                           child: Image.asset(
                             "assets/images/menu.png",
-                         
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
-                HomeAD(),
+                const SizedBox(
+                  width: 20,
+                ),
+                Expanded(child: HomeAD()),
               ],
             ),
             HomePageTopCard(),
@@ -100,14 +102,14 @@ class HomeView extends GetView<HomeController> {
                             highlightColor: Colors.grey[100]!,
                             child: ListView.builder(
                               shrinkWrap: true,
-                              itemCount: 4,
+                              itemCount: 5,
                               itemBuilder: (BuildContext context, int index) {
                                 return Padding(
                                   padding: const EdgeInsets.symmetric(
-                                      horizontal: 5.0, vertical: 2),
+                                      horizontal: 10.0, vertical: 2),
                                   child: Container(
                                     width: double.infinity,
-                                    height: 130,
+                                    height: 80,
                                     color: themeData!.whiteColor,
                                   ),
                                 );
@@ -130,15 +132,15 @@ class HomeView extends GetView<HomeController> {
                                   highlightColor: Colors.grey[100]!,
                                   child: ListView.builder(
                                     shrinkWrap: true,
-                                    itemCount: 4,
+                                    itemCount: 5,
                                     itemBuilder:
                                         (BuildContext context, int index) {
                                       return Padding(
                                         padding: const EdgeInsets.symmetric(
-                                            horizontal: 5.0, vertical: 2),
+                                            horizontal: 10.0, vertical: 2),
                                         child: Container(
                                           width: double.infinity,
-                                          height: 130,
+                                          height: 80,
                                           color: themeData!.whiteColor,
                                         ),
                                       );
@@ -259,8 +261,10 @@ class HomeView extends GetView<HomeController> {
                                                             Text(
                                                               "${usStatesController.cacheStateHandler.data!.numberOfQuestions - usStatesController.cacheStateHandler.data!.passingScore} Mistakes Allowed",
                                                               style: TextStyle(
-                                                                  color: themeData
-                                                                      ?.primaryColor,fontSize: 14,),
+                                                                color: themeData
+                                                                    ?.primaryColor,
+                                                                fontSize: 14,
+                                                              ),
                                                             ),
                                                           ],
                                                         ),

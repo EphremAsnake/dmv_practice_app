@@ -1,4 +1,3 @@
-
 import 'package:drivingexam/app/utils/helper/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -48,7 +47,7 @@ class Settings extends StatelessWidget {
         ),
         GestureDetector(
           onTap: () {
-             Get.toNamed("/about");
+            Get.toNamed("/about");
           },
           child: const Card(
             elevation: 0,
@@ -66,9 +65,21 @@ class Settings extends StatelessWidget {
             elevation: 0,
             borderOnForeground: true,
             child: ListTile(
-              title: Text("Share "),
+              title: Text("Share"),
               trailing: Icon(Icons.chevron_right),
               leading: Icon(Icons.share_outlined),
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: const Card(
+            elevation: 0,
+            borderOnForeground: true,
+            child: ListTile(
+              title: Text("Rate"),
+              trailing: Icon(Icons.chevron_right),
+              leading: Icon(Icons.star_outline),
             ),
           ),
         ),
