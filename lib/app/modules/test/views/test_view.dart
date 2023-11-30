@@ -12,6 +12,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/test_controller.dart';
 
+// ignore: must_be_immutable
 class TestView extends GetView<TestController> {
   TestView({Key? key}) : super(key: key);
   final themeData = Get.find<ThemeController>().themeData.value;
