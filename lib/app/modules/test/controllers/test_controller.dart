@@ -9,6 +9,7 @@ import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
 import 'package:drivingexam/app/modules/test/views/result_page.dart';
 import 'package:drivingexam/app/utils/helper/Interstitial_ad_manager.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class TestController extends GetxController {
@@ -30,6 +31,8 @@ class TestController extends GetxController {
   Rx<bool> isLastQuestionPageBackButtonEnabled = false.obs;
   Question? question;
   int numberOfQuestionsForState = 0;
+  ScrollController scrollController = ScrollController();
+  
   TestController(this.testUrl, this.numberOfQuestionsForState);
 
   final apiStateHandler = ApiStateHandler<Test>();

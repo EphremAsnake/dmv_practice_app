@@ -17,7 +17,7 @@ class TestView extends GetView<TestController> {
   TestView({Key? key}) : super(key: key);
   final themeData = Get.find<ThemeController>().themeData.value;
   final NativeAdController nativeAdController = Get.put(NativeAdController());
-  ScrollController scrollController = ScrollController();
+  
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -42,95 +42,82 @@ class TestView extends GetView<TestController> {
               ];
 
               return SafeArea(
-                child: Column(
-                  //mainAxisSize: MainAxisSize.max,
+                child: ListView(
+                  controller: controller.scrollController,
                   children: [
-                    Expanded(
-                      child: ListView(
-                        children: [
-                          const SizedBox(
-                            height: 5,
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(horizontal: 5.0),
-                                child: GestureDetector(
-                                  onTap: () {
-                                    Get.back();
-                                  },
-                                  child: Container(
-                                    width: 50,
-                                    height: 50,
-                                    decoration: BoxDecoration(
-                                      color: themeData?.whiteColor,
-                                      shape: BoxShape.rectangle,
-                                      borderRadius: BorderRadius.circular(10),
-                                      boxShadow: [
-                                        BoxShadow(
-                                          color: themeData!.shadowColor
-                                              .withOpacity(0.5),
-                                          spreadRadius: 2,
-                                          blurRadius: 1,
-                                          offset: const Offset(0,
-                                              1), // horizontal, vertical offset
-                                        ),
-                                      ],
-                                    ),
-                                    child: const Padding(
-                                      padding: EdgeInsets.symmetric(
-                                          horizontal: 10.0),
-                                      child: SizedBox(
-                                        width: 1,
-                                        height: 1,
-                                        child: Center(
-                                          child: Icon(
-                                            Icons.chevron_left_outlined,
-                                            size: 32,
-                                          ),
-                                        ),
-                                      ),
+                    const SizedBox(
+                      height: 5,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
+                          child: GestureDetector(
+                            onTap: () {
+                              Get.back();
+                            },
+                            child: Container(
+                              width: 50,
+                              height: 50,
+                              decoration: BoxDecoration(
+                                color: themeData?.whiteColor,
+                                shape: BoxShape.rectangle,
+                                borderRadius: BorderRadius.circular(10),
+                                boxShadow: [
+                                  BoxShadow(
+                                    color:
+                                        themeData!.shadowColor.withOpacity(0.5),
+                                    spreadRadius: 2,
+                                    blurRadius: 1,
+                                    offset: const Offset(
+                                        0, 1), // horizontal, vertical offset
+                                  ),
+                                ],
+                              ),
+                              child: const Padding(
+                                padding: EdgeInsets.symmetric(horizontal: 10.0),
+                                child: SizedBox(
+                                  width: 1,
+                                  height: 1,
+                                  child: Center(
+                                    child: Icon(
+                                      Icons.chevron_left_outlined,
+                                      size: 32,
                                     ),
                                   ),
                                 ),
                               ),
-                              Expanded(child: HomeAD()),
-                            ],
+                            ),
                           ),
-                          QuestionProgress(),
-                          Obx(() => Visibility(
-                                visible: controller.showProgress.value,
-                                child: ProgressCard(result: controller.results),
-                              )),
-                          ExpandablePageView.builder(
-                            animationCurve: Curves.easeIn,
-                            animateFirstPage: true,
-                            itemCount: questionPages.length,
-                            itemBuilder: (context, index) {
-                              return Obx(() => questionPages[
-                                  controller.currentPageIndex.value]);
-                            },
-                            onPageChanged: (index) {
-                              controller.currentPageIndex.value = index;
-                              scrollController.animateTo(
-                                0,
-                                duration: const Duration(milliseconds: 300),
-                                curve: Curves.easeInOut,
-                              );
-                            },
-                            physics:
-                                const NeverScrollableScrollPhysics(), // Disable swiping between pages
-                          ),
-                          GetBuilder<NativeAdController>(
-                            init: nativeAdController,
-                            builder: (_) {
-                              return buildNativeAd();
-                            },
-                          ),
-                        ],
-                      ),
+                        ),
+                        Expanded(child: HomeAD()),
+                      ],
+                    ),
+                    QuestionProgress(),
+                    Obx(() => Visibility(
+                          visible: controller.showProgress.value,
+                          child: ProgressCard(result: controller.results),
+                        )),
+                    ExpandablePageView.builder(
+                      animationCurve: Curves.easeIn,
+                      animateFirstPage: true,
+                      itemCount: questionPages.length,
+                      itemBuilder: (context, index) {
+                        return Obx(() =>
+                            questionPages[controller.currentPageIndex.value]);
+                      },
+                      onPageChanged: (index) {
+                        controller.currentPageIndex.value = index;
+                      },
+                      physics:
+                          const NeverScrollableScrollPhysics(), // Disable swiping between pages
+                    ),
+                    GetBuilder<NativeAdController>(
+                      init: nativeAdController,
+                      builder: (_) {
+                        return buildNativeAd();
+                      },
                     ),
                     QuestionController(pages: questionPages),
                   ],

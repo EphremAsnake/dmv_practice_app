@@ -35,7 +35,7 @@ class HomePageTopCard extends StatelessWidget {
           ],
         ),
         width: MediaQuery.of(context).size.width,
-        height: 20.h,
+        height: 15.h,
         child: Card(
           elevation: 0,
           child: Padding(
@@ -94,55 +94,61 @@ class HomePageTopCard extends StatelessWidget {
                 const SizedBox(
                   height: 2,
                 ),
-                Text(
-                  "Want To Practice Traffic Signs First ?",
-                  style: TextStyle(
-                      color: themeData!.primaryColor,
-                      fontSize: 14,
-                      fontWeight: FontWeight.bold),
-                ),
-                const SizedBox(
-                  height: 6,
-                ),
                 Row(
-                  mainAxisAlignment: MainAxisAlignment.end,
                   children: [
-                    GestureDetector(
-                      onTap: () {
-                        Get.toNamed('/study-signs');
-                      },
-                      child: Container(
-                        decoration: BoxDecoration(
-                          color: themeData!.primaryColor,
-                          border: Border.all(
+                    Expanded(
+                      child: Text(
+                        "Want To Practice Traffic Signs First ?",
+                        style: TextStyle(
                             color: themeData!.primaryColor,
-                          ),
-                          borderRadius: BorderRadius.circular(30),
-                        ),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 15),
-                          child: Row(
-                            children: [
-                              LineIcon.play(
-                                size: 20.0,
-                                color: themeData!.whiteColor,
-                              ),
-                              const SizedBox( 
-                                width: 5,
-                              ),
-                              Text(  
-                                "Start Practicing",
-                                style: TextStyle(
-                                  color: themeData!.whiteColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold),
                       ),
+                    ),
+                    const SizedBox(
+                      height: 6,
+                    ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            Get.toNamed('/study-signs');
+                          },
+                          child: Container(
+                            decoration: BoxDecoration(
+                              color: themeData!.primaryColor,
+                              border: Border.all(
+                                color: themeData!.primaryColor,
+                              ),
+                              borderRadius: BorderRadius.circular(30),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.symmetric(
+                                  vertical: 10.0, horizontal: 15),
+                              child: Row(
+                                children: [
+                                  LineIcon.play(
+                                    size: 20.0,
+                                    color: themeData!.whiteColor,
+                                  ),
+                                  const SizedBox( 
+                                    width: 5,
+                                  ),
+                                  Text(  
+                                    "Start Practicing",
+                                    style: TextStyle(
+                                      color: themeData!.whiteColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ],
                 ),

@@ -19,10 +19,10 @@ class QuestionController extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only( left: 0.0,right: 0.0, top: 5.0),
+      padding: const EdgeInsets.only(left: 0.0, right: 0.0, top: 5.0),
       child: SizedBox(
         width: MediaQuery.of(context).size.width,
-        height: 8.h,
+        height: 9.h,
         child: Card(
           elevation: 0,
           child: Padding(
@@ -42,6 +42,11 @@ class QuestionController extends StatelessWidget {
                       controller.previousPage();
                       controller.goToPreviousQuestion();
                     }
+                    controller.scrollController.animateTo(
+                      controller.scrollController.position.minScrollExtent,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
+                    );
                   },
                   child: Container(
                     width: 45.w,
@@ -54,7 +59,7 @@ class QuestionController extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 15),
+                          vertical: 20.0, horizontal: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -65,10 +70,14 @@ class QuestionController extends StatelessWidget {
                           const SizedBox(
                             width: 5,
                           ),
-                          Text("Previous",
-                              style: TextStyle(
-                                  color: themeData?.primaryColor,
-                                  fontWeight: FontWeight.bold)),
+                          Text(
+                            "Previous",
+                            style: TextStyle(
+                              color: themeData?.primaryColor,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 11.sp,
+                            ),
+                          ),
                         ],
                       ),
                     ),
@@ -95,6 +104,11 @@ class QuestionController extends StatelessWidget {
                     } else {
                       controller.goToNextQuestion(pages.length);
                     }
+                    controller.scrollController.animateTo(
+                      controller.scrollController.position.minScrollExtent,
+                      duration: const Duration(milliseconds: 300),
+                      curve: Curves.easeOut,
+                    );
                     //}
                   },
                   child: Container(
@@ -108,7 +122,7 @@ class QuestionController extends StatelessWidget {
                     ),
                     child: Padding(
                       padding: const EdgeInsets.symmetric(
-                          vertical: 10.0, horizontal: 15),
+                          vertical: 20.0, horizontal: 15),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: [
@@ -119,8 +133,10 @@ class QuestionController extends StatelessWidget {
                                   ? "Finish"
                                   : "Next",
                               style: TextStyle(
-                                  color: themeData?.whiteColor,
-                                  fontWeight: FontWeight.bold),
+                                color: themeData?.whiteColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 11.sp,
+                              ),
                             ),
                           ),
                           const SizedBox(

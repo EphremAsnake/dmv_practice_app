@@ -82,13 +82,14 @@ class AboutView extends GetView<AboutController> {
                     ),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.all(5.0),
+                        padding: const EdgeInsets.all(0.0),
                         child: Card(
                           elevation: 0,
                           child: Padding(
                             padding: EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 40.0.sp),
-                            child: Column(
+                                horizontal: 10.0, vertical: 10.0.sp),
+                            child: ListView(
+                              shrinkWrap: true,
                               children: [
                                 Expanded(
                                   child: Text(

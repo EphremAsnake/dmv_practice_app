@@ -100,11 +100,12 @@ class QuestionCard extends StatelessWidget {
                           child: Padding(
                             padding: const EdgeInsets.all(6.0),
                             child: ListTile(
-                              visualDensity:
-                                  const VisualDensity(horizontal: 0, vertical: -4),
+                              visualDensity: const VisualDensity(
+                                  horizontal: 0, vertical: -4),
                               dense: true,
                               contentPadding: const EdgeInsets.all(0),
-                              splashColor: themeData!.splashColor.withOpacity(0.5),
+                              splashColor:
+                                  themeData!.splashColor.withOpacity(0.5),
                               title: Text(
                                 choice.text,
                                 style: TextStyle(fontSize: 11.sp),
@@ -136,7 +137,8 @@ class QuestionCard extends StatelessWidget {
                                     child: TestHelper().getCheckedOrWrongIcon(
                                             controller.isAnswerSelected.value,
                                             choice.selected,
-                                            controller.wasAnsweredCorrectly.value,
+                                            controller
+                                                .wasAnsweredCorrectly.value,
                                             choice.id,
                                             question.answerId) ??
                                         const SizedBox.shrink(),
@@ -153,18 +155,26 @@ class QuestionCard extends StatelessWidget {
                                     controller.update();
                                   }
                                   Choice selectedAnswer = question.choices
-                                      .where((element) => element.selected == true)
+                                      .where(
+                                          (element) => element.selected == true)
                                       .first;
-                  
+
                                   controller.choiceId = selectedAnswer.id;
-                  
+
                                   //
                                   //checking answer
                                   controller.showQuestionAnswer(
                                       controller.choiceId,
                                       controller.test!.questions[
                                           controller.currentPageIndex.value]);
-                  
+
+                                  Future.delayed(const Duration(milliseconds: 500),(){controller.scrollController.animateTo(
+                                    controller.scrollController.position
+                                        .maxScrollExtent,
+                                    duration: const Duration(milliseconds: 300),
+                                    curve: Curves.easeOut,
+                                  );});
+
                                   controller.update();
                                 }
                               },
@@ -190,7 +200,8 @@ class QuestionCard extends StatelessWidget {
                             question.explaniation,
                             textAlign: TextAlign.justify,
                             style: TextStyle(
-                                color: themeData?.blackColor, fontSize: 10.5.sp),
+                                color: themeData?.blackColor,
+                                fontSize: 10.5.sp),
                           ),
                         ),
                       ),

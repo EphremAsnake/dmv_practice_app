@@ -68,18 +68,18 @@ class ReadManual extends StatelessWidget {
                     ],
                   ),
                   width: MediaQuery.of(context).size.width,
-                  height: 6.h,
+                  height: 8.h,
                   child: Card(
                     elevation: 0,
                     child: Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.all(0.0),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Row(
                             children: [
                               SizedBox(
-                                height: 45,
+                                height: 50,
                                 child: Image.asset(
                                   "assets/images/manual.png",
                                   fit: BoxFit.contain,
@@ -89,7 +89,7 @@ class ReadManual extends StatelessWidget {
                                 "Read ${controller.state!.name}'s Drivers Manual",
                                 style: TextStyle(
                                   color: themeData!.primaryColor,
-                                  fontSize: 11.sp,
+                                  fontSize: 11.5.sp,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
