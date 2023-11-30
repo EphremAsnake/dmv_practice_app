@@ -63,19 +63,19 @@ class HomeAD extends StatelessWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        // Row(
-                        //   children: [
-                        //     Flexible(
-                        //       child: Text(
-                        //         masterDataController.configs!.houseAd.title.toTitleCase(),
-                        //         style: TextStyle(
-                        //           fontSize: 13,
-                        //           color: themeData!.blackColor,
-                        //         ),
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
+                        Row(
+                          children: [
+                            Flexible(
+                              child: Text(
+                                masterDataController.configs!.houseAd.title.toTitleCase(),
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  color: themeData!.blackColor,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
                         const SizedBox(
                           height: 4,
                         ),

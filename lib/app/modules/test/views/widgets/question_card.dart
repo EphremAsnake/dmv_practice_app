@@ -59,7 +59,7 @@ class QuestionCard extends StatelessWidget {
                     "${index + 1}. ${question.question}",
                     style: TextStyle(
                         color: themeData?.blackColor,
-                        fontSize: 11.sp,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.bold),
                   ),
                 ),
@@ -107,7 +107,7 @@ class QuestionCard extends StatelessWidget {
                               splashColor: themeData!.splashColor.withOpacity(0.5),
                               title: Text(
                                 choice.text,
-                                style: TextStyle(fontSize: 10.5.sp),
+                                style: TextStyle(fontSize: 11.sp),
                               ),
                               leading: Padding(
                                 padding: const EdgeInsets.only(left: 5.0),
@@ -116,7 +116,7 @@ class QuestionCard extends StatelessWidget {
                                   height: 25,
                                   decoration: BoxDecoration(
                                     shape: BoxShape.circle,
-                                    color: TestHelper().getBorderColor(
+                                    color: TestHelper().getChoiceBgColor(
                                         controller.isAnswerSelected.value,
                                         choice.selected,
                                         controller.wasAnsweredCorrectly.value,

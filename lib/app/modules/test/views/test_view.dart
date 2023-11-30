@@ -10,13 +10,13 @@ import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:expandable_page_view/expandable_page_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:sizer/sizer.dart';
 import '../controllers/test_controller.dart';
 
 class TestView extends GetView<TestController> {
   TestView({Key? key}) : super(key: key);
   final themeData = Get.find<ThemeController>().themeData.value;
   final NativeAdController nativeAdController = Get.put(NativeAdController());
+  ScrollController scrollController = ScrollController();
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -44,8 +44,7 @@ class TestView extends GetView<TestController> {
                 child: Column(
                   //mainAxisSize: MainAxisSize.max,
                   children: [
-                    Container(
-                      height: 85.h,
+                    Expanded(
                       child: ListView(
                         children: [
                           const SizedBox(
@@ -96,7 +95,7 @@ class TestView extends GetView<TestController> {
                                   ),
                                 ),
                               ),
-                              HomeAD(),
+                              Expanded(child: HomeAD()),
                             ],
                           ),
                           QuestionProgress(),
@@ -105,6 +104,7 @@ class TestView extends GetView<TestController> {
                                 child: ProgressCard(result: controller.results),
                               )),
                           ExpandablePageView.builder(
+                            animationCurve: Curves.easeIn,
                             animateFirstPage: true,
                             itemCount: questionPages.length,
                             itemBuilder: (context, index) {
@@ -113,6 +113,11 @@ class TestView extends GetView<TestController> {
                             },
                             onPageChanged: (index) {
                               controller.currentPageIndex.value = index;
+                              scrollController.animateTo(
+                                0,
+                                duration: const Duration(milliseconds: 300),
+                                curve: Curves.easeInOut,
+                              );
                             },
                             physics:
                                 const NeverScrollableScrollPhysics(), // Disable swiping between pages

@@ -11,6 +11,7 @@ class TestResult extends StatelessWidget {
   TestResult({super.key});
   final themeData = Get.find<ThemeController>().themeData.value;
   final TestController controller = Get.find();
+  
   @override
   Widget build(BuildContext context) {
     int incorrectAnswers =
@@ -26,38 +27,37 @@ class TestResult extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                  padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: GestureDetector(
                     onTap: () {
-                      Get.toNamed("/home");
+                      Get.offAndToNamed("/home");
                     },
-                    child: Container(
-                      width: 50,
-                      height: 50,
-                      decoration: BoxDecoration(
-                        color: themeData?.whiteColor,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(10),
-                        boxShadow: [
-                          BoxShadow(
-                            color: themeData!.shadowColor.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 1,
-                            offset: const Offset(
-                                0, 1), // horizontal, vertical offset
-                          ),
-                        ],
-                      ),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
-                        child: SizedBox(
-                          width: 1,
-                          height: 1,
-                          child: Center(
-                            child: Icon(
-                              Icons.home_outlined,
-                              color: themeData!.blackColor.withOpacity(0.4),
-                              size: 32,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Container(
+                        width: 50,
+                        height: 50,
+                        decoration: BoxDecoration(
+                          color: themeData?.whiteColor,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(10),
+                          boxShadow: [
+                            BoxShadow(
+                              color: themeData!.shadowColor.withOpacity(0.5),
+                              spreadRadius: 2,
+                              blurRadius: 1,
+                              offset: const Offset(
+                                  0, 1), // horizontal, vertical offset
+                            ),
+                          ],
+                        ),
+                        child: Padding(
+                          padding: const EdgeInsets.all(12.0),
+                          child: SizedBox(
+                            width: 1,
+                            height: 1,
+                            child: Image.asset(
+                              "assets/images/home.png",
                             ),
                           ),
                         ),
@@ -65,17 +65,22 @@ class TestResult extends StatelessWidget {
                     ),
                   ),
                 ),
-                HomeAD(),
+                Expanded(child: HomeAD()),
               ],
-            ),
-            const SizedBox(
-              height: 10,
             ),
             passed
                 ? Expanded(
-                    child: PassedWidget(incorrectAnswers: incorrectAnswers))
+                    child: PassedWidget(
+                      incorrectAnswers: incorrectAnswers,
+                      numberOfQuestions: controller.test!.questions.length,
+                    ),
+                  )
                 : Expanded(
-                    child: FailedWidget(incorrectAnswers: incorrectAnswers))
+                    child: FailedWidget(
+                      incorrectAnswers: incorrectAnswers,
+                      numberOfQuestions: controller.test!.questions.length,
+                    ),
+                  )
           ],
         ),
       ),

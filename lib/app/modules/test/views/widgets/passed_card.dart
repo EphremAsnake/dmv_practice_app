@@ -6,17 +6,18 @@ import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
 
 class PassedWidget extends StatelessWidget {
-  PassedWidget({
-    super.key,
-    required this.incorrectAnswers,
-  });
+  PassedWidget(
+      {super.key,
+      required this.incorrectAnswers,
+      required this.numberOfQuestions});
   final themeData = Get.find<ThemeController>().themeData.value;
   final int incorrectAnswers;
+  final int numberOfQuestions;
   final TestController controller = Get.find();
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(5.0),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -52,12 +53,25 @@ class PassedWidget extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              Text(
-                "You have made $incorrectAnswers errors out of 35 questions",
-                style: TextStyle(
-                  fontSize: 16,
-                  fontWeight: FontWeight.bold,
-                  color: themeData?.blackColor,
+              Align(
+                alignment: Alignment.center,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 5),
+                  child: Row(
+                    children: [
+                      Expanded(
+                        child: Text(
+                          "You have made $incorrectAnswers errors out of $numberOfQuestions questions",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: themeData?.blackColor,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
                 ),
               ),
               GetBuilder<TestController>(
@@ -74,7 +88,7 @@ class PassedWidget extends StatelessWidget {
                 ),
               ),
               const SizedBox(
-                height: 30,
+                height: 15,
               ),
               GestureDetector(
                 onTap: () {},
@@ -107,47 +121,50 @@ class PassedWidget extends StatelessWidget {
                   ),
                 ),
               ),
+              // const SizedBox(
+              //   height: 30,
+              // ),
+              // GestureDetector(
+              //   onTap: () {},
+              //   child: Container(
+              //     width: 70.w,
+              //     decoration: BoxDecoration(
+              //       color: themeData!.lightGrey.withOpacity(0.6),
+              //       border: Border.all(
+              //         color: themeData!.whiteColor,
+              //       ),
+              //       borderRadius: BorderRadius.circular(5),
+              //     ),
+              //     child: Padding(
+              //       padding: const EdgeInsets.symmetric(
+              //           vertical: 15.0, horizontal: 15),
+              //       child: Row(
+              //         mainAxisAlignment: MainAxisAlignment.center,
+              //         children: [
+              //           Center(
+              //             child: Text(
+              //               "BACK TO INCORRECT & SKIPPED(28)",
+              //               style: TextStyle(
+              //                   color: themeData!.primaryColor,
+              //                   fontWeight: FontWeight.bold,
+              //                   fontSize: 9.5.sp),
+              //             ),
+              //           ),
+              //         ],
+              //       ),
+              //     ),
+              //   ),
+              // ),
               const SizedBox(
-                height: 30,
-              ),
-              GestureDetector(
-                onTap: () {},
-                child: Container(
-                  width: 70.w,
-                  decoration: BoxDecoration(
-                    color: themeData!.lightGrey.withOpacity(0.6),
-                    border: Border.all(
-                      color: themeData!.whiteColor,
-                    ),
-                    borderRadius: BorderRadius.circular(5),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 15.0, horizontal: 15),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Center(
-                          child: Text(
-                            "BACK TO INCORRECT & SKIPPED(28)",
-                            style: TextStyle(
-                                color: themeData!.primaryColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 9.5.sp),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              const SizedBox(
-                height: 30,
+                height: 15,
               ),
               GestureDetector(
                 onTap: () {
-                  Get.toNamed("/test",
-                      arguments: {'test_url': controller.testUrl});
+                  Get.offAndToNamed("/test", arguments: {
+                    'test_url': controller.testUrl,
+                    'number_of_questions': controller.numberOfQuestionsForState
+                  });
+                  controller.resetControllerValues();
                 },
                 child: Container(
                   width: 70.w,
@@ -167,6 +184,42 @@ class PassedWidget extends StatelessWidget {
                         Center(
                           child: Text(
                             "RESTART TEST",
+                            style: TextStyle(
+                                color: themeData!.primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 9.5.sp),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: () {
+                  Get.offAndToNamed("/home");
+                },
+                child: Container(
+                  width: 70.w,
+                  decoration: BoxDecoration(
+                    color: themeData!.lightGrey.withOpacity(0.6),
+                    border: Border.all(
+                      color: themeData!.whiteColor,
+                    ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15.0, horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Text(
+                            "HOME",
                             style: TextStyle(
                                 color: themeData!.primaryColor,
                                 fontWeight: FontWeight.bold,

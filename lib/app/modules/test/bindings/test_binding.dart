@@ -7,8 +7,9 @@ class TestBinding extends Bindings {
   void dependencies() {
     Map<String, dynamic> arguments = Get.arguments;
     String testUrl = arguments['test_url'];
+    int numberOfQuestions = arguments['number_of_questions'];
     Get.lazyPut<TestController>(
-      () => TestController(testUrl),
+      () => TestController(testUrl,numberOfQuestions),
     );
   }
 }

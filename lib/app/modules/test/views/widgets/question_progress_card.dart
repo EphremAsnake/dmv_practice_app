@@ -20,81 +20,79 @@ class QuestionProgress extends StatelessWidget {
     return Center(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
-        child: Container(
-          decoration: BoxDecoration(
-            color: themeData!.whiteColor,
-            boxShadow: [
-              BoxShadow(
-                color: themeData!.shadowColor,
-                spreadRadius: 2,
-                blurRadius: 10,
-                offset: const Offset(0, 8), // horizontal, vertical offset
-              ),
-              BoxShadow(
-                color: themeData!.shadowColor,
-                spreadRadius: 2,
-                blurRadius: 10,
-                offset: const Offset(0, -8), // horizontal, vertical offset
-              ),
-            ],
-          ),
-          width: MediaQuery.of(context).size.width,
-          height: 9.h,
-          child: Card(
-            elevation: 0,
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 5),
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Obx(() => Text(
-                        "Question ${controller.questionPageNumber.value}/${controller.apiStateHandler.data!.questions.length}",
-                        style: TextStyle(
-                            color: themeData?.blackColor,
-                            fontSize: 14,
-                            fontWeight: FontWeight.bold),
-                      )),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  Container(
-                    height: 8,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(5),
-                      color: themeData?.grayTextColor,
+        child: GestureDetector(
+          onTap: () {
+            if (controller.results.isEmpty) {
+              customSnackBar(
+                title: "Information",
+                body: "Please make some progress to view your progress",
+              );
+            } else {
+              controller.showProgress.value = !controller.showProgress.value;
+              controller.update();
+            }
+          },
+          child: Container(
+            decoration: BoxDecoration(
+              color: themeData!.whiteColor,
+              boxShadow: [
+                BoxShadow(
+                  color: themeData!.shadowColor,
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: const Offset(0, 8), // horizontal, vertical offset
+                ),
+                BoxShadow(
+                  color: themeData!.shadowColor,
+                  spreadRadius: 2,
+                  blurRadius: 10,
+                  offset: const Offset(0, -8), // horizontal, vertical offset
+                ),
+              ],
+            ),
+            width: MediaQuery.of(context).size.width,
+            height: 9.5.h,
+            child: Card(
+              elevation: 0,
+              child: Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 5),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Obx(() => Text(
+                          "Question ${controller.questionPageNumber.value}/${controller.apiStateHandler.data!.questions.length}",
+                          style: TextStyle(
+                              color: themeData?.blackColor,
+                              fontSize: 14,
+                              fontWeight: FontWeight.bold),
+                        )),
+                    const SizedBox(
+                      height: 4,
                     ),
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(5),
-                      child: Obx(() => LinearProgressIndicator(
-                            value: controller.questionPageNumber /
-                                controller.test!.questions.length,
-                            minHeight: 10,
-                            backgroundColor: Colors.transparent,
-                            valueColor: AlwaysStoppedAnimation<Color>(
-                              themeData!.primaryColor,
-                            ),
-                          )),
+                    Container(
+                      height: 8,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(5),
+                        color: themeData?.grayTextColor,
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(5),
+                        child: Obx(() => LinearProgressIndicator(
+                              value: controller.questionPageNumber /
+                                  controller.test!.questions.length,
+                              minHeight: 10,
+                              backgroundColor: Colors.transparent,
+                              valueColor: AlwaysStoppedAnimation<Color>(
+                                themeData!.primaryColor,
+                              ),
+                            )),
+                      ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 4,
-                  ),
-                  GestureDetector(
-                    onTap: () {
-                      if (controller.results.isEmpty) {
-                        customSnackBar(
-                          title: "Information",
-                          body:
-                              "Please make some progress to view your progress",
-                        );
-                      } else {
-                        controller.showProgress.value =
-                            !controller.showProgress.value;
-                        controller.update();
-                      }
-                    },
-                    child: Obx(
+                    const SizedBox(
+                      height: 4,
+                    ),
+                    Obx(
                       () => Text(
                         controller.showProgress.value
                             ? "Hide Progress"
@@ -105,8 +103,8 @@ class QuestionProgress extends StatelessWidget {
                             fontWeight: FontWeight.bold),
                       ),
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           ),

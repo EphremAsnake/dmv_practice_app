@@ -35,12 +35,13 @@ class HomePageTopCard extends StatelessWidget {
           ],
         ),
         width: MediaQuery.of(context).size.width,
-        height: 17.h,
+        height: 20.h,
         child: Card(
           elevation: 0,
           child: Padding(
             padding: const EdgeInsets.all(8.0),
             child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const SizedBox(

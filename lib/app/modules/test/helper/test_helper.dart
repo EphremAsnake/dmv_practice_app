@@ -1,8 +1,10 @@
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/data/models/result/result.dart';
+import 'package:drivingexam/app/data/models/test/test.dart';
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:collection/collection.dart';
 
 class TestHelper {
   final themeData = Get.find<ThemeController>().themeData.value;
@@ -23,6 +25,25 @@ class TestHelper {
     } else {
       borderColor =
           isChoiceSelected ? themeData!.primaryColor : themeData!.grayTextColor;
+    }
+    return borderColor;
+  }
+
+  Color getChoiceBgColor(bool isAnswerSelected, bool isChoiceSelected,
+      bool wasAnswerdCorrectly, int choiceId, int answerId) {
+    Color borderColor;
+    if (isAnswerSelected) {
+      if (isChoiceSelected) {
+        borderColor = wasAnswerdCorrectly
+            ? themeData!.primaryColor
+            : themeData!.errorColor;
+      } else {
+        borderColor =
+            answerId == choiceId ? themeData!.primaryColor : Colors.transparent;
+      }
+    } else {
+      borderColor =
+          isChoiceSelected ? themeData!.primaryColor : Colors.transparent;
     }
     return borderColor;
   }
@@ -55,15 +76,26 @@ class TestHelper {
     if (isAnswerSelected) {
       if (isChoiceSelected) {
         icon = wasAnswerdCorrectly
-            ? Icon(Icons.check, color: themeData?.whiteColor,size: 18,)
-            : Icon(Icons.close, color: themeData?.whiteColor,size: 18);
+            ? Icon(
+                Icons.check,
+                color: themeData?.whiteColor,
+                size: 18,
+              )
+            : Icon(Icons.close, color: themeData?.whiteColor, size: 18);
       } else {
         icon = answerId == choiceId
-            ? Icon(Icons.check, color: themeData?.whiteColor,size: 18)
+            ? Icon(Icons.check, color: themeData?.whiteColor, size: 18)
             : null;
       }
       return icon;
     }
     return null;
+  }
+
+  selectRandomQuestions(List<Question> questions, int numberOfQuestions) {
+    List<Question> getQuestions(int n, List<Question> source) =>
+        source.sample(n);
+    final questionsList = getQuestions(numberOfQuestions, questions);
+    return questionsList;
   }
 }

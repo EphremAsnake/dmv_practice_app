@@ -29,8 +29,8 @@ class TestController extends GetxController {
   Rx<int> showAdCounter = 0.obs;
   Rx<bool> isLastQuestionPageBackButtonEnabled = false.obs;
   Question? question;
-
-  TestController(this.testUrl);
+  int numberOfQuestionsForState = 0;
+  TestController(this.testUrl, this.numberOfQuestionsForState);
 
   final apiStateHandler = ApiStateHandler<Test>();
   var httpService = Get.find<HttpService>();
@@ -65,6 +65,8 @@ class TestController extends GetxController {
 
       final result = jsonDecode(response.body);
       test = Test.fromJson(result);
+      test?.questions = testHelper.selectRandomQuestions(
+          test?.questions ?? [], numberOfQuestionsForState);
       // Update state with success and response data
       apiStateHandler.setSuccess(test!);
       update();

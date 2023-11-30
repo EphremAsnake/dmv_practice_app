@@ -31,14 +31,14 @@ class AboutView extends GetView<AboutController> {
             } else if (masterDataController.apiStateHandler.apiState ==
                 ApiState.success) {
               return Padding(
-                padding: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(5.0),
                 child: Column(
                   children: [
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                          padding: const EdgeInsets.symmetric(horizontal: 5.0),
                           child: GestureDetector(
                             onTap: () {
                               Get.back();
@@ -77,12 +77,12 @@ class AboutView extends GetView<AboutController> {
                             ),
                           ),
                         ),
-                        HomeAD(),
+                        Expanded(child: HomeAD()),
                       ],
                     ),
                     Expanded(
                       child: Padding(
-                        padding: const EdgeInsets.all(10.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Card(
                           elevation: 0,
                           child: Padding(
@@ -99,11 +99,6 @@ class AboutView extends GetView<AboutController> {
                                         fontSize: 16),
                                   ),
                                 ),
-                                Text(
-                                  "Copyright © ${DateTime.now().year} DMV Practice APP. All Rights Reserved.",
-                                  textAlign: TextAlign.justify,
-                                  style: TextStyle(color: themeData?.primaryColor),
-                                )
                               ],
                             ),
                           ),

@@ -166,7 +166,12 @@ class HomeView extends GetView<HomeController> {
                                                 .apiStateHandler
                                                 .data!
                                                 .tests[index]
-                                                .url
+                                                .url,
+                                            'number_of_questions':
+                                                usStatesController
+                                                    .cacheStateHandler
+                                                    .data!
+                                                    .numberOfQuestions
                                           });
                                         },
                                         child: Center(

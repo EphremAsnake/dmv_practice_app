@@ -29,13 +29,13 @@ class StudySignsView extends GetView<StudySignsController> {
               return Column(
                 children: [
                   const SizedBox(
-                    height: 20,
+                    height: 5,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 10.0),
+                        padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: GestureDetector(
                           onTap: () {
                             Get.back();
@@ -74,11 +74,11 @@ class StudySignsView extends GetView<StudySignsController> {
                           ),
                         ),
                       ),
-                      HomeAD(),
+                      Expanded(child: HomeAD()),
                     ],
                   ),
                   const SizedBox(
-                    height: 10,
+                    height: 2,
                   ),
                   Expanded(
                     child: GridView.builder(
@@ -86,8 +86,8 @@ class StudySignsView extends GetView<StudySignsController> {
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 5,
-                        mainAxisSpacing: 5,
+                        crossAxisSpacing: 2,
+                        mainAxisSpacing: 2,
                       ),
                       itemCount: controller.apiStateHandler.data?.signsStudy
                           .signsAndDescriptions.length,
@@ -98,7 +98,7 @@ class StudySignsView extends GetView<StudySignsController> {
                                 .data!.signsStudy.signsAndDescriptions[index]);
                           },
                           child: Padding(
-                            padding: const EdgeInsets.all(10.0),
+                            padding: const EdgeInsets.all(5.0),
                             child: Container(
                               decoration: BoxDecoration(
                                 color: themeData!.whiteColor,
@@ -119,7 +119,7 @@ class StudySignsView extends GetView<StudySignsController> {
                                 children: [
                                   Center(
                                     child: Padding(
-                                        padding: const EdgeInsets.all(10.0),
+                                        padding: const EdgeInsets.all(5.0),
                                         child: Image.network(
                                           "${Keys.baseurl}${controller.apiStateHandler.data!.signsStudy.signsAndDescriptions[index].image}",
                                           width: 100,

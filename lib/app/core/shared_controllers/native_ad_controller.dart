@@ -18,6 +18,7 @@ class NativeAdController extends GetxController {
 
   loadAd() {
     nativeAd = NativeAd(
+      
       adUnitId: "ca-app-pub-3940256099942544/2247696110",
       request: const AdRequest(),
       listener: NativeAdListener(
