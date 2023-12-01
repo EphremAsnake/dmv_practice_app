@@ -23,6 +23,7 @@ class StudySignsController extends GetxController {
     try {
       dynamic response =
           await httpService.sendHttpRequest(StudySignsHttpAttributes());
+          
       //decode the api result to model type
       final result = jsonDecode(response.body);
       signsStudy = SignsStudy.fromJson(result);

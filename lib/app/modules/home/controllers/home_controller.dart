@@ -1,18 +1,24 @@
 import 'dart:convert';
 
+import 'package:drivingexam/app/core/cache/local_storage.dart';
 import 'package:drivingexam/app/core/http_client/http_service.dart';
 import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
 import 'package:drivingexam/app/data/models/test/all_test_list.dart';
 import 'package:drivingexam/app/modules/home/controllers/all_tests_http_attribuites.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/keys/keys.dart';
 import 'package:get/get.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
 class HomeController extends GetxController {
   final apiStateHandler = ApiStateHandler<AllTests>();
   var httpService = Get.find<HttpService>();
+  Rx<bool> isAutoScrollingEnabled = false.obs;
+  static final _storage = Hive.box('driving_exam');
 
   @override
   void onInit() {
+    isAutoScrollingEnabled.value = _storage.get(Keys.autoScrollingCacheKey);
     fetchData();
     super.onInit();
   }
@@ -38,11 +44,16 @@ class HomeController extends GetxController {
     }
   }
 
-   // Reactive variable to track the modal state
+  // Reactive variable to track the modal state
   RxBool isModalOpen = false.obs;
 
   // Method to toggle the modal state
   void toggleModal() {
     isModalOpen.toggle();
+  }
+
+  void toggleAutoScrollingBehavior(bool state) {
+    _storage.put(Keys.autoScrollingCacheKey, state);
+    isAutoScrollingEnabled.value = state;
   }
 }

@@ -1,14 +1,17 @@
+import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:drivingexam/app/utils/helper/app_colors.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:lite_rolling_switch/lite_rolling_switch.dart';
 
 class Settings extends StatelessWidget {
-  const Settings({
+  Settings({
     super.key,
     required this.themeData,
   });
 
   final ThemeDataModel? themeData;
+  final HomeController controller = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -71,15 +74,38 @@ class Settings extends StatelessWidget {
             ),
           ),
         ),
+        //  bool isAutoScrollEnabled = false;
+
         GestureDetector(
           onTap: () {},
-          child: const Card(
+          child: Card(
             elevation: 0,
             borderOnForeground: true,
             child: ListTile(
-              title: Text("Rate"),
-              trailing: Icon(Icons.chevron_right),
-              leading: Icon(Icons.star_outline),
+              title: const Text("Auto Scrolling"),
+              trailing: SizedBox(
+                height: 40,
+                child: Obx(() => LiteRollingSwitch(
+                      width: 90,
+                      onDoubleTap: () {},
+                      onSwipe: () {},
+                      onTap: () {},
+                      value: controller.isAutoScrollingEnabled.value,
+                      textOn: 'On',
+                      textOff: 'Off',
+                      colorOn: themeData!.primaryColor,
+                      colorOff: themeData!.errorColor,
+                      iconOn: Icons.done,
+                      iconOff: Icons.remove_circle_outline,
+                      textSize: 14.0,
+                      textOffColor: themeData!.whiteColor,
+                      textOnColor: themeData!.whiteColor,
+                      onChanged: (bool state) {
+                        controller.toggleAutoScrollingBehavior(state);
+                      },
+                    )),
+              ),
+              leading: const Icon(Icons.play_arrow_outlined),
             ),
           ),
         ),

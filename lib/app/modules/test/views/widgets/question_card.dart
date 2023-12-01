@@ -1,6 +1,7 @@
 // ignore: must_be_immutable
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/data/models/test/test.dart';
+import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
 import 'package:drivingexam/app/utils/keys/keys.dart';
@@ -18,6 +19,7 @@ class QuestionCard extends StatelessWidget {
     required this.index,
   });
   final TestController controller = Get.find();
+  final HomeController homeController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -168,13 +170,10 @@ class QuestionCard extends StatelessWidget {
                                       controller.test!.questions[
                                           controller.currentPageIndex.value]);
 
-                                  Future.delayed(const Duration(milliseconds: 500),(){controller.scrollController.animateTo(
-                                    controller.scrollController.position
-                                        .maxScrollExtent,
-                                    duration: const Duration(milliseconds: 300),
-                                    curve: Curves.easeOut,
-                                  );});
+                                  //auto scrolling to bottom
+                                  controller.autoScrollBottom();
 
+                                  //
                                   controller.update();
                                 }
                               },

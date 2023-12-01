@@ -218,14 +218,14 @@ class HomeView extends GetView<HomeController> {
                                                             "${usStatesController.cacheStateHandler.data!.numberOfQuestions.toString()} QUESTIONS",
                                                             style: TextStyle(
                                                               color: themeData
-                                                                  ?.blackColor,
+                                                                  ?.grayTextColor,
                                                             ),
                                                           ),
                                                           Text(
                                                             "PASSING SCORE ${usStatesController.cacheStateHandler.data!.passingScore.toString()}",
                                                             style: TextStyle(
                                                               color: themeData
-                                                                  ?.blackColor,
+                                                                  ?.grayTextColor,
                                                             ),
                                                           ),
                                                         ]),

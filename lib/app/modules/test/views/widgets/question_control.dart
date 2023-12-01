@@ -1,4 +1,5 @@
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
+import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:drivingexam/app/utils/helper/Interstitial_ad_manager.dart';
 import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
@@ -15,6 +16,7 @@ class QuestionController extends StatelessWidget {
 
   final List<Widget> pages;
   final TestController controller = Get.find();
+  final HomeController homeController = Get.find();
   final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
@@ -104,12 +106,8 @@ class QuestionController extends StatelessWidget {
                     } else {
                       controller.goToNextQuestion(pages.length);
                     }
-                    controller.scrollController.animateTo(
-                      controller.scrollController.position.minScrollExtent,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeOut,
-                    );
-                    //}
+                    //auto scrolling to top
+                    controller.autoScrollTop();
                   },
                   child: Container(
                     width: 45.w,

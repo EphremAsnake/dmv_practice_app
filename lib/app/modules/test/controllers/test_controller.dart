@@ -4,6 +4,7 @@ import 'package:drivingexam/app/core/http_client/http_service.dart';
 import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
 import 'package:drivingexam/app/data/models/result/result.dart';
 import 'package:drivingexam/app/data/models/test/test.dart';
+import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_http_attribuites.dart';
 import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
 import 'package:drivingexam/app/modules/test/views/result_page.dart';
@@ -32,7 +33,8 @@ class TestController extends GetxController {
   Question? question;
   int numberOfQuestionsForState = 0;
   ScrollController scrollController = ScrollController();
-  
+  final HomeController homeController = Get.find();
+
   TestController(this.testUrl, this.numberOfQuestionsForState);
 
   final apiStateHandler = ApiStateHandler<Test>();
@@ -191,6 +193,30 @@ class TestController extends GetxController {
       return true;
     } else {
       return false;
+    }
+  }
+
+  //autoScroll Bottom
+  void autoScrollBottom() {
+    if (homeController.isAutoScrollingEnabled.value == true) {
+      Future.delayed(const Duration(milliseconds: 500), () {
+        scrollController.animateTo(
+          scrollController.position.maxScrollExtent,
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeOut,
+        );
+      });
+    }
+  }
+
+  //autoScroll Top
+  void autoScrollTop() {
+    if (homeController.isAutoScrollingEnabled.value == true) {
+      scrollController.animateTo(
+        scrollController.position.minScrollExtent,
+        duration: const Duration(milliseconds: 300),
+        curve: Curves.easeOut,
+      );
     }
   }
 }

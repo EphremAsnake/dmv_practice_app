@@ -14,7 +14,7 @@ class MasterDataController extends GetxController {
   CacheStorageService cacheStorageService = CacheStorageService();
   Configs? configs;
   final apiStateHandler = ApiStateHandler<Configs>();
-
+  
   //get master data from API
   Future getMasterData() async {
     try {

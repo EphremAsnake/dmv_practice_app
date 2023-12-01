@@ -9,4 +9,5 @@ class Keys {
   static String nativeAdUnitKey = '/6499/example/native';
   static String manualsCacheKey = 'Manuals Cache Key';
   static String savedStateCacheKey = "Saved State Cache Key";
+  static String autoScrollingCacheKey = "Auto Scrolling Cache Key";
 }
