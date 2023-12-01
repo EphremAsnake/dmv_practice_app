@@ -47,7 +47,7 @@ class QuestionCard extends StatelessWidget {
         child: Card(
           elevation: 0,
           child: Padding(
-            padding: const EdgeInsets.only(bottom: 30),
+            padding: const EdgeInsets.only(bottom: 10),
             child: ListView(
               shrinkWrap: true,
               physics: const NeverScrollableScrollPhysics(),
@@ -68,11 +68,11 @@ class QuestionCard extends StatelessWidget {
                 if (question.imageUrl != null)
                   Center(
                     child: Padding(
-                      padding: const EdgeInsets.all(0.0),
+                      padding: const EdgeInsets.symmetric(vertical: 5.0),
                       child: Image.network(
                         "${Keys.baseurl}${question.imageUrl!}",
-                        width: 100,
-                        height: 100,
+                        width: 80,
+                        height: 80,
                       ),
                     ),
                   ),
@@ -105,6 +105,7 @@ class QuestionCard extends StatelessWidget {
                               visualDensity: const VisualDensity(
                                   horizontal: 0, vertical: -4),
                               dense: true,
+                              // enableFeedback: true,
                               contentPadding: const EdgeInsets.all(0),
                               splashColor:
                                   themeData!.splashColor.withOpacity(0.5),
@@ -147,7 +148,9 @@ class QuestionCard extends StatelessWidget {
                                   ),
                                 ),
                               ),
-                              onTap: () {
+                              onTap: () async {
+                                // //playing audio
+                                // await SoundService.instance.playTapDownSound();
                                 if (controller.isSelectingAnswerEnabled.value ==
                                     true) {
                                   for (int i = 0;
@@ -163,7 +166,6 @@ class QuestionCard extends StatelessWidget {
 
                                   controller.choiceId = selectedAnswer.id;
 
-                                  //
                                   //checking answer
                                   controller.showQuestionAnswer(
                                       controller.choiceId,
@@ -188,13 +190,13 @@ class QuestionCard extends StatelessWidget {
                   () => Visibility(
                     visible: controller.showDescription.value,
                     child: Padding(
-                      padding: const EdgeInsets.all(5.0),
+                      padding: const EdgeInsets.only(left:  5.0,right: 5.0,top: 5.0),
                       child: Card(
                         elevation: 0,
                         color: themeData?.primaryColor.withOpacity(0.1),
                         child: Padding(
                           padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 15),
+                              horizontal: 10.0, vertical: 10),
                           child: Text(
                             question.explaniation,
                             textAlign: TextAlign.justify,

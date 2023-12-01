@@ -347,6 +347,7 @@ class HomeView extends GetView<HomeController> {
                             }
                           },
                         );
+
                       } else if (usStatesController
                               .cacheStateHandler.apiState ==
                           ApiState.error) {

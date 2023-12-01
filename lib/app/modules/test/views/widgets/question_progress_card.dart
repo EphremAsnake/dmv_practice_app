@@ -74,7 +74,7 @@ class QuestionProgress extends StatelessWidget {
                       height: 8,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(5),
-                        color: themeData?.grayTextColor,
+                        color: themeData?.lightGrey,
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(5),

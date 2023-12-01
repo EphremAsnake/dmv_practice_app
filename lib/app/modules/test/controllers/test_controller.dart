@@ -10,8 +10,10 @@ import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
 import 'package:drivingexam/app/modules/test/views/result_page.dart';
 import 'package:drivingexam/app/utils/helper/Interstitial_ad_manager.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/helper/sound_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+
 
 class TestController extends GetxController {
   var currentPageIndex = 0.obs;
@@ -43,6 +45,7 @@ class TestController extends GetxController {
   @override
   void onInit() {
     fetchData();
+    SoundService.instance.loadSounds();
     confettiController = ConfettiController();
     InterstitialAdManager().loadAd();
     super.onInit();

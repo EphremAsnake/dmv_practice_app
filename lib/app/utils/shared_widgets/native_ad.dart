@@ -16,7 +16,7 @@ Widget buildNativeAd() {
             constraints: const BoxConstraints(
               minWidth: 200,
               minHeight: 150,
-              maxHeight: 400,
+              maxHeight: 350,
               maxWidth: 350,
             ),
             child: AdWidget(ad: nativeAdController.nativeAd!),

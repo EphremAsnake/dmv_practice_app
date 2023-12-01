@@ -26,8 +26,10 @@ dependencies:
   flutter_native_splash: ^2.3.6
   expandable_page_view: ^1.0.17
   collection: ^1.17.2
-  lite_rolling_switch: ^1.0.1
-  
+  audioplayers: ^5.2.1
+
+
+
 dev_dependencies: 
   flutter_lints: ^2.0.0
   flutter_test: 
@@ -44,4 +46,5 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
+    - assets/audio/
 

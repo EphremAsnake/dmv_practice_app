@@ -1,8 +1,9 @@
 import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:drivingexam/app/utils/helper/app_colors.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:lite_rolling_switch/lite_rolling_switch.dart';
+import 'package:line_icons/line_icon.dart';
 
 class Settings extends StatelessWidget {
   Settings({
@@ -22,12 +23,15 @@ class Settings extends StatelessWidget {
         const SizedBox(height: 20),
         Align(
           alignment: Alignment.centerLeft,
-          child: Text(
-            "Settings",
-            style: TextStyle(
-              color: themeData?.primaryColor,
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 5),
+            child: Text(
+              "Settings",
+              style: TextStyle(
+                color: themeData?.primaryColor,
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
             ),
           ),
         ),
@@ -38,13 +42,22 @@ class Settings extends StatelessWidget {
           onTap: () {
             Get.toNamed("/us-states");
           },
-          child: const Card(
+          child: Card(
             elevation: 0,
             borderOnForeground: true,
             child: ListTile(
-              title: Text("Change State"),
-              trailing: Icon(Icons.chevron_right),
-              leading: Icon(Icons.flag_outlined),
+              title: Text(
+                "Change State",
+                style: TextStyle(color: themeData?.grayTextColor),
+              ),
+              trailing: Icon(
+                Icons.chevron_right,
+                color: themeData?.grayTextColor,
+              ),
+              leading: Icon(
+                Icons.flag_outlined,
+                color: themeData?.grayTextColor,
+              ),
             ),
           ),
         ),
@@ -52,25 +65,43 @@ class Settings extends StatelessWidget {
           onTap: () {
             Get.toNamed("/about");
           },
-          child: const Card(
+          child: Card(
             elevation: 0,
             borderOnForeground: true,
             child: ListTile(
-              title: Text("About"),
-              trailing: Icon(Icons.chevron_right),
-              leading: Icon(Icons.info_outline),
+              title: Text(
+                "About",
+                style: TextStyle(color: themeData?.grayTextColor),
+              ),
+              trailing: Icon(
+                Icons.chevron_right,
+                color: themeData?.grayTextColor,
+              ),
+              leading: Icon(
+                Icons.info_outline,
+                color: themeData?.grayTextColor,
+              ),
             ),
           ),
         ),
         GestureDetector(
           onTap: () {},
-          child: const Card(
+          child: Card(
             elevation: 0,
             borderOnForeground: true,
             child: ListTile(
-              title: Text("Share"),
-              trailing: Icon(Icons.chevron_right),
-              leading: Icon(Icons.share_outlined),
+              title: Text(
+                "Share",
+                style: TextStyle(color: themeData?.grayTextColor),
+              ),
+              trailing: Icon(
+                Icons.chevron_right,
+                color: themeData?.grayTextColor,
+              ),
+              leading: Icon(
+                Icons.share_outlined,
+                color: themeData?.grayTextColor,
+              ),
             ),
           ),
         ),
@@ -82,30 +113,19 @@ class Settings extends StatelessWidget {
             elevation: 0,
             borderOnForeground: true,
             child: ListTile(
-              title: const Text("Auto Scrolling"),
-              trailing: SizedBox(
-                height: 40,
-                child: Obx(() => LiteRollingSwitch(
-                      width: 90,
-                      onDoubleTap: () {},
-                      onSwipe: () {},
-                      onTap: () {},
-                      value: controller.isAutoScrollingEnabled.value,
-                      textOn: 'On',
-                      textOff: 'Off',
-                      colorOn: themeData!.primaryColor,
-                      colorOff: themeData!.errorColor,
-                      iconOn: Icons.done,
-                      iconOff: Icons.remove_circle_outline,
-                      textSize: 14.0,
-                      textOffColor: themeData!.whiteColor,
-                      textOnColor: themeData!.whiteColor,
-                      onChanged: (bool state) {
-                        controller.toggleAutoScrollingBehavior(state);
-                      },
-                    )),
+              title:  Text("Auto Scrolling",   style: TextStyle(color: themeData?.grayTextColor),),
+              trailing: Obx(
+                () => CupertinoSwitch(
+                  activeColor: themeData!.primaryColor,
+                  value: controller.isAutoScrollingEnabled.value,
+                  onChanged: (state) {
+                    controller.toggleAutoScrollingBehavior(state);
+                  },
+                ),
               ),
-              leading: const Icon(Icons.play_arrow_outlined),
+              leading: LineIcon.scroll(
+                color: themeData?.grayTextColor,
+              ),
             ),
           ),
         ),

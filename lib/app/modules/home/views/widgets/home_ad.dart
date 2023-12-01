@@ -51,62 +51,70 @@ class HomeAD extends StatelessWidget {
                         masterDataController.configs!.houseAd.androidUrl);
                   }
                 },
-                child: Container(
-                  // height: 60,
-                  decoration: BoxDecoration(
-                    color: themeData!.whiteColor,
-                    shape: BoxShape.rectangle,
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Padding(
-                    padding: const EdgeInsets.all(10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Row(
+                child: Wrap(
+                  children: [
+                    Container(
+                      // height: 60,
+                      decoration: BoxDecoration(
+                        color: themeData!.whiteColor,
+                        shape: BoxShape.rectangle,
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Flexible(
-                              child: Text(
-                                masterDataController.configs!.houseAd.title.toTitleCase(),
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  color: themeData!.blackColor,
+                            Row(
+                              mainAxisSize: MainAxisSize.min,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    masterDataController.configs!.houseAd.title
+                                        .toTitleCase(),
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      color: themeData!.blackColor,
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const SizedBox(
+                              height: 4,
+                            ),
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  color: themeData?.primaryColor,
+                                  border: Border.all(
+                                    color: themeData!.primaryColor
+                                        .withOpacity(0.5),
+                                  ),
+                                  borderRadius: BorderRadius.circular(4),
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.symmetric(
+                                      vertical: 2.0, horizontal: 15),
+                                  child: Text(
+                                    masterDataController
+                                        .configs!.houseAd.buttonText
+                                        .toTitleCase(),
+                                    style: TextStyle(
+                                      color: themeData!.whiteColor,
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 12,
+                                    ),
+                                  ),
                                 ),
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(
-                          height: 4,
-                        ),
-                        Align(
-                          alignment: Alignment.centerRight,
-                          child: Container(
-                            decoration: BoxDecoration(
-                              color: themeData?.primaryColor,
-                              border: Border.all(
-                                color: themeData!.primaryColor.withOpacity(0.5),
-                              ),
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.symmetric(
-                                  vertical: 2.0, horizontal: 15),
-                              child: Text(
-                                masterDataController.configs!.houseAd.buttonText
-                                    .toTitleCase(),
-                                style: TextStyle(
-                                  color: themeData!.whiteColor,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: 12,
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
+                      ),
                     ),
-                  ),
+                  ],
                 ),
               ),
             );

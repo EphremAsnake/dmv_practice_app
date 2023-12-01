@@ -42,7 +42,7 @@ class ThemeController extends GetxController {
       errorColor: HexColor(
           controller.configs?.appConfig.appColors.errorColor ?? "#FF1100"),
       lightGrey: HexColor(
-          controller.configs?.appConfig.appColors.lightGrey ?? "#D8D8D8"),
+          controller.configs?.appConfig.appColors.lightGrey ?? "#cccbc8"),
     );
     themeData.value = theme;
     setAppTheme(theme);
