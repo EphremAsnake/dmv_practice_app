@@ -70,8 +70,13 @@ class QuestionCard extends StatelessWidget {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(vertical: 5.0),
                       child: Image.network(
+                        errorBuilder: (BuildContext context, Object exception,
+                            StackTrace? stackTrace) {
+                          return const SizedBox
+                              .shrink(); // Show SizedBox.shrink() on image load failure
+                        },
                         "${Keys.baseurl}${question.imageUrl!}",
-                        width: 80,
+                        width: 90.w,
                         height: 80,
                       ),
                     ),
@@ -190,7 +195,8 @@ class QuestionCard extends StatelessWidget {
                   () => Visibility(
                     visible: controller.showDescription.value,
                     child: Padding(
-                      padding: const EdgeInsets.only(left:  5.0,right: 5.0,top: 5.0),
+                      padding: const EdgeInsets.only(
+                          left: 5.0, right: 5.0, top: 5.0),
                       child: Card(
                         elevation: 0,
                         color: themeData?.primaryColor.withOpacity(0.1),

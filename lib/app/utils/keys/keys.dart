@@ -4,10 +4,8 @@ class Keys {
   static String usStatesCacheKey = "Us States Cache Key";
   static String testCacheKey = "Test Cache Key";
   static String signsStudy = "Signs Study";
-  static String adAndroidKey = "ca-app-pub-3940256099942544/1033173712";
-  static String adIosKey = "ca-app-pub-3940256099942544/4411468910";  
-  static String nativeAdUnitKey = '/6499/example/native';
   static String manualsCacheKey = 'Manuals Cache Key';
   static String savedStateCacheKey = "Saved State Cache Key";
   static String autoScrollingCacheKey = "Auto Scrolling Cache Key";
+  static String randomizeQuestionsCacheKey = "Randomize Questions Cache Key";
 }

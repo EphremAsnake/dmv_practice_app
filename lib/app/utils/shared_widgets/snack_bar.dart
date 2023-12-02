@@ -8,9 +8,9 @@ SnackbarController customSnackBar(
   return Get.snackbar(
     title,
     body,
-    duration: const Duration(seconds: 3),
-    backgroundColor: themeData?.primaryColor.withOpacity(0.8),
-    colorText: themeData?.whiteColor,
+    duration: const Duration(seconds: 2),
+    backgroundColor: themeData?.primaryColor.withOpacity(0.05),
+    colorText: themeData?.blackColor,
     snackPosition: SnackPosition.BOTTOM,
     dismissDirection: DismissDirection.horizontal,
   );

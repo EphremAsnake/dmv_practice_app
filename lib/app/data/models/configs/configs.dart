@@ -5,83 +5,82 @@ Configs configsFromJson(String str) => Configs.fromJson(json.decode(str));
 String configsToJson(Configs data) => json.encode(data.toJson());
 
 class Configs {
-    Settings settings;
-    AppConfig appConfig;
-    HouseAd houseAd;
-    String aboutApp;
+  Settings settings;
+  AppConfig appConfig;
+  HouseAd houseAd;
+  String aboutApp;
 
-    Configs({
-        required this.settings,
-        required this.appConfig,
-        required this.houseAd,
-        required this.aboutApp,
-    });
+  Configs({
+    required this.settings,
+    required this.appConfig,
+    required this.houseAd,
+    required this.aboutApp,
+  });
 
-    factory Configs.fromJson(Map<String, dynamic> json) => Configs(
-        settings: Settings.fromJson(json["settings"]),
-        appConfig: AppConfig.fromJson(json["app_config"]),
-        houseAd: HouseAd.fromJson(json["house_ad"]),
-        aboutApp: json["about_app"]
-    );
+  factory Configs.fromJson(Map<String, dynamic> json) => Configs(
+      settings: Settings.fromJson(json["settings"]),
+      appConfig: AppConfig.fromJson(json["app_config"]),
+      houseAd: HouseAd.fromJson(json["house_ad"]),
+      aboutApp: json["about_app"]);
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "settings": settings.toJson(),
         "app_config": appConfig.toJson(),
         "house_ad": houseAd.toJson(),
         "about_app": aboutApp,
-    };
+      };
 }
 
 class AppConfig {
-    AppColors appColors;
+  AppColors appColors;
 
-    AppConfig({
-        required this.appColors,
-    });
+  AppConfig({
+    required this.appColors,
+  });
 
-    factory AppConfig.fromJson(Map<String, dynamic> json) => AppConfig(
+  factory AppConfig.fromJson(Map<String, dynamic> json) => AppConfig(
         appColors: AppColors.fromJson(json["app_colors"]),
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "app_colors": appColors.toJson(),
-    };
+      };
 }
 
 class AppColors {
-    String whiteColor;
-    String backgroundColor;
-    String primaryColor;
-    String secondaryColor;
-    String blackColor;
-    String primaryTextColor;
-    String secondaryTextColor;
-    String grayTextColor;
-    String blackTextColor;
-    String shadowColor;
-    String primaryGrayColor;
-    String splashColor;
-    String errorColor;
-    String lightGrey;
+  String whiteColor;
+  String backgroundColor;
+  String primaryColor;
+  String secondaryColor;
+  String blackColor;
+  String primaryTextColor;
+  String secondaryTextColor;
+  String grayTextColor;
+  String blackTextColor;
+  String shadowColor;
+  String primaryGrayColor;
+  String splashColor;
+  String errorColor;
+  String lightGrey;
 
-    AppColors({
-        required this.whiteColor,
-        required this.backgroundColor,
-        required this.primaryColor,
-        required this.secondaryColor,
-        required this.blackColor,
-        required this.primaryTextColor,
-        required this.secondaryTextColor,
-        required this.grayTextColor,
-        required this.blackTextColor,
-        required this.shadowColor,
-        required this.primaryGrayColor,
-        required this.splashColor,
-        required this.errorColor,
-        required this.lightGrey,
-    });
+  AppColors({
+    required this.whiteColor,
+    required this.backgroundColor,
+    required this.primaryColor,
+    required this.secondaryColor,
+    required this.blackColor,
+    required this.primaryTextColor,
+    required this.secondaryTextColor,
+    required this.grayTextColor,
+    required this.blackTextColor,
+    required this.shadowColor,
+    required this.primaryGrayColor,
+    required this.splashColor,
+    required this.errorColor,
+    required this.lightGrey,
+  });
 
-    factory AppColors.fromJson(Map<String, dynamic> json) => AppColors(
+  factory AppColors.fromJson(Map<String, dynamic> json) => AppColors(
         whiteColor: json["white_color"],
         backgroundColor: json["background_color"],
         primaryColor: json["primary_color"],
@@ -96,9 +95,9 @@ class AppColors {
         splashColor: json["splash_color"],
         errorColor: json["error_color"],
         lightGrey: json["light_grey"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "white_color": whiteColor,
         "background_color": backgroundColor,
         "primary_color": primaryColor,
@@ -113,73 +112,81 @@ class AppColors {
         "splash_color": splashColor,
         "error_color": errorColor,
         "light_grey": lightGrey,
-    };
+      };
 }
 
 class HouseAd {
-    String title;
-    String buttonText;
-    bool show;
-    bool typeApp;
-    String iosUrl;
-    String androidUrl;
+  String title;
+  String buttonText;
+  bool show;
+  bool typeApp;
+  String iosUrl;
+  String androidUrl;
 
-    HouseAd({
-        required this.title,
-        required this.buttonText,
-        required this.show,
-        required this.typeApp,
-        required this.iosUrl,
-        required this.androidUrl,
-    });
+  HouseAd({
+    required this.title,
+    required this.buttonText,
+    required this.show,
+    required this.typeApp,
+    required this.iosUrl,
+    required this.androidUrl,
+  });
 
-    factory HouseAd.fromJson(Map<String, dynamic> json) => HouseAd(
+  factory HouseAd.fromJson(Map<String, dynamic> json) => HouseAd(
         title: json["title"],
         buttonText: json["button_text"],
         show: json["show"],
         typeApp: json["type_app"],
         iosUrl: json["ios_url"],
         androidUrl: json["android_url"],
-    );
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "title": title,
         "button_text": buttonText,
         "show": show,
         "type_app": typeApp,
         "ios_url": iosUrl,
         "android_url": androidUrl,
-    };
+      };
 }
 
 class Settings {
-    String androidInterstitialAdId;
-    String androidNativeAdId;
-    String iosInterstitialAdId;
-    String iosNativeAdId;
-    int interstitialAdFrequency;
+  String androidInterstitialAdId;
+  String androidNativeAdId;
+  String iosInterstitialAdId;
+  String iosNativeAdId;
+  int interstitialAdFrequency;
+  bool showInterstitialAd;
+  bool showNativeAd;
 
-    Settings({
-        required this.androidInterstitialAdId,
-        required this.androidNativeAdId,
-        required this.iosInterstitialAdId,
-        required this.iosNativeAdId,
-        required this.interstitialAdFrequency,
-    });
+  Settings({
+    required this.showNativeAd,
+    required this.showInterstitialAd,
+    required this.androidInterstitialAdId,
+    required this.androidNativeAdId,
+    required this.iosInterstitialAdId,
+    required this.iosNativeAdId,
+    required this.interstitialAdFrequency,
+  });
 
-    factory Settings.fromJson(Map<String, dynamic> json) => Settings(
+  factory Settings.fromJson(Map<String, dynamic> json) => Settings(
         androidInterstitialAdId: json["android_interstitial_ad_id"],
         androidNativeAdId: json["android_native_ad_id"],
         iosInterstitialAdId: json["ios_interstitial_ad_id"],
         iosNativeAdId: json["ios_native_ad_id"],
         interstitialAdFrequency: json["interstitial_ad_frequency"],
-    );
+        showInterstitialAd: json["show_interstitial_ad"],
+        showNativeAd: json["show_native_ad"],
+      );
 
-    Map<String, dynamic> toJson() => {
+  Map<String, dynamic> toJson() => {
         "android_interstitial_ad_id": androidInterstitialAdId,
         "android_native_ad_id": androidNativeAdId,
         "ios_interstitial_ad_id": iosInterstitialAdId,
         "ios_native_ad_id": iosNativeAdId,
         "interstitial_ad_frequency": interstitialAdFrequency,
-    };
+        "show_interstitial_ad": showInterstitialAd,
+        "show_native_ad": showNativeAd,
+      };
 }

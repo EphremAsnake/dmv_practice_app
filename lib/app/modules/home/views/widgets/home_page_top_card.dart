@@ -16,7 +16,7 @@ class HomePageTopCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 5.0,vertical: 0.0),
+      padding: const EdgeInsets.symmetric(horizontal: 5.0, vertical: 0.0),
       child: Container(
         decoration: BoxDecoration(
           boxShadow: [
@@ -35,7 +35,7 @@ class HomePageTopCard extends StatelessWidget {
           ],
         ),
         width: MediaQuery.of(context).size.width,
-        height: 15.h,
+        height: 18.h,
         child: Card(
           elevation: 0,
           child: Padding(
@@ -44,9 +44,6 @@ class HomePageTopCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(
-                  height: 5,
-                ),
                 GetBuilder<UsStatesController>(
                   init: usStateController,
                   initState: (_) {},
@@ -98,10 +95,10 @@ class HomePageTopCard extends StatelessWidget {
                   children: [
                     Expanded(
                       child: Text(
-                        "Want To Practice Traffic Signs First ?",
+                        "Practice Traffic Signs",
                         style: TextStyle(
                             color: themeData!.primaryColor,
-                            fontSize: 14,
+                            fontSize: 13.5.sp,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -132,10 +129,10 @@ class HomePageTopCard extends StatelessWidget {
                                     size: 20.0,
                                     color: themeData!.whiteColor,
                                   ),
-                                  const SizedBox( 
+                                  const SizedBox(
                                     width: 5,
                                   ),
-                                  Text(  
+                                  Text(
                                     "Start Practicing",
                                     style: TextStyle(
                                       color: themeData!.whiteColor,

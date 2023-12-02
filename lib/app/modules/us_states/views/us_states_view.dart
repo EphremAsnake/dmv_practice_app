@@ -169,7 +169,7 @@ class UsStatesView extends GetView<UsStatesController> {
             } else {
                return RefreshErrorWidget(
                 assetImage: "assets/images/error.png",
-                errorMessage: "Unknown Error Occurred",
+                errorMessage: "No internet connection, please check your internet connection and try again.",
                 onRefresh: () async {
                   controller.fetchData();
                   controller.update();

@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
@@ -17,6 +18,7 @@ class QuestionController extends StatelessWidget {
   final List<Widget> pages;
   final TestController controller = Get.find();
   final HomeController homeController = Get.find();
+  final MasterDataController masterDataController = Get.find();
   final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
@@ -59,29 +61,34 @@ class QuestionController extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          LineIcon.chevronLeft(
-                            size: 20.0,
-                            color: themeData?.primaryColor,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0.0, horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LineIcon.chevronLeft(
+                                size: 20.0,
+                                color: themeData?.primaryColor,
+                              ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              Text(
+                                "Previous",
+                                style: TextStyle(
+                                  color: themeData?.primaryColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 13.sp,
+                                ),
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Text(
-                            "Previous",
-                            style: TextStyle(
-                              color: themeData?.primaryColor,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 11.sp,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),
@@ -95,14 +102,20 @@ class QuestionController extends StatelessWidget {
                     // } else {
                     if (controller.choiceId == 0) {
                       customSnackBar(
-                          title: "Error", body: "Please Select Answer");
-                    } else if (controller.showAdCounter.value == 8) {
-                      await InterstitialAdManager().showInterstitialAd();
-                      controller.goToNextQuestion(pages.length);
-                      //loading ad for next use
-                      InterstitialAdManager().loadAd();
-                      //reset AD counter value
-                      controller.showAdCounter.value = 0;
+                          title: "Info", body: "Please Select Answer");
+                    } else if (controller.showAdCounter.value ==
+                        masterDataController
+                            .configs?.settings.interstitialAdFrequency) {
+                      if (masterDataController
+                              .configs?.settings.showInterstitialAd ==
+                          true) {
+                        await InterstitialAdManager().showInterstitialAd();
+                        controller.goToNextQuestion(pages.length);
+                        //loading ad for next use
+                        InterstitialAdManager().loadAd();
+                        //reset AD counter value
+                        controller.showAdCounter.value = 0;
+                      }
                     } else {
                       controller.goToNextQuestion(pages.length);
                     }
@@ -118,34 +131,39 @@ class QuestionController extends StatelessWidget {
                       ),
                       borderRadius: BorderRadius.circular(5),
                     ),
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(
-                          vertical: 20.0, horizontal: 15),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Obx(
-                            () => Text(
-                              controller.questionPageNumber.value ==
-                                      controller.test?.questions.length
-                                  ? "Finish"
-                                  : "Next",
-                              style: TextStyle(
-                                color: themeData?.whiteColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 11.sp,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 0.0, horizontal: 15),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Obx(
+                                () => Text(
+                                  controller.questionPageNumber.value ==
+                                          controller.test?.questions.length
+                                      ? "Finish"
+                                      : "Next",
+                                  style: TextStyle(
+                                    color: themeData?.whiteColor,
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 13.sp,
+                                  ),
+                                ),
                               ),
-                            ),
+                              const SizedBox(
+                                width: 5,
+                              ),
+                              LineIcon.chevronRight(
+                                size: 20.0,
+                                color: themeData?.whiteColor,
+                              ),
+                            ],
                           ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          LineIcon.chevronRight(
-                            size: 20.0,
-                            color: themeData?.whiteColor,
-                          ),
-                        ],
-                      ),
+                        ),
+                      ],
                     ),
                   ),
                 ),

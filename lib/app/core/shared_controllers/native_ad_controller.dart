@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:get/get.dart';
@@ -8,18 +10,22 @@ final themeData = Get.find<ThemeController>().themeData.value;
 class NativeAdController extends GetxController {
   NativeAd? nativeAd;
   bool nativeAdIsLoaded = false;
+  final MasterDataController masterDataController = Get.find();
 
   @override
   void onInit() {
     super.onInit();
-    loadAd();
-    startAdRefresher();
+    if (masterDataController.configs?.settings.showNativeAd == true) {
+      loadAd();
+      startAdRefresher();
+    }
   }
 
   loadAd() {
     nativeAd = NativeAd(
-      
-      adUnitId: "ca-app-pub-3940256099942544/2247696110",
+      adUnitId: Platform.isAndroid
+          ? masterDataController.configs!.settings.androidNativeAdId
+          : masterDataController.configs!.settings.iosNativeAdId,
       request: const AdRequest(),
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {
@@ -41,7 +47,6 @@ class NativeAdController extends GetxController {
           backgroundColor: themeData?.primaryColor,
           style: NativeTemplateFontStyle.bold,
           size: 16.0,
-          
         ),
         primaryTextStyle: NativeTemplateTextStyle(
           textColor: themeData?.blackColor,

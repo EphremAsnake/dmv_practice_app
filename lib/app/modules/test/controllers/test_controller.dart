@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'package:confetti/confetti.dart';
 import 'package:drivingexam/app/core/http_client/http_service.dart';
 import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
+import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/data/models/result/result.dart';
 import 'package:drivingexam/app/data/models/test/test.dart';
 import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
@@ -13,7 +14,6 @@ import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 import 'package:drivingexam/app/utils/helper/sound_service.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
 
 class TestController extends GetxController {
   var currentPageIndex = 0.obs;
@@ -34,8 +34,9 @@ class TestController extends GetxController {
   Rx<bool> isLastQuestionPageBackButtonEnabled = false.obs;
   Question? question;
   int numberOfQuestionsForState = 0;
-  ScrollController scrollController = ScrollController();
+  late ScrollController scrollController;
   final HomeController homeController = Get.find();
+  final MasterDataController masterDataController = Get.find();
 
   TestController(this.testUrl, this.numberOfQuestionsForState);
 
@@ -46,14 +47,18 @@ class TestController extends GetxController {
   void onInit() {
     fetchData();
     SoundService.instance.loadSounds();
+    scrollController = ScrollController();
     confettiController = ConfettiController();
-    InterstitialAdManager().loadAd();
+    if (masterDataController.configs?.settings.showInterstitialAd == true) {
+      InterstitialAdManager().loadAd();
+    }
     super.onInit();
   }
 
   @override
   void onClose() {
     confettiController.dispose();
+    scrollController.dispose();
     super.onClose();
   }
 
@@ -73,8 +78,16 @@ class TestController extends GetxController {
 
       final result = jsonDecode(response.body);
       test = Test.fromJson(result);
-      test?.questions = testHelper.selectRandomQuestions(
-          test?.questions ?? [], numberOfQuestionsForState);
+
+      //randomizing questions
+      if (homeController.isRandomizeQuestions.value == true) {
+        test?.questions = testHelper.selectRandomQuestions(
+            test?.questions ?? [], numberOfQuestionsForState);
+      } else {
+        test?.questions =
+            test!.questions.take(numberOfQuestionsForState).toList();
+      }
+
       // Update state with success and response data
       apiStateHandler.setSuccess(test!);
       update();
@@ -122,14 +135,16 @@ class TestController extends GetxController {
       questionPageNumber.value = questionPageNumber.value + 1;
 
       //incrementing show ad counter
-      showAdCounter.value = showAdCounter.value + 1;
+      if (masterDataController.configs?.settings.showInterstitialAd == true) {
+        showAdCounter.value = showAdCounter.value + 1;
+      }
 
       //setting selected question value to false
       for (int i = 0; i < question!.choices.length; i++) {
         question?.choices[i].selected = false;
       }
     } else {
-      Get.to(TestResult())?.then((_) {
+      Get.to(() => TestResult())?.then((_) {
         playConfetti();
       });
       isLastQuestionPageBackButtonEnabled.value = true;
@@ -173,7 +188,9 @@ class TestController extends GetxController {
     questionPageNumber.value = questionPageNumber.value - 1;
 
     //decrementing show ad counter
-    showAdCounter.value = showAdCounter.value - 1;
+    if (masterDataController.configs?.settings.showInterstitialAd == true) {
+      showAdCounter.value = showAdCounter.value - 1;
+    }
   }
 
   resetControllerValues() {

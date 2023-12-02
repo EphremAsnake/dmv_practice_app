@@ -1,9 +1,11 @@
 import 'dart:io';
-import 'package:drivingexam/app/utils/keys/keys.dart';
+import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
+import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 
 class InterstitialAdManager {
-  static final InterstitialAdManager _instance = InterstitialAdManager._internal();
+  static final InterstitialAdManager _instance =
+      InterstitialAdManager._internal();
   InterstitialAd? _interstitialAd;
 
   factory InterstitialAdManager() {
@@ -12,10 +14,12 @@ class InterstitialAdManager {
 
   InterstitialAdManager._internal();
 
-  final adUnitId = Platform.isAndroid ? Keys.adAndroidKey : Keys.adIosKey;
-
   // Loads an interstitial ad.
   void loadAd() {
+    final MasterDataController masterDataController = Get.find();
+    final adUnitId = Platform.isAndroid
+        ? masterDataController.configs!.settings.androidInterstitialAdId
+        : masterDataController.configs!.settings.iosInterstitialAdId;
     InterstitialAd.load(
       adUnitId: adUnitId,
       request: const AdRequest(),

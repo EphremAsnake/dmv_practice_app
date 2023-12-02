@@ -62,23 +62,50 @@ class Settings extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {
-            Get.toNamed("/about");
-          },
+          onTap: () {},
           child: Card(
             elevation: 0,
             borderOnForeground: true,
             child: ListTile(
               title: Text(
-                "About",
+                "Randomize Questions",
                 style: TextStyle(color: themeData?.grayTextColor),
               ),
-              trailing: Icon(
-                Icons.chevron_right,
+              trailing: Obx(
+                () => CupertinoSwitch(
+                  activeColor: themeData!.primaryColor,
+                  value: controller.isRandomizeQuestions.value,
+                  onChanged: (state) {
+                    controller.toggleRandomizingQuestion(state);
+                  },
+                ),
+              ),
+              leading: LineIcon.random(
                 color: themeData?.grayTextColor,
               ),
-              leading: Icon(
-                Icons.info_outline,
+            ),
+          ),
+        ),
+        GestureDetector(
+          onTap: () {},
+          child: Card(
+            elevation: 0,
+            borderOnForeground: true,
+            child: ListTile(
+              title: Text(
+                "Auto Scrolling",
+                style: TextStyle(color: themeData?.grayTextColor),
+              ),
+              trailing: Obx(
+                () => CupertinoSwitch(
+                  activeColor: themeData!.primaryColor,
+                  value: controller.isAutoScrollingEnabled.value,
+                  onChanged: (state) {
+                    controller.toggleAutoScrollingBehavior(state);
+                  },
+                ),
+              ),
+              leading: LineIcon.scroll(
                 color: themeData?.grayTextColor,
               ),
             ),
@@ -105,31 +132,30 @@ class Settings extends StatelessWidget {
             ),
           ),
         ),
-        //  bool isAutoScrollEnabled = false;
-
         GestureDetector(
-          onTap: () {},
+          onTap: () {
+            Get.toNamed("/about");
+          },
           child: Card(
             elevation: 0,
             borderOnForeground: true,
             child: ListTile(
-              title:  Text("Auto Scrolling",   style: TextStyle(color: themeData?.grayTextColor),),
-              trailing: Obx(
-                () => CupertinoSwitch(
-                  activeColor: themeData!.primaryColor,
-                  value: controller.isAutoScrollingEnabled.value,
-                  onChanged: (state) {
-                    controller.toggleAutoScrollingBehavior(state);
-                  },
-                ),
+              title: Text(
+                "About",
+                style: TextStyle(color: themeData?.grayTextColor),
               ),
-              leading: LineIcon.scroll(
+              trailing: Icon(
+                Icons.chevron_right,
+                color: themeData?.grayTextColor,
+              ),
+              leading: Icon(
+                Icons.info_outline,
                 color: themeData?.grayTextColor,
               ),
             ),
           ),
         ),
-        const SizedBox(height: 15),
+        const SizedBox(height: 5),
       ],
     );
   }

@@ -24,7 +24,7 @@ class QuestionProgress extends StatelessWidget {
           onTap: () {
             if (controller.results.isEmpty) {
               customSnackBar(
-                title: "Information",
+                title: "Info",
                 body: "Please make some progress to view your progress",
               );
             } else {

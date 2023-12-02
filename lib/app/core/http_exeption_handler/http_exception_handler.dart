@@ -33,7 +33,7 @@ class HandleHttpException {
     } else if (error is ClientException) {
       return error.message.toString();
     } else {
-      return 'Unknown Error';
+      return 'No internet connection, please check your internet connection and try again.';
     }
   }
 }

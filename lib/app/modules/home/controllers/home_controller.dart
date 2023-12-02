@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import 'package:drivingexam/app/core/cache/local_storage.dart';
 import 'package:drivingexam/app/core/http_client/http_service.dart';
 import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
 import 'package:drivingexam/app/data/models/test/all_test_list.dart';
@@ -14,6 +12,7 @@ class HomeController extends GetxController {
   final apiStateHandler = ApiStateHandler<AllTests>();
   var httpService = Get.find<HttpService>();
   Rx<bool> isAutoScrollingEnabled = false.obs;
+  Rx<bool> isRandomizeQuestions = false.obs;
   static final _storage = Hive.box('driving_exam');
 
   @override
@@ -51,9 +50,16 @@ class HomeController extends GetxController {
   void toggleModal() {
     isModalOpen.toggle();
   }
-
+  
+   //toggling auto scrolling behavior
   void toggleAutoScrollingBehavior(bool state) {
     _storage.put(Keys.autoScrollingCacheKey, state);
     isAutoScrollingEnabled.value = state;
+  }
+ 
+ //toggling randomize question feature
+  void toggleRandomizingQuestion(bool state) {
+    _storage.put(Keys.randomizeQuestionsCacheKey, state);
+    isRandomizeQuestions.value = state;
   }
 }

@@ -36,6 +36,7 @@ class HomeView extends GetView<HomeController> {
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
                         child: Settings(themeData: themeData),
                       ),
+                      
                       backgroundColor: themeData?.backgroundColor,
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -338,7 +339,7 @@ class HomeView extends GetView<HomeController> {
                             } else {
                               return RefreshErrorWidget(
                                 assetImage: "assets/images/error.png",
-                                errorMessage: "Unknown Error Occurred",
+                                errorMessage: "No internet connection, please check your internet connection and try again.",
                                 onRefresh: () async {
                                   controller.fetchData();
                                   controller.update();
@@ -353,7 +354,7 @@ class HomeView extends GetView<HomeController> {
                           ApiState.error) {
                         return RefreshErrorWidget(
                           assetImage: "assets/images/error.png",
-                          errorMessage: "Unknown Error Occurred",
+                          errorMessage: "No internet connection, please check your internet connection and try again.",
                           onRefresh: () async {
                             usStatesController.fetchData();
                             usStatesController.savedStateData();
@@ -364,7 +365,7 @@ class HomeView extends GetView<HomeController> {
                       } else {
                         return RefreshErrorWidget(
                           assetImage: "assets/images/error.png",
-                          errorMessage: "Unknown Error Occurred",
+                          errorMessage: "No internet connection, please check your internet connection and try again.",
                           onRefresh: () async {
                             usStatesController.fetchData();
                             usStatesController.savedStateData();

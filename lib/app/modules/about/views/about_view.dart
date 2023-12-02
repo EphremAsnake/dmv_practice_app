@@ -123,7 +123,7 @@ class AboutView extends GetView<AboutController> {
             } else {
               return RefreshErrorWidget(
                 assetImage: "assets/images/error.png",
-                errorMessage: "Unknown Error Occurred",
+                errorMessage: "No internet connection, please check your internet connection and try again.",
                 onRefresh: () async {
                   masterDataController.getMasterData();
                   masterDataController.readMasterData();

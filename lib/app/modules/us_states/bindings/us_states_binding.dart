@@ -7,6 +7,7 @@ class UsStatesBinding extends Bindings {
   void dependencies() {
     Get.lazyPut<UsStatesController>(
       () => UsStatesController(),
+      fenix: true,
     );
   }
 }

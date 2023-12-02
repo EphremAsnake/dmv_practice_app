@@ -27,7 +27,7 @@ class ThemeController extends GetxController {
           controller.configs?.appConfig.appColors.secondaryTextColor ??
               "#43374F"),
       grayTextColor: HexColor(
-        controller.configs?.appConfig.appColors.grayTextColor ?? "#DCDFE5",
+        controller.configs?.appConfig.appColors.grayTextColor ?? "#747475",
       ),
       blackTextColor: HexColor(
         controller.configs?.appConfig.appColors.blackTextColor ?? "#DCDFE5",

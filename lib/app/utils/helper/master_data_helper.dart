@@ -9,8 +9,12 @@ class MasterDataHelper {
   getMasterData() async {
     try {
       dynamic autoScrollingCacheKey = _storage.get(Keys.autoScrollingCacheKey);
+      dynamic randomizeQuestionCacheKey = _storage.get(Keys.randomizeQuestionsCacheKey);
       if (autoScrollingCacheKey == null) {
         _storage.put(Keys.autoScrollingCacheKey, false);
+      }
+      if (randomizeQuestionCacheKey == null) {
+        _storage.put(Keys.randomizeQuestionsCacheKey, false);
       }
       controller.readMasterData();
       if (controller.configs == null) {

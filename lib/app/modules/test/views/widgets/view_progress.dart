@@ -157,7 +157,7 @@ class ProgressCard extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text(
-                          "Incorrect & Skipped",
+                          "Incorrect",
                           style: TextStyle(
                             fontSize: 12.sp,
                             fontWeight: FontWeight.bold,

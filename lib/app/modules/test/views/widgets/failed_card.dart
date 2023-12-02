@@ -1,5 +1,6 @@
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
+import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:sizer/sizer.dart';
@@ -110,51 +111,21 @@ class FailedWidget extends StatelessWidget {
                     ),
                   ),
                 ),
-                // const SizedBox(
-                //   height: 30,
-                // ),
-                // GestureDetector(
-                //   onTap: () {},
-                //   child: Container(
-                //     width: 70.w,
-                //     decoration: BoxDecoration(
-                //       color: themeData!.lightGrey.withOpacity(0.6),
-                //       border: Border.all(
-                //         color: themeData!.whiteColor,
-                //       ),
-                //       borderRadius: BorderRadius.circular(5),
-                //     ),
-                //     child: Padding(
-                //       padding: const EdgeInsets.symmetric(
-                //           vertical: 15.0, horizontal: 15),
-                //       child: Row(
-                //         mainAxisAlignment: MainAxisAlignment.center,
-                //         children: [
-                //           Center(
-                //             child: Text(
-                //               "BACK TO INCORRECT & SKIPPED(28)",
-                //               style: TextStyle(
-                //                 color: themeData!.primaryColor,
-                //                 fontWeight: FontWeight.bold,
-                //                 fontSize: 9.5.sp
-                //               ),
-                //             ),
-                //           ),
-                //         ],
-                //       ),
-                //     ),
-                //   ),
-                // ),
                 const SizedBox(
                   height: 15,
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.offAndToNamed("/test", arguments: {
-                      'test_url': controller.testUrl,
-                      'number_of_questions':
-                          controller.numberOfQuestionsForState
-                    });
+                    Get.offAllNamed(
+                      "/test",
+                      arguments: {
+                        'test_url': controller.testUrl,
+                        'number_of_questions':
+                            controller.numberOfQuestionsForState
+                      },
+                      predicate: (route) => Get.previousRoute != "/test",
+                    );
+                    Get.lazyPut(() => UsStatesController());
                     controller.resetControllerValues();
                   },
                   child: Container(
