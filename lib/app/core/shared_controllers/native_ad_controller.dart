@@ -47,6 +47,7 @@ class NativeAdController extends GetxController {
           backgroundColor: themeData?.primaryColor,
           style: NativeTemplateFontStyle.bold,
           size: 16.0,
+          
         ),
         primaryTextStyle: NativeTemplateTextStyle(
           textColor: themeData?.blackColor,

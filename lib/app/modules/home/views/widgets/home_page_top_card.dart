@@ -98,7 +98,7 @@ class HomePageTopCard extends StatelessWidget {
                         "Practice Traffic Signs",
                         style: TextStyle(
                             color: themeData!.primaryColor,
-                            fontSize: 13.5.sp,
+                            fontSize: 12.sp,
                             fontWeight: FontWeight.bold),
                       ),
                     ),
@@ -107,6 +107,7 @@ class HomePageTopCard extends StatelessWidget {
                     ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.end,
+                      crossAxisAlignment: CrossAxisAlignment.center,
                       children: [
                         GestureDetector(
                           onTap: () {

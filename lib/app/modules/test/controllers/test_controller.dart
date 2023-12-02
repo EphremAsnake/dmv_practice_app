@@ -132,7 +132,9 @@ class TestController extends GetxController {
       resetQuestionValues();
 
       //incrementing page number
-      questionPageNumber.value = questionPageNumber.value + 1;
+      if (questionPageNumber.value <= test!.questions.length) {
+        questionPageNumber.value = questionPageNumber.value + 1;
+      }
 
       //incrementing show ad counter
       if (masterDataController.configs?.settings.showInterstitialAd == true) {
@@ -176,6 +178,10 @@ class TestController extends GetxController {
     //resting question values
     resetQuestionValues();
 
+    //setting selected question value to false
+    for (int i = 0; i < question!.choices.length; i++) {
+      question?.choices[i].selected = false;
+    }
     //removing the last item from list
     if (results.isNotEmpty) {
       results.removeAt(results.length - 1);
@@ -184,12 +190,17 @@ class TestController extends GetxController {
     if (results.isEmpty) {
       showProgress.value = false;
     }
+
     //decrementing  page number
-    questionPageNumber.value = questionPageNumber.value - 1;
+    if (questionPageNumber.value > 1) {
+      questionPageNumber.value = questionPageNumber.value - 1;
+    }
 
     //decrementing show ad counter
     if (masterDataController.configs?.settings.showInterstitialAd == true) {
-      showAdCounter.value = showAdCounter.value - 1;
+      if (showAdCounter.value > 1) {
+        showAdCounter.value = showAdCounter.value - 1;
+      }
     }
   }
 
