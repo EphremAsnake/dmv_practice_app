@@ -82,7 +82,7 @@ class HomeView extends GetView<HomeController> {
                 const SizedBox(
                   width: 20,
                 ),
-                Expanded(child: HomeAD()),
+                HomeAD(),
               ],
             ),
             HomePageTopCard(),

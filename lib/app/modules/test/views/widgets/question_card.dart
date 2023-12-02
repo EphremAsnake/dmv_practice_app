@@ -1,4 +1,5 @@
 // ignore: must_be_immutable
+import 'dart:ui';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/data/models/test/test.dart';
 import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
@@ -66,18 +67,24 @@ class QuestionCard extends StatelessWidget {
                   ),
                 ),
                 if (question.imageUrl != null)
-                  Center(
-                    child: Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 5.0),
-                      child: Image.network(
-                        errorBuilder: (BuildContext context, Object exception,
-                            StackTrace? stackTrace) {
-                          return const SizedBox
-                              .shrink(); // Show SizedBox.shrink() on image load failure
-                        },
-                        "${Keys.baseurl}${question.imageUrl!}",
-                        width: 90.w,
-                        height: 80,
+                  GestureDetector(
+                    onTap: () {
+                      showImageModal(
+                          context, "${Keys.baseurl}${question.imageUrl!}");
+                    },
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 5.0),
+                        child: Image.network(
+                          errorBuilder: (BuildContext context, Object exception,
+                              StackTrace? stackTrace) {
+                            return const SizedBox
+                                .shrink(); // Show SizedBox.shrink() on image load failure
+                          },
+                          "${Keys.baseurl}${question.imageUrl!}",
+                          width: 90.w,
+                          height: 80,
+                        ),
                       ),
                     ),
                   ),
@@ -191,30 +198,32 @@ class QuestionCard extends StatelessWidget {
                     );
                   },
                 ),
-                Obx(
-                  () => Visibility(
-                    visible: controller.showDescription.value,
-                    child: Padding(
-                      padding: const EdgeInsets.only(
-                          left: 5.0, right: 5.0, top: 5.0),
-                      child: Card(
-                        elevation: 0,
-                        color: themeData?.primaryColor.withOpacity(0.1),
-                        child: Padding(
-                          padding: const EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 10),
-                          child: Text(
-                            question.explaniation,
-                            textAlign: TextAlign.justify,
-                            style: TextStyle(
-                                color: themeData?.blackColor,
-                                fontSize: 10.5.sp),
+                if (question.explanation != null &&
+                    question.explanation != "")
+                  Obx(
+                    () => Visibility(
+                      visible: controller.showDescription.value,
+                      child: Padding(
+                        padding: const EdgeInsets.only(
+                            left: 5.0, right: 5.0, top: 5.0),
+                        child: Card(
+                          elevation: 0,
+                          color: themeData?.primaryColor.withOpacity(0.1),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 10),
+                            child: Text(
+                              question.explanation!,
+                              textAlign: TextAlign.justify,
+                              style: TextStyle(
+                                  color: themeData?.blackColor,
+                                  fontSize: 10.5.sp),
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
-                ),
               ],
             ),
           ),
@@ -222,4 +231,17 @@ class QuestionCard extends StatelessWidget {
       ),
     );
   }
+}
+
+void showImageModal(BuildContext context, String url) {
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return Dialog(
+        child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
+            child: Image.network(url)),
+      );
+    },
+  );
 }

@@ -77,7 +77,7 @@ class AboutView extends GetView<AboutController> {
                             ),
                           ),
                         ),
-                        Expanded(child: HomeAD()),
+                        HomeAD(),
                       ],
                     ),
                     Expanded(

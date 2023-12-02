@@ -30,7 +30,7 @@ class Question {
   String question;
   String? imageUrl;
   int answerId;
-  String explaniation;
+  String? explanation;
   List<Choice> choices;
 
   Question({
@@ -38,16 +38,16 @@ class Question {
     required this.question,
     this.imageUrl,
     required this.answerId,
-    required this.explaniation,
+    this.explanation,
     required this.choices,
   });
 
   factory Question.fromJson(Map<String, dynamic> json) => Question(
-        id:json["id"],
+        id: json["id"],
         question: json["question"],
         imageUrl: json["image_url"],
         answerId: json["answer_id"],
-        explaniation: json["explaniation"],
+        explanation: json["explaniation"],
         choices:
             List<Choice>.from(json["choices"].map((x) => Choice.fromJson(x))),
       );
@@ -57,7 +57,7 @@ class Question {
         "question": question,
         "image_url": imageUrl,
         "answer_id": answerId,
-        "explaniation": explaniation,
+        "explaniation": explanation,
         "choices": List<dynamic>.from(choices.map((x) => x.toJson())),
       };
 }

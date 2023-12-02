@@ -7,6 +7,7 @@ String configsToJson(Configs data) => json.encode(data.toJson());
 class Configs {
   Settings settings;
   AppConfig appConfig;
+  
   HouseAd houseAd;
   String aboutApp;
 

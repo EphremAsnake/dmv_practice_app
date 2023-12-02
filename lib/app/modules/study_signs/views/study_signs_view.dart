@@ -74,7 +74,7 @@ class StudySignsView extends GetView<StudySignsController> {
                           ),
                         ),
                       ),
-                      Expanded(child: HomeAD()),
+                      HomeAD(),
                     ],
                   ),
                   const SizedBox(

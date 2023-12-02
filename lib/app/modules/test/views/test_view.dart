@@ -93,7 +93,7 @@ class TestView extends GetView<TestController> {
                             ),
                           ),
                         ),
-                        Expanded(child: HomeAD()),
+                        HomeAD(),
                       ],
                     ),
                     QuestionProgress(),
