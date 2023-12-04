@@ -46,11 +46,10 @@ class QuestionController extends StatelessWidget {
                       controller.previousPage();
                       controller.goToPreviousQuestion();
                     }
-                    controller.scrollController.animateTo(
-                      controller.scrollController.position.minScrollExtent,
-                      duration: const Duration(milliseconds: 300),
-                      curve: Curves.easeOut,
-                    );
+                    //auto scrolling to top
+                    controller.autoScrollTop();
+                    //
+                    controller.update();
                   },
                   child: Container(
                     width: 45.w,
