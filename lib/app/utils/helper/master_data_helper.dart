@@ -11,7 +11,7 @@ class MasterDataHelper {
       dynamic autoScrollingCacheKey = _storage.get(Keys.autoScrollingCacheKey);
       dynamic randomizeQuestionCacheKey = _storage.get(Keys.randomizeQuestionsCacheKey);
       if (autoScrollingCacheKey == null) {
-        _storage.put(Keys.autoScrollingCacheKey, false);
+        _storage.put(Keys.autoScrollingCacheKey, true);
       }
       if (randomizeQuestionCacheKey == null) {
         _storage.put(Keys.randomizeQuestionsCacheKey, false);
