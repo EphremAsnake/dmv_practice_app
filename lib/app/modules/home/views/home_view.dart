@@ -48,7 +48,7 @@ class HomeView extends GetView<HomeController> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.all(5.0),
+                    padding: const EdgeInsets.only(top: 5.0, left: 10),
                     child: Container(
                       width: 50,
                       height: 50,
@@ -180,16 +180,14 @@ class HomeView extends GetView<HomeController> {
                                             decoration: BoxDecoration(
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color:
-                                                      themeData!.shadowColor,
+                                                  color: themeData!.shadowColor,
                                                   spreadRadius: 2,
                                                   blurRadius: 10,
                                                   offset: const Offset(0,
                                                       4), // horizontal, vertical offset
                                                 ),
                                                 BoxShadow(
-                                                  color:
-                                                      themeData!.shadowColor,
+                                                  color: themeData!.shadowColor,
                                                   spreadRadius: 2,
                                                   blurRadius: 10,
                                                   offset: const Offset(0,
@@ -204,13 +202,12 @@ class HomeView extends GetView<HomeController> {
                                             child: Card(
                                               elevation: 0,
                                               child: Padding(
-                                                padding: const EdgeInsets
-                                                    .symmetric(
-                                                    horizontal: 10.0),
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 10.0),
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment
-                                                          .start,
+                                                      CrossAxisAlignment.start,
                                                   children: [
                                                     const SizedBox(height: 7),
                                                     Row(
@@ -233,8 +230,7 @@ class HomeView extends GetView<HomeController> {
                                                             ),
                                                           ),
                                                         ]),
-                                                    const SizedBox(
-                                                        height: 10),
+                                                    const SizedBox(height: 10),
                                                     Text(
                                                       controller
                                                           .apiStateHandler
@@ -270,8 +266,7 @@ class HomeView extends GetView<HomeController> {
                                                                 width: 5),
                                                             Text(
                                                               "${usStatesController.cacheStateHandler.data!.numberOfQuestions - usStatesController.cacheStateHandler.data!.passingScore} Mistakes Allowed",
-                                                              style:
-                                                                  TextStyle(
+                                                              style: TextStyle(
                                                                 color: themeData
                                                                     ?.primaryColor,
                                                                 fontSize: 14,
@@ -282,8 +277,7 @@ class HomeView extends GetView<HomeController> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            border:
-                                                                Border.all(
+                                                            border: Border.all(
                                                               color: themeData!
                                                                   .primaryColor,
                                                             ),

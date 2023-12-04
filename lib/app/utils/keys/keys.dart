@@ -8,4 +8,5 @@ class Keys {
   static String savedStateCacheKey = "Saved State Cache Key";
   static String autoScrollingCacheKey = "Auto Scrolling Cache Key";
   static String randomizeQuestionsCacheKey = "Randomize Questions Cache Key";
+  static String allTestsCacheKey = "All Test Cache Key";
 }
