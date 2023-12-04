@@ -1,8 +1,6 @@
-import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
-import 'package:drivingexam/app/utils/helper/Interstitial_ad_manager.dart';
 import 'package:drivingexam/app/utils/shared_widgets/snack_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -18,7 +16,6 @@ class QuestionController extends StatelessWidget {
   final List<Widget> pages;
   final TestController controller = Get.find();
   final HomeController homeController = Get.find();
-  final MasterDataController masterDataController = Get.find();
   final themeData = Get.find<ThemeController>().themeData.value;
   @override
   Widget build(BuildContext context) {
@@ -102,19 +99,6 @@ class QuestionController extends StatelessWidget {
                     if (controller.choiceId == 0) {
                       customSnackBar(
                           title: "Info", body: "Please Select Answer");
-                    } else if (controller.showAdCounter.value ==
-                        masterDataController
-                            .configs?.settings.interstitialAdFrequency) {
-                      if (masterDataController
-                              .configs?.settings.showInterstitialAd ==
-                          true) {
-                        await InterstitialAdManager().showInterstitialAd();
-                        controller.goToNextQuestion(pages.length);
-                        //loading ad for next use
-                        InterstitialAdManager().loadAd();
-                        //reset AD counter value
-                        controller.showAdCounter.value = 0;
-                      }
                     } else {
                       controller.goToNextQuestion(pages.length);
                     }

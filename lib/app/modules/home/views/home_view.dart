@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:shimmer/shimmer.dart';
+import 'package:sizer/sizer.dart';
 import '../controllers/home_controller.dart';
 
 class HomeView extends GetView<HomeController> {
@@ -48,7 +49,7 @@ class HomeView extends GetView<HomeController> {
                     );
                   },
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 5.0, left: 10),
+                    padding:  const EdgeInsets.only(top: 5.0, left: 8),
                     child: Container(
                       width: 50,
                       height: 50,
@@ -80,9 +81,9 @@ class HomeView extends GetView<HomeController> {
                   ),
                 ),
                 const SizedBox(
-                  width: 20,
+                  width: 10,
                 ),
-                HomeAD(),
+                Expanded(child: HomeAD()),
               ],
             ),
             HomePageTopCard(),

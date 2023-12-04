@@ -82,22 +82,28 @@ class AboutView extends GetView<AboutController> {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(0.0),
-                      child: Card(
-                        elevation: 0,
-                        child: Padding(
-                          padding: EdgeInsets.symmetric(
-                              horizontal: 10.0, vertical: 10.0.sp),
-                          child: ListView(
-                            shrinkWrap: true,
-                            children: [
-                              Text(
-                                masterDataController.configs!.aboutApp,
-                                textAlign: TextAlign.justify,
-                                style: TextStyle(
-                                    color: themeData?.blackColor,
-                                    fontSize: 16),
+                      child: SizedBox(
+                        height: 86.h,
+                        child: Card(
+                          elevation: 0,
+                          child: Padding(
+                            padding: EdgeInsets.symmetric(
+                                horizontal: 10.0, vertical: 10.0.sp),
+                            child: SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Center(
+                                    child: Text(
+                                      masterDataController.configs!.aboutApp,
+                                      textAlign: TextAlign.justify,
+                                      style: TextStyle(
+                                          color: themeData?.blackColor, fontSize: 16),
+                                    ),
+                                  ),
+                                ],
                               ),
-                            ],
+                            ),
                           ),
                         ),
                       ),
@@ -119,7 +125,8 @@ class AboutView extends GetView<AboutController> {
             } else {
               return RefreshErrorWidget(
                 assetImage: "assets/images/error.png",
-                errorMessage: "No internet connection, please check your internet connection and try again.",
+                errorMessage:
+                    "No internet connection, please check your internet connection and try again.",
                 onRefresh: () async {
                   masterDataController.getMasterData();
                   masterDataController.readMasterData();

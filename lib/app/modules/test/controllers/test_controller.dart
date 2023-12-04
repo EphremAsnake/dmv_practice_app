@@ -30,7 +30,7 @@ class TestController extends GetxController {
   Rx<bool> showDescription = false.obs;
   TestHelper testHelper = TestHelper();
   String testUrl;
-  Rx<int> showAdCounter = 0.obs;
+  Rx<int> showAdCounter = 1.obs;
   Rx<bool> isLastQuestionPageBackButtonEnabled = false.obs;
   Question? question;
   int numberOfQuestionsForState = 0;

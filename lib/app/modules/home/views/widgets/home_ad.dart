@@ -71,70 +71,72 @@ class HomeAD extends StatelessWidget {
                     }
                   }
                 },
-                child: Row(
-                  children: [
-                    Container(
-                      width: 75.w,
-                      decoration: BoxDecoration(
-                        color: themeData!.whiteColor,
-                        shape: BoxShape.rectangle,
-                        borderRadius: BorderRadius.circular(10),
+                child: Container(
+                  width: 75.w,
+                  decoration: BoxDecoration(
+                    color: themeData!.whiteColor,
+                    shape: BoxShape.rectangle,
+                    borderRadius: BorderRadius.circular(5),
+                    boxShadow: [
+                      BoxShadow(
+                        color: themeData!.shadowColor,
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        offset:
+                            const Offset(0, 8), // horizontal, vertical offset
                       ),
-                      child: Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Row(
-                              mainAxisSize: MainAxisSize.min,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    masterDataController.configs!.houseAd.title
-                                        .toTitleCase(),
-                                    style: TextStyle(
-                                      fontSize: 13,
-                                      color: themeData!.blackColor,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 4,
-                                ),
-                                Align(
-                                  alignment: Alignment.centerRight,
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: themeData?.primaryColor,
-                                      border: Border.all(
-                                        color: themeData!.primaryColor
-                                            .withOpacity(0.5),
-                                      ),
-                                      borderRadius: BorderRadius.circular(4),
-                                    ),
-                                    child: Padding(
-                                      padding: const EdgeInsets.symmetric(
-                                          vertical: 2.0, horizontal: 15),
-                                      child: Text(
-                                        masterDataController
-                                            .configs!.houseAd.buttonText
-                                            .toTitleCase(),
-                                        style: TextStyle(
-                                          color: themeData!.whiteColor,
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 10.sp,
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                      BoxShadow(
+                        color: themeData!.shadowColor,
+                        spreadRadius: 2,
+                        blurRadius: 10,
+                        offset:
+                            const Offset(0, -8), // horizontal, vertical offset
+                      ),
+                    ],
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Expanded(
+                          child: Text(
+                            masterDataController.configs!.houseAd.title
+                                .toTitleCase(),
+                            style: TextStyle(
+                              fontSize: 13,
+                              color: themeData!.blackColor,
                             ),
-                          ],
+                          ),
                         ),
-                      ),
+                        const SizedBox(
+                          width: 4,
+                        ),
+                        Container(
+                          decoration: BoxDecoration(
+                            color: themeData?.primaryColor,
+                            border: Border.all(
+                              color: themeData!.primaryColor.withOpacity(0.5),
+                            ),
+                            borderRadius: BorderRadius.circular(4),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.symmetric(
+                                vertical: 2.0, horizontal: 15),
+                            child: Text(
+                              masterDataController.configs!.houseAd.buttonText
+                                  .toTitleCase(),
+                              style: TextStyle(
+                                color: themeData!.whiteColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 10.sp,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ],
+                  ),
                 ),
               ),
             );
