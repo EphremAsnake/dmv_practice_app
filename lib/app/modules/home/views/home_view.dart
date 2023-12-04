@@ -34,9 +34,9 @@ class HomeView extends GetView<HomeController> {
                     Get.bottomSheet(
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 5.0),
-                        child: Settings(themeData: themeData),
+                        child: SingleChildScrollView(
+                            child: Settings(themeData: themeData)),
                       ),
-                      
                       backgroundColor: themeData?.backgroundColor,
                       elevation: 0,
                       shape: const RoundedRectangleBorder(
@@ -180,14 +180,16 @@ class HomeView extends GetView<HomeController> {
                                             decoration: BoxDecoration(
                                               boxShadow: [
                                                 BoxShadow(
-                                                  color: themeData!.shadowColor,
+                                                  color:
+                                                      themeData!.shadowColor,
                                                   spreadRadius: 2,
                                                   blurRadius: 10,
                                                   offset: const Offset(0,
                                                       4), // horizontal, vertical offset
                                                 ),
                                                 BoxShadow(
-                                                  color: themeData!.shadowColor,
+                                                  color:
+                                                      themeData!.shadowColor,
                                                   spreadRadius: 2,
                                                   blurRadius: 10,
                                                   offset: const Offset(0,
@@ -202,12 +204,13 @@ class HomeView extends GetView<HomeController> {
                                             child: Card(
                                               elevation: 0,
                                               child: Padding(
-                                                padding:
-                                                    const EdgeInsets.symmetric(
-                                                        horizontal: 10.0),
+                                                padding: const EdgeInsets
+                                                    .symmetric(
+                                                    horizontal: 10.0),
                                                 child: Column(
                                                   crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
+                                                      CrossAxisAlignment
+                                                          .start,
                                                   children: [
                                                     const SizedBox(height: 7),
                                                     Row(
@@ -230,7 +233,8 @@ class HomeView extends GetView<HomeController> {
                                                             ),
                                                           ),
                                                         ]),
-                                                    const SizedBox(height: 10),
+                                                    const SizedBox(
+                                                        height: 10),
                                                     Text(
                                                       controller
                                                           .apiStateHandler
@@ -266,7 +270,8 @@ class HomeView extends GetView<HomeController> {
                                                                 width: 5),
                                                             Text(
                                                               "${usStatesController.cacheStateHandler.data!.numberOfQuestions - usStatesController.cacheStateHandler.data!.passingScore} Mistakes Allowed",
-                                                              style: TextStyle(
+                                                              style:
+                                                                  TextStyle(
                                                                 color: themeData
                                                                     ?.primaryColor,
                                                                 fontSize: 14,
@@ -277,7 +282,8 @@ class HomeView extends GetView<HomeController> {
                                                         Container(
                                                           decoration:
                                                               BoxDecoration(
-                                                            border: Border.all(
+                                                            border:
+                                                                Border.all(
                                                               color: themeData!
                                                                   .primaryColor,
                                                             ),
@@ -339,7 +345,8 @@ class HomeView extends GetView<HomeController> {
                             } else {
                               return RefreshErrorWidget(
                                 assetImage: "assets/images/error.png",
-                                errorMessage: "No internet connection, please check your internet connection and try again.",
+                                errorMessage:
+                                    "No internet connection, please check your internet connection and try again.",
                                 onRefresh: () async {
                                   controller.fetchData();
                                   controller.update();
@@ -348,13 +355,13 @@ class HomeView extends GetView<HomeController> {
                             }
                           },
                         );
-
                       } else if (usStatesController
                               .cacheStateHandler.apiState ==
                           ApiState.error) {
                         return RefreshErrorWidget(
                           assetImage: "assets/images/error.png",
-                          errorMessage: "No internet connection, please check your internet connection and try again.",
+                          errorMessage:
+                              "No internet connection, please check your internet connection and try again.",
                           onRefresh: () async {
                             usStatesController.fetchData();
                             usStatesController.savedStateData();
@@ -365,7 +372,8 @@ class HomeView extends GetView<HomeController> {
                       } else {
                         return RefreshErrorWidget(
                           assetImage: "assets/images/error.png",
-                          errorMessage: "No internet connection, please check your internet connection and try again.",
+                          errorMessage:
+                              "No internet connection, please check your internet connection and try again.",
                           onRefresh: () async {
                             usStatesController.fetchData();
                             usStatesController.savedStateData();

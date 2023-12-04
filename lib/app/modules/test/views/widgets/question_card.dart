@@ -198,8 +198,7 @@ class QuestionCard extends StatelessWidget {
                     );
                   },
                 ),
-                if (question.explanation != null &&
-                    question.explanation != "")
+                if (question.explanation != null && question.explanation != "")
                   Obx(
                     () => Visibility(
                       visible: controller.showDescription.value,
@@ -238,9 +237,8 @@ void showImageModal(BuildContext context, String url) {
     context: context,
     builder: (BuildContext context) {
       return Dialog(
-        child: BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
-            child: Image.network(url)),
+        backgroundColor: Colors.transparent,
+        child: Image.network(url),
       );
     },
   );

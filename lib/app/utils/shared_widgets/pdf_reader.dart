@@ -22,7 +22,10 @@ class PDFReader extends StatelessWidget {
         automaticallyImplyLeading: false,
         backgroundColor: themeData?.primaryColor,
         elevation: 0,
-        title: Text(pdfTitle),
+        title: Text(
+          pdfTitle,
+          style: TextStyle(color: themeData?.whiteColor),
+        ),
         leading: IconButton(
           icon: Icon(Icons.chevron_left,
               color: themeData?.whiteColor, size: 25.sp),

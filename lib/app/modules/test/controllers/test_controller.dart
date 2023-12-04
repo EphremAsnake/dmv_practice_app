@@ -231,12 +231,10 @@ class TestController extends GetxController {
 
   //autoScroll Top
   void autoScrollTop() {
-    if (homeController.isAutoScrollingEnabled.value == true) {
-      scrollController.animateTo(
-        scrollController.position.minScrollExtent,
-        duration: const Duration(milliseconds: 300),
-        curve: Curves.easeOut,
-      );
-    }
+    scrollController.animateTo(
+      scrollController.position.minScrollExtent,
+      duration: const Duration(milliseconds: 300),
+      curve: Curves.easeOut,
+    );
   }
 }

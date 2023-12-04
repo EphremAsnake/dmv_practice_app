@@ -65,7 +65,7 @@ class TestResult extends StatelessWidget {
                     ),
                   ),
                 ),
-                Expanded(child: HomeAD()),
+                HomeAD(),
               ],
             ),
             passed

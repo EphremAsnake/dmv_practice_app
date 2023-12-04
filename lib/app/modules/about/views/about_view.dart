@@ -80,28 +80,24 @@ class AboutView extends GetView<AboutController> {
                         HomeAD(),
                       ],
                     ),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.all(0.0),
-                        child: Card(
-                          elevation: 0,
-                          child: Padding(
-                            padding: EdgeInsets.symmetric(
-                                horizontal: 10.0, vertical: 10.0.sp),
-                            child: ListView(
-                              shrinkWrap: true,
-                              children: [
-                                Expanded(
-                                  child: Text(
-                                    masterDataController.configs!.aboutApp,
-                                    textAlign: TextAlign.justify,
-                                    style: TextStyle(
-                                        color: themeData?.blackColor,
-                                        fontSize: 16),
-                                  ),
-                                ),
-                              ],
-                            ),
+                    Padding(
+                      padding: const EdgeInsets.all(0.0),
+                      child: Card(
+                        elevation: 0,
+                        child: Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: 10.0, vertical: 10.0.sp),
+                          child: ListView(
+                            shrinkWrap: true,
+                            children: [
+                              Text(
+                                masterDataController.configs!.aboutApp,
+                                textAlign: TextAlign.justify,
+                                style: TextStyle(
+                                    color: themeData?.blackColor,
+                                    fontSize: 16),
+                              ),
+                            ],
                           ),
                         ),
                       ),

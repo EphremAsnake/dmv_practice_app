@@ -137,7 +137,7 @@ class HomePageTopCard extends StatelessWidget {
                                     style: TextStyle(
                                       color: themeData!.whiteColor,
                                       fontWeight: FontWeight.bold,
-                                      fontSize: 12,
+                                      fontSize: 10.sp,
                                     ),
                                   ),
                                 ],

@@ -2,7 +2,7 @@ import 'package:store_redirect/store_redirect.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomeHelpers {
-  openStores(String androidAppId, String iOSAppId) {
+  openStores({String? androidAppId, String? iOSAppId}) {
     try {
       StoreRedirect.redirect(androidAppId: androidAppId, iOSAppId: iOSAppId);
     } catch (ex) {}

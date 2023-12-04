@@ -39,7 +39,7 @@ class NativeAdController extends GetxController {
         onAdClosed: (Ad ad) => print('$NativeAd onAdClosed.'),
       ),
       nativeTemplateStyle: NativeTemplateStyle(
-        cornerRadius: 20.0,
+        cornerRadius: 10.0,
         templateType: TemplateType.medium,
         mainBackgroundColor: themeData?.whiteColor,
         callToActionTextStyle: NativeTemplateTextStyle(
@@ -47,6 +47,12 @@ class NativeAdController extends GetxController {
           backgroundColor: themeData?.primaryColor,
           style: NativeTemplateFontStyle.bold,
           size: 16.0,
+        ),
+        secondaryTextStyle: NativeTemplateTextStyle(
+          textColor: themeData?.grayTextColor,
+        ),
+        tertiaryTextStyle: NativeTemplateTextStyle(
+          textColor: themeData?.grayTextColor,
         ),
         primaryTextStyle: NativeTemplateTextStyle(
           textColor: themeData?.blackColor,

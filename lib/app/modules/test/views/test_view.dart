@@ -45,6 +45,7 @@ class TestView extends GetView<TestController> {
 
               return SafeArea(
                 child: ListView(
+                  physics: const ClampingScrollPhysics(),
                   controller: controller.scrollController,
                   children: [
                     const SizedBox(
@@ -115,8 +116,7 @@ class TestView extends GetView<TestController> {
                       physics:
                           const NeverScrollableScrollPhysics(), // Disable swiping between pages
                     ),
-                    if (masterDataController
-                            .configs?.settings.showNativeAd ==
+                    if (masterDataController.configs?.settings.showNativeAd ==
                         true)
                       GetBuilder<NativeAdController>(
                         init: nativeAdController,

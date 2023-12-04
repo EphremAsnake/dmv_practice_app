@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/home/helpers/home_helpers.dart';
@@ -44,19 +46,35 @@ class HomeAD extends StatelessWidget {
               padding: const EdgeInsets.all(10.0),
               child: GestureDetector(
                 onTap: () {
-                  if (masterDataController.configs!.houseAd.typeApp == true) {
-                    HomeHelpers().openStores(
-                        masterDataController.configs!.houseAd.androidUrl,
-                        masterDataController.configs!.houseAd.iosUrl);
-                  } else {
-                    HomeHelpers().launchWebUrl(
-                        masterDataController.configs!.houseAd.androidUrl);
+                  if (Platform.isAndroid) {
+                    if (masterDataController.configs!.houseAd.androidUrl
+                            .contains("http") ==
+                        true) {
+                      HomeHelpers().launchWebUrl(
+                          masterDataController.configs!.houseAd.androidUrl);
+                    } else {
+                      HomeHelpers().openStores(
+                        androidAppId:
+                            masterDataController.configs!.houseAd.androidUrl,
+                      );
+                    }
+                  } else if (Platform.isIOS) {
+                    if (masterDataController.configs!.houseAd.iosUrl
+                            .contains("http") ==
+                        true) {
+                      HomeHelpers().launchWebUrl(
+                          masterDataController.configs!.houseAd.iosUrl);
+                    } else {
+                      HomeHelpers().openStores(
+                        iOSAppId: masterDataController.configs!.houseAd.iosUrl,
+                      );
+                    }
                   }
                 },
                 child: Row(
                   children: [
                     Container(
-                      width:60.w,
+                      width: 75.w,
                       decoration: BoxDecoration(
                         color: themeData!.whiteColor,
                         shape: BoxShape.rectangle,
@@ -72,8 +90,7 @@ class HomeAD extends StatelessWidget {
                               children: [
                                 Expanded(
                                   child: Text(
-                                     masterDataController
-                                        .configs!.houseAd.title
+                                    masterDataController.configs!.houseAd.title
                                         .toTitleCase(),
                                     style: TextStyle(
                                       fontSize: 13,
@@ -81,37 +98,37 @@ class HomeAD extends StatelessWidget {
                                     ),
                                   ),
                                 ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 4,
-                            ),
-                            Align(
-                              alignment: Alignment.centerRight,
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  color: themeData?.primaryColor,
-                                  border: Border.all(
-                                    color: themeData!.primaryColor
-                                        .withOpacity(0.5),
-                                  ),
-                                  borderRadius: BorderRadius.circular(4),
+                                const SizedBox(
+                                  width: 4,
                                 ),
-                                child: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      vertical: 2.0, horizontal: 15),
-                                  child: Text(
-                                    masterDataController
-                                        .configs!.houseAd.buttonText
-                                        .toTitleCase(),
-                                    style: TextStyle(
-                                      color: themeData!.whiteColor,
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12,
+                                Align(
+                                  alignment: Alignment.centerRight,
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: themeData?.primaryColor,
+                                      border: Border.all(
+                                        color: themeData!.primaryColor
+                                            .withOpacity(0.5),
+                                      ),
+                                      borderRadius: BorderRadius.circular(4),
+                                    ),
+                                    child: Padding(
+                                      padding: const EdgeInsets.symmetric(
+                                          vertical: 2.0, horizontal: 15),
+                                      child: Text(
+                                        masterDataController
+                                            .configs!.houseAd.buttonText
+                                            .toTitleCase(),
+                                        style: TextStyle(
+                                          color: themeData!.whiteColor,
+                                          fontWeight: FontWeight.bold,
+                                          fontSize: 10.sp,
+                                        ),
+                                      ),
                                     ),
                                   ),
                                 ),
-                              ),
+                              ],
                             ),
                           ],
                         ),

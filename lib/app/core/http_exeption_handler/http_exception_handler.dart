@@ -9,7 +9,7 @@ class HandleHttpException {
     } else if (error is HttpException) {
       return 'Http Error Occurred';
     } else if (error is FormatException) {
-      return 'Invalid Format';
+      return 'Unable To Load, Please Try Again!';
     } else if (error is FileMovedException) {
       return error.message.toString();
     } else if (error is BadRequestException) {

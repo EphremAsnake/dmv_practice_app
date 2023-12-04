@@ -6,6 +6,7 @@ import 'package:drivingexam/app/utils/helper/internet_connectivity.dart';
 import 'package:drivingexam/app/utils/helper/master_data_helper.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 import 'package:get/get.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -35,11 +36,18 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  //set the status bar color to transparent
-  SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-    statusBarColor: Color(0xFF016A70),
-  ));
+  // //set the status bar color to transparent
+  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+  //   statusBarColor: Color(0xFF016A70),
+  // ));
 
+  //set the status bar color to teal
+  FlutterStatusbarcolor.setStatusBarColor(
+    Color(0xFF016A70),
+  );
+
+  //set the status bar  text color to white
+  FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
   runApp(
     Sizer(
       builder: (context, orientation, deviceType) {

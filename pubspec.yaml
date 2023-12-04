@@ -27,7 +27,7 @@ dependencies:
   expandable_page_view: ^1.0.17
   collection: ^1.17.2
   audioplayers: ^5.2.1
- 
+  flutter_statusbarcolor_ns: ^0.5.0
 
 dev_dependencies: 
   flutter_lints: ^2.0.0

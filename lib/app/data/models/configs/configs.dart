@@ -7,7 +7,7 @@ String configsToJson(Configs data) => json.encode(data.toJson());
 class Configs {
   Settings settings;
   AppConfig appConfig;
-  
+  AppRateShare appRateShare;
   HouseAd houseAd;
   String aboutApp;
 
@@ -16,12 +16,14 @@ class Configs {
     required this.appConfig,
     required this.houseAd,
     required this.aboutApp,
+    required this.appRateShare,
   });
 
   factory Configs.fromJson(Map<String, dynamic> json) => Configs(
       settings: Settings.fromJson(json["settings"]),
       appConfig: AppConfig.fromJson(json["app_config"]),
       houseAd: HouseAd.fromJson(json["house_ad"]),
+      appRateShare: AppRateShare.fromJson(json["app_rate_share"]),
       aboutApp: json["about_app"]);
 
   Map<String, dynamic> toJson() => {
@@ -29,6 +31,7 @@ class Configs {
         "app_config": appConfig.toJson(),
         "house_ad": houseAd.toJson(),
         "about_app": aboutApp,
+        "app_rate_share": appRateShare.toJson(),
       };
 }
 
@@ -120,7 +123,6 @@ class HouseAd {
   String title;
   String buttonText;
   bool show;
-  bool typeApp;
   String iosUrl;
   String androidUrl;
 
@@ -128,7 +130,6 @@ class HouseAd {
     required this.title,
     required this.buttonText,
     required this.show,
-    required this.typeApp,
     required this.iosUrl,
     required this.androidUrl,
   });
@@ -137,7 +138,6 @@ class HouseAd {
         title: json["title"],
         buttonText: json["button_text"],
         show: json["show"],
-        typeApp: json["type_app"],
         iosUrl: json["ios_url"],
         androidUrl: json["android_url"],
       );
@@ -146,7 +146,6 @@ class HouseAd {
         "title": title,
         "button_text": buttonText,
         "show": show,
-        "type_app": typeApp,
         "ios_url": iosUrl,
         "android_url": androidUrl,
       };
@@ -189,5 +188,33 @@ class Settings {
         "interstitial_ad_frequency": interstitialAdFrequency,
         "show_interstitial_ad": showInterstitialAd,
         "show_native_ad": showNativeAd,
+      };
+}
+
+class AppRateShare {
+  String iosId;
+  String androidId;
+  String iosShare;
+  String androidShare;
+
+  AppRateShare({
+    required this.iosId,
+    required this.androidId,
+    required this.iosShare,
+    required this.androidShare,
+  });
+
+  factory AppRateShare.fromJson(Map<String, dynamic> json) => AppRateShare(
+        iosId: json["ios_id"],
+        androidId: json["android_id"],
+        iosShare: json["ios_share"],
+        androidShare: json["android_share"],
+      );
+
+  Map<String, dynamic> toJson() => {
+        "ios_id": iosId,
+        "android_id": androidId,
+        "ios_share": iosShare,
+        "android_share": androidShare,
       };
 }

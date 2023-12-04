@@ -1,5 +1,5 @@
 class Keys {
-  static String baseurl = "https://app.et/devwork/dmv_practice_app/v1";
+  static String baseurl = "https://buy.et/devwork/dmv_practice_app/v1";
   static String configsCacheKey = "Configs Cache Key";
   static String usStatesCacheKey = "Us States Cache Key";
   static String testCacheKey = "Test Cache Key";
