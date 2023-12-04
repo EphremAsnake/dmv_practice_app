@@ -36,10 +36,6 @@ void main() async {
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
-  // //set the status bar color to transparent
-  // SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-  //   statusBarColor: Color(0xFF016A70),
-  // ));
 
   //set the status bar color to teal
   FlutterStatusbarcolor.setStatusBarColor(
