@@ -204,7 +204,11 @@ class FailedWidget extends StatelessWidget {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Get.offAndToNamed("/home");
+                    Get.offAllNamed(
+                      "/home",
+                      // Remove routes until reaching the /home route
+                      predicate: (route) => route.settings.name == "/home",
+                    );
                   },
                   child: Container(
                     width: 70.w,

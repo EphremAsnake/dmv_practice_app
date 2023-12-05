@@ -11,7 +11,7 @@ class TestResult extends StatelessWidget {
   TestResult({super.key});
   final themeData = Get.find<ThemeController>().themeData.value;
   final TestController controller = Get.find();
-  
+
   @override
   Widget build(BuildContext context) {
     int incorrectAnswers =
@@ -30,7 +30,11 @@ class TestResult extends StatelessWidget {
                   padding: const EdgeInsets.symmetric(horizontal: 5.0),
                   child: GestureDetector(
                     onTap: () {
-                      Get.offAndToNamed("/home");
+                      Get.offAllNamed(
+                        "/home",
+                        // Remove routes until reaching the /home route
+                        predicate: (route) => route.settings.name == "/home",
+                      );
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(5.0),
