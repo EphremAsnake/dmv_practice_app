@@ -112,7 +112,9 @@ class Settings extends StatelessWidget {
           ),
         ),
         GestureDetector(
-          onTap: () {},
+          onTap: () async {
+            await controller.share();
+          },
           child: Card(
             elevation: 0,
             borderOnForeground: true,

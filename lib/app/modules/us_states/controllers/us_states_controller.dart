@@ -1,18 +1,22 @@
 import 'dart:convert';
-
 import 'package:drivingexam/app/core/cache/local_storage.dart';
 import 'package:drivingexam/app/core/http_client/http_service.dart';
 import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
 import 'package:drivingexam/app/data/models/us_states/us_states.dart';
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_http_attribuites.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
+import 'package:drivingexam/app/utils/helper/internet_connectivity.dart';
 import 'package:drivingexam/app/utils/keys/keys.dart';
 import 'package:get/get.dart';
 
 class UsStatesController extends GetxController {
   @override
   void onInit() {
-    fetchData();
+    if (InternetConnectivity().isConnected == true) {
+      fetchData();
+    } else {
+      fetchDataFromCache();
+    }
     super.onInit();
   }
 
@@ -33,6 +37,30 @@ class UsStatesController extends GetxController {
 
       final result = jsonDecode(response.body);
       usStates = UsStates.fromJson(result);
+      usStates?.states.sort((a, b) => a.name.compareTo(b.name));
+      //caching data
+      cacheStorageService.saveData(
+          Keys.allUsStatesCacheKey, usStates!.toJson());
+      // Update state with success and response data
+      apiStateHandler.setSuccess(usStates!);
+      update();
+    } catch (ex) {
+      // Update state with error message
+      String errorMessage = await HandleHttpException().getExceptionString(ex);
+      apiStateHandler.setError(errorMessage);
+      update();
+    }
+  }
+
+  Future<void> fetchDataFromCache() async {
+    apiStateHandler.setLoading();
+    try {
+      dynamic cachedData =
+          await cacheStorageService.getSavedData(Keys.allUsStatesCacheKey);
+
+      if (cachedData != null) {
+        usStates = UsStates.fromJson(cachedData);
+      }
       usStates?.states.sort((a, b) => a.name.compareTo(b.name));
       // Update state with success and response data
       apiStateHandler.setSuccess(usStates!);

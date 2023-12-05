@@ -1,5 +1,7 @@
 import 'package:confetti/confetti.dart';
+import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
+import 'package:drivingexam/app/modules/home/helpers/home_helpers.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -14,6 +16,8 @@ class PassedWidget extends StatelessWidget {
   final int incorrectAnswers;
   final int numberOfQuestions;
   final TestController controller = Get.find();
+  final MasterDataController masterDataController = Get.find();
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -91,7 +95,39 @@ class PassedWidget extends StatelessWidget {
                 height: 15,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  controller.checkIsLastTest();
+                  if (controller.isLastTest.value == true) {
+                    controller.previousTest();
+                    String testUrl = controller.testUrl;
+                    int numberOfQuestionsForState =
+                        controller.numberOfQuestionsForState;
+                    Get.offAllNamed(
+                      "/test",
+                      arguments: {
+                        'test_url': testUrl,
+                        'number_of_questions': numberOfQuestionsForState,
+                      },
+                      // Remove routes until reaching the /home route
+                      predicate: (route) => route.settings.name == "/home",
+                    );
+                    controller.resetControllerValues();
+                  } else {
+                    controller.nextTest();
+                    String testUrl = controller.testUrl;
+                    int numberOfQuestionsForState =
+                        controller.numberOfQuestionsForState;
+                    Get.offAllNamed(
+                      "/test",
+                      arguments: {
+                        'test_url': testUrl,
+                        'number_of_questions': numberOfQuestionsForState,
+                      },
+                      // Remove routes until reaching the /home route
+                      predicate: (route) => route.settings.name == "/home",
+                    );
+                  }
+                },
                 child: Container(
                   width: 70.w,
                   decoration: BoxDecoration(
@@ -108,12 +144,16 @@ class PassedWidget extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                          child: Text(
-                            "GO TO NEXT TEST",
-                            style: TextStyle(
-                                color: themeData!.whiteColor,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 9.5.sp),
+                          child: Obx(
+                            () => Text(
+                              controller.isLastTest.value == false
+                                  ? "GO TO NEXT TEST"
+                                  : "GO TO PREVIOUS TEST",
+                              style: TextStyle(
+                                  color: themeData!.whiteColor,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 9.5.sp),
+                            ),
                           ),
                         ),
                       ],
@@ -121,40 +161,6 @@ class PassedWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              // const SizedBox(
-              //   height: 30,
-              // ),
-              // GestureDetector(
-              //   onTap: () {},
-              //   child: Container(
-              //     width: 70.w,
-              //     decoration: BoxDecoration(
-              //       color: themeData!.lightGrey.withOpacity(0.6),
-              //       border: Border.all(
-              //         color: themeData!.whiteColor,
-              //       ),
-              //       borderRadius: BorderRadius.circular(5),
-              //     ),
-              //     child: Padding(
-              //       padding: const EdgeInsets.symmetric(
-              //           vertical: 15.0, horizontal: 15),
-              //       child: Row(
-              //         mainAxisAlignment: MainAxisAlignment.center,
-              //         children: [
-              //           Center(
-              //             child: Text(
-              //               "BACK TO INCORRECT & SKIPPED(28)",
-              //               style: TextStyle(
-              //                   color: themeData!.primaryColor,
-              //                   fontWeight: FontWeight.bold,
-              //                   fontSize: 9.5.sp),
-              //             ),
-              //           ),
-              //         ],
-              //       ),
-              //     ),
-              //   ),
-              // ),
               const SizedBox(
                 height: 15,
               ),
@@ -220,6 +226,46 @@ class PassedWidget extends StatelessWidget {
                         Center(
                           child: Text(
                             "HOME",
+                            style: TextStyle(
+                                color: themeData!.primaryColor,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 9.5.sp),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+              const SizedBox(
+                height: 15,
+              ),
+              GestureDetector(
+                onTap: () {
+                  HomeHelpers().openStores(
+                      androidAppId:
+                          masterDataController.configs!.appRateShare.androidId,
+                      iOSAppId:
+                          masterDataController.configs!.appRateShare.iosId);
+                },
+                child: Container(
+                  width: 70.w,
+                  decoration: BoxDecoration(
+                    color: themeData!.lightGrey.withOpacity(0.6),
+                    border: Border.all(
+                      color: themeData!.whiteColor,
+                    ),
+                    borderRadius: BorderRadius.circular(5),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 15.0, horizontal: 15),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Center(
+                          child: Text(
+                            "RATE",
                             style: TextStyle(
                                 color: themeData!.primaryColor,
                                 fontWeight: FontWeight.bold,

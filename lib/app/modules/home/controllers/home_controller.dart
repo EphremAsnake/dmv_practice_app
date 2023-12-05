@@ -1,14 +1,7 @@
-import 'dart:convert';
-import 'package:drivingexam/app/core/cache/local_storage.dart';
-import 'package:drivingexam/app/core/http_client/http_service.dart';
-import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
-import 'package:drivingexam/app/data/models/test/all_test_list.dart';
-import 'package:drivingexam/app/modules/home/controllers/all_tests_http_attribuites.dart';
-import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
-import 'package:drivingexam/app/utils/helper/internet_connectivity.dart';
-import 'package:drivingexam/app/utils/keys/keys.dart';
-import 'package:get/get.dart';
-import 'package:hive_flutter/hive_flutter.dart';
+import 'dart:io';
+
+import 'package:drivingexam/app/modules/home/controllers/home_controller_imports.dart';
+import 'package:share_plus/share_plus.dart';
 
 class HomeController extends GetxController {
   final apiStateHandler = ApiStateHandler<AllTests>();
@@ -17,6 +10,7 @@ class HomeController extends GetxController {
   Rx<bool> isRandomizeQuestions = false.obs;
   static final _storage = Hive.box('driving_exam');
   CacheStorageService cacheStorageService = CacheStorageService();
+  final MasterDataController masterDataController = Get.find();
 
   @override
   void onInit() {
@@ -25,6 +19,9 @@ class HomeController extends GetxController {
       fetchData();
     } else {
       fetchFromCacheData();
+    }
+    if (masterDataController.configs?.settings.showInterstitialAd == true) {
+      InterstitialAdManager().loadAd();
     }
     super.onInit();
   }
@@ -93,5 +90,13 @@ class HomeController extends GetxController {
   void toggleRandomizingQuestion(bool state) {
     _storage.put(Keys.randomizeQuestionsCacheKey, state);
     isRandomizeQuestions.value = state;
+  }
+
+  Future<void> share() async {
+    Platform.isAndroid
+        ? await Share.share(
+            masterDataController.configs!.appRateShare.androidShare)
+        : await Share.share(
+            masterDataController.configs!.appRateShare.iosShare);
   }
 }

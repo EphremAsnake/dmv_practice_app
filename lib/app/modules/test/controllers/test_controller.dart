@@ -1,19 +1,4 @@
-import 'dart:convert';
-import 'package:confetti/confetti.dart';
-import 'package:drivingexam/app/core/http_client/http_service.dart';
-import 'package:drivingexam/app/core/http_exeption_handler/http_exception_handler.dart';
-import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
-import 'package:drivingexam/app/data/models/result/result.dart';
-import 'package:drivingexam/app/data/models/test/test.dart';
-import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
-import 'package:drivingexam/app/modules/test/controllers/test_http_attribuites.dart';
-import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
-import 'package:drivingexam/app/modules/test/views/result_page.dart';
-import 'package:drivingexam/app/utils/helper/Interstitial_ad_manager.dart';
-import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
-import 'package:drivingexam/app/utils/helper/sound_service.dart';
-import 'package:flutter/material.dart';
-import 'package:get/get.dart';
+import 'package:drivingexam/app/modules/test/controllers/test_controller_imports.dart';
 
 class TestController extends GetxController {
   var currentPageIndex = 0.obs;
@@ -37,6 +22,7 @@ class TestController extends GetxController {
   late ScrollController scrollController;
   final HomeController homeController = Get.find();
   final MasterDataController masterDataController = Get.find();
+  Rx<bool> isLastTest = false.obs;
 
   TestController(this.testUrl, this.numberOfQuestionsForState);
 
@@ -49,18 +35,15 @@ class TestController extends GetxController {
     SoundService.instance.loadSounds();
     scrollController = ScrollController();
     confettiController = ConfettiController();
-    if (masterDataController.configs?.settings.showInterstitialAd == true) {
-      InterstitialAdManager().loadAd();
-    }
     super.onInit();
   }
 
-  @override
-  void onClose() {
-    confettiController.dispose();
-    scrollController.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   confettiController.dispose();
+  //   scrollController.dispose();
+  //   super.onClose();
+  // }
 
   void playConfetti() {
     confettiController.play();
@@ -247,5 +230,38 @@ class TestController extends GetxController {
       duration: const Duration(milliseconds: 300),
       curve: Curves.easeOut,
     );
+  }
+
+  //check if the test is the last test
+  checkIsLastTest() {
+    int currentTestIndex = homeController.allTests!.tests
+        .indexWhere((element) => element.url == testUrl);
+    if (currentTestIndex == homeController.allTests!.tests.length - 1) {
+      isLastTest.value = true;
+    } else {
+      isLastTest.value = false;
+    }
+  }
+
+  //go to next test
+  nextTest() {
+    int currentTestIndex = homeController.allTests!.tests
+        .indexWhere((element) => element.url == testUrl);
+    if (currentTestIndex + 1 < homeController.allTests!.tests.length) {
+      String nextTestUrl =
+          homeController.allTests!.tests[currentTestIndex + 1].url;
+      testUrl = nextTestUrl;
+    }
+  }
+
+  //go to  previous test
+  previousTest() {
+    int currentTestIndex = homeController.allTests!.tests
+        .indexWhere((element) => element.url == testUrl);
+    if (currentTestIndex <= homeController.allTests!.tests.length - 1) {
+      String nextTestUrl =
+          homeController.allTests!.tests[currentTestIndex - 1].url;
+      testUrl = nextTestUrl;
+    }
   }
 }
