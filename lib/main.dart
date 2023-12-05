@@ -39,7 +39,7 @@ void main() async {
 
   //set the status bar color to teal
   FlutterStatusbarcolor.setStatusBarColor(
-    Color(0xFF016A70),
+    const Color(0xFF016A70),
   );
 
   //set the status bar  text color to white
