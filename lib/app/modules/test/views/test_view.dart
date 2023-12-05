@@ -1,6 +1,7 @@
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/native_ad_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
+import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:drivingexam/app/modules/home/views/widgets/home_ad.dart';
 import 'package:drivingexam/app/modules/test/views/widgets/test_widgets_export.dart';
 import 'package:drivingexam/app/modules/test/views/widgets/view_progress.dart';
@@ -18,6 +19,7 @@ class TestView extends GetView<TestController> {
   TestView({Key? key}) : super(key: key);
   final themeData = Get.find<ThemeController>().themeData.value;
   final MasterDataController masterDataController = Get.find();
+  final HomeController homeController = Get.find();
   final NativeAdController nativeAdController = Get.put(NativeAdController());
 
   @override
@@ -45,7 +47,8 @@ class TestView extends GetView<TestController> {
 
               return SafeArea(
                 child: masterDataController.configs?.settings.showNativeAd ==
-                        false
+                            false ||
+                        homeController.isLoadingNativeAdFailed.value == true
                     ? Column(
                         children: [
                           Expanded(

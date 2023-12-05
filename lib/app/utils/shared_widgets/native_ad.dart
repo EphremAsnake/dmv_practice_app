@@ -24,7 +24,8 @@ Widget buildNativeAd() {
         );
       },
     );
-  } else {
+  }
+  else {
     return const SizedBox.shrink();
   }
 }

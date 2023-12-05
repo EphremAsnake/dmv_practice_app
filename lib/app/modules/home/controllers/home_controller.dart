@@ -8,6 +8,8 @@ class HomeController extends GetxController {
   var httpService = Get.find<HttpService>();
   Rx<bool> isAutoScrollingEnabled = false.obs;
   Rx<bool> isRandomizeQuestions = false.obs;
+  Rx<bool> isLoadingNativeAdFailed = false.obs;
+
   static final _storage = Hive.box('driving_exam');
   CacheStorageService cacheStorageService = CacheStorageService();
   final MasterDataController masterDataController = Get.find();

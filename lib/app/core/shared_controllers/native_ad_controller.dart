@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:io';
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
+import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:get/get.dart';
 
@@ -11,6 +12,7 @@ class NativeAdController extends GetxController {
   NativeAd? nativeAd;
   bool nativeAdIsLoaded = false;
   final MasterDataController masterDataController = Get.find();
+  final HomeController homeController = Get.find();
 
   @override
   void onInit() {
@@ -33,6 +35,7 @@ class NativeAdController extends GetxController {
           update();
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
+          homeController.isLoadingNativeAdFailed.value = true;
           ad.dispose();
         },
         onAdOpened: (Ad ad) => print('$NativeAd onAdOpened.'),
