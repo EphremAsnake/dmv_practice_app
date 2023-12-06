@@ -31,14 +31,17 @@ class RefreshErrorWidget extends StatelessWidget {
               assetImage,
               height: 120,
             ),
-            Text(
-              errorMessage,
-              style: Theme.of(context).textTheme.headlineSmall!.copyWith(
-                  color: themeData?.primaryColor,
-                  fontSize:
-                      SizerUtil.deviceType == DeviceType.mobile ? 14.sp : 16.sp,
-                  fontWeight: FontWeight.w600),
-              textAlign: TextAlign.center,
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10),
+              child: Text(
+                errorMessage,
+                style: Theme.of(context).textTheme.headlineSmall!.copyWith(
+                    color: themeData?.primaryColor,
+                    fontSize:
+                        SizerUtil.deviceType == DeviceType.mobile ? 14.sp : 16.sp,
+                    fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center,
+              ),
             ),
             const SizedBox(height: 5),
             Text(
