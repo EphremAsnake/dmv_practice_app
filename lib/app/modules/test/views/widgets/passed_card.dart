@@ -111,7 +111,6 @@ class PassedWidget extends StatelessWidget {
                       // Remove routes until reaching the /home route
                       predicate: (route) => route.settings.name == "/home",
                     );
-                    controller.resetControllerValues();
                   } else {
                     controller.nextTest();
                     String testUrl = controller.testUrl;
@@ -170,7 +169,6 @@ class PassedWidget extends StatelessWidget {
                     'test_url': controller.testUrl,
                     'number_of_questions': controller.numberOfQuestionsForState
                   });
-                  controller.resetControllerValues();
                 },
                 child: Container(
                   width: 70.w,

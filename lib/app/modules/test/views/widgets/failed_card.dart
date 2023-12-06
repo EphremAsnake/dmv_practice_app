@@ -101,7 +101,6 @@ class FailedWidget extends StatelessWidget {
                         // Remove routes until reaching the /home route
                         predicate: (route) => route.settings.name == "/home",
                       );
-                      controller.resetControllerValues();
                     } else {
                       controller.nextTest();
                       String testUrl = controller.testUrl;
@@ -167,8 +166,6 @@ class FailedWidget extends StatelessWidget {
                       // Remove routes until reaching the /home route
                       predicate: (route) => route.settings.name == "/home",
                     );
-
-                    controller.resetControllerValues();
                   },
                   child: Container(
                     width: 70.w,

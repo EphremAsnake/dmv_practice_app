@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'dart:io';
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
@@ -6,20 +5,19 @@ import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:get/get.dart';
 
-final themeData = Get.find<ThemeController>().themeData.value;
-
 class NativeAdController extends GetxController {
   NativeAd? nativeAd;
   bool nativeAdIsLoaded = false;
   final MasterDataController masterDataController = Get.find();
   final HomeController homeController = Get.find();
+  final themeData = Get.find<ThemeController>().themeData.value;
 
   @override
   void onInit() {
     super.onInit();
     if (masterDataController.configs?.settings.showNativeAd == true) {
       loadAd();
-      startAdRefresher();
+      update();
     }
   }
 
@@ -37,6 +35,7 @@ class NativeAdController extends GetxController {
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
           homeController.isLoadingNativeAdFailed.value = true;
           ad.dispose();
+          update();
         },
         onAdOpened: (Ad ad) => print('$NativeAd onAdOpened.'),
         onAdClosed: (Ad ad) => print('$NativeAd onAdClosed.'),
@@ -50,7 +49,6 @@ class NativeAdController extends GetxController {
           backgroundColor: themeData?.primaryColor,
           style: NativeTemplateFontStyle.bold,
           size: 16.0,
-          
         ),
         secondaryTextStyle: NativeTemplateTextStyle(
           textColor: themeData?.grayTextColor,
@@ -63,13 +61,6 @@ class NativeAdController extends GetxController {
         ),
       ),
     )..load();
-  }
-
-  void startAdRefresher() {
-    Timer.periodic(const Duration(seconds: 30), (_) {
-      loadAd();
-      update();
-    });
   }
 
   @override

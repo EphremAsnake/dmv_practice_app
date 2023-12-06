@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/native_ad_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller_imports.dart';
 
 class TestController extends GetxController {
@@ -22,6 +23,7 @@ class TestController extends GetxController {
   late ScrollController scrollController;
   final HomeController homeController = Get.find();
   final MasterDataController masterDataController = Get.find();
+  final NativeAdController nativeAdController = Get.find();
   Rx<bool> isLastTest = false.obs;
 
   TestController(this.testUrl, this.numberOfQuestionsForState);
@@ -187,23 +189,8 @@ class TestController extends GetxController {
     }
   }
 
-  resetControllerValues() {
-    currentPageIndex.value = 0;
-    choiceId = 0;
-    isAnswerSelected.value = false;
-    wasAnsweredCorrectly.value = false;
-    isSelectingAnswerEnabled.value = true;
-    showAnswer.value = true;
-    showProgress.value = false;
-    results = <Result>[];
-    questionPageNumber.value = 1;
-    showDescription.value = false;
-    showAdCounter.value = 0;
-  }
-
   Future<bool> onWillPop() async {
     if (isLastQuestionPageBackButtonEnabled.value == true) {
-      resetControllerValues();
       return true;
     } else {
       return false;

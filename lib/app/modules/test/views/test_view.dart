@@ -20,10 +20,11 @@ class TestView extends GetView<TestController> {
   final themeData = Get.find<ThemeController>().themeData.value;
   final MasterDataController masterDataController = Get.find();
   final HomeController homeController = Get.find();
-  final NativeAdController nativeAdController = Get.put(NativeAdController());
 
   @override
   Widget build(BuildContext context) {
+    final NativeAdController nativeAdController = Get.find();
+
     return WillPopScope(
       onWillPop: controller.onWillPop,
       child: Scaffold(
