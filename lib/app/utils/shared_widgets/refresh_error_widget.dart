@@ -65,42 +65,51 @@ class RefreshErrorWidget extends StatelessWidget {
               visible: showBackToHomeButton,
               child: Padding(
                 padding: EdgeInsets.symmetric(horizontal: 15.w),
-                child: Container(
-                  decoration: BoxDecoration(
-                    color: themeData?.primaryColor,
-                    border: Border.all(
-                      color: themeData!.primaryColor,
-                    ),
-                    borderRadius: BorderRadius.circular(10),
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 5),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            LineIcon.home(
-                              size: 22.0,
-                              color: themeData?.whiteColor,
-                            ),
-                            const SizedBox(
-                              width: 10,
-                            ),
-                            Text(
-                              "Back To Home",
-                              style: TextStyle(
-                                color: themeData?.whiteColor,
-                                fontWeight: FontWeight.normal,
-                                fontSize: 13.sp,
-                              ),
-                            ),
-                          ],
-                        ),
+                child: GestureDetector(
+                  onTap: () {
+                    Get.offAllNamed(
+                      "/home",
+                      // Remove routes until reaching the /home route
+                      predicate: (route) => route.settings.name == "/home",
+                    );
+                  },
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: themeData?.primaryColor,
+                      border: Border.all(
+                        color: themeData!.primaryColor,
                       ),
-                    ],
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 10.0, horizontal: 5),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              LineIcon.home(
+                                size: 22.0,
+                                color: themeData?.whiteColor,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Text(
+                                "Back To Home",
+                                style: TextStyle(
+                                  color: themeData?.whiteColor,
+                                  fontWeight: FontWeight.normal,
+                                  fontSize: 13.sp,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ),
