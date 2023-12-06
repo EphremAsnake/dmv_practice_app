@@ -69,7 +69,12 @@ class TestView extends GetView<TestController> {
                                           horizontal: 5.0),
                                       child: GestureDetector(
                                         onTap: () {
-                                          Get.back();
+                                          Get.offAllNamed(
+                                            "/home",
+                                            // Remove routes until reaching the /home route
+                                            predicate: (route) =>
+                                                route.settings.name == "/home",
+                                          );
                                         },
                                         child: Container(
                                           width: 50,

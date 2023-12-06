@@ -63,9 +63,9 @@ class NativeAdController extends GetxController {
     )..load();
   }
 
-  @override
-  void onClose() {
-    nativeAd?.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   nativeAd?.dispose();
+  //   super.onClose();
+  // }
 }
