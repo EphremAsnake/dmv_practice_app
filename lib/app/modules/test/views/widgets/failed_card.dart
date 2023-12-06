@@ -25,6 +25,7 @@ class FailedWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 5),
         child: Container(
+          height: 88.h,
           decoration: BoxDecoration(
             boxShadow: [
               BoxShadow(

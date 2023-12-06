@@ -23,6 +23,7 @@ class PassedWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
+        height: 88.h,
         decoration: BoxDecoration(
           boxShadow: [
             BoxShadow(

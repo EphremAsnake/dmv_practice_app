@@ -239,6 +239,7 @@ class TestView extends GetView<TestController> {
               );
             } else if (controller.apiStateHandler.apiState == ApiState.error) {
               return RefreshErrorWidget(
+                showBackToHomeButton: true,
                 assetImage: "assets/images/error.png",
                 errorMessage: controller.apiStateHandler.error.toString(),
                 onRefresh: () async {
@@ -248,6 +249,7 @@ class TestView extends GetView<TestController> {
               );
             } else {
               return RefreshErrorWidget(
+                showBackToHomeButton: true,
                 assetImage: "assets/images/error.png",
                 errorMessage: controller.apiStateHandler.error.toString(),
                 onRefresh: () async {

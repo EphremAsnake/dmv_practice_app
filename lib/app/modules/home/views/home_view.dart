@@ -341,6 +341,7 @@ class HomeView extends GetView<HomeController> {
                               } else if (controller.apiStateHandler.apiState ==
                                   ApiState.error) {
                                 return RefreshErrorWidget(
+                                  showBackToHomeButton: false,
                                   assetImage: "assets/images/error.png",
                                   errorMessage:
                                       controller.apiStateHandler.error!,
@@ -351,6 +352,7 @@ class HomeView extends GetView<HomeController> {
                                 );
                               } else {
                                 return RefreshErrorWidget(
+                                   showBackToHomeButton: false,
                                   assetImage: "assets/images/error.png",
                                   errorMessage:
                                       "No internet connection, please check your internet connection and try again.",
@@ -366,6 +368,7 @@ class HomeView extends GetView<HomeController> {
                                 .cacheStateHandler.apiState ==
                             ApiState.error) {
                           return RefreshErrorWidget(
+                            showBackToHomeButton: false,
                             assetImage: "assets/images/error.png",
                             errorMessage:
                                 "No internet connection, please check your internet connection and try again.",
@@ -378,6 +381,7 @@ class HomeView extends GetView<HomeController> {
                           );
                         } else {
                           return RefreshErrorWidget(
+                             showBackToHomeButton: false,
                             assetImage: "assets/images/error.png",
                             errorMessage:
                                 "No internet connection, please check your internet connection and try again.",

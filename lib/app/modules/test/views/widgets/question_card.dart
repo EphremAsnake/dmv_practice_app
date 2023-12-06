@@ -188,7 +188,7 @@ class QuestionCard extends StatelessWidget {
 
                                   //auto scrolling to bottom
                                   controller.autoScrollBottom();
-
+ 
                                   //showing ad
                                   if (controller.showAdCounter.value ==
                                       masterDataController.configs?.settings

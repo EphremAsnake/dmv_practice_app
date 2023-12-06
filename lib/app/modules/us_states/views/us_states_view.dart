@@ -20,7 +20,7 @@ class UsStatesView extends GetView<UsStatesController> {
         child: GetBuilder<UsStatesController>(
           builder: (controller) {
             if (controller.apiStateHandler.apiState == ApiState.loading) {
-              return  Center(child: CustomProgressIndicator());
+              return Center(child: CustomProgressIndicator());
             } else if (controller.apiStateHandler.apiState ==
                 ApiState.success) {
               return Column(
@@ -159,6 +159,7 @@ class UsStatesView extends GetView<UsStatesController> {
               );
             } else if (controller.apiStateHandler.apiState == ApiState.error) {
               return RefreshErrorWidget(
+                showBackToHomeButton: false,
                 assetImage: "assets/images/error.png",
                 errorMessage: controller.apiStateHandler.error.toString(),
                 onRefresh: () async {
@@ -167,9 +168,11 @@ class UsStatesView extends GetView<UsStatesController> {
                 },
               );
             } else {
-               return RefreshErrorWidget(
+              return RefreshErrorWidget(
+                showBackToHomeButton: false,
                 assetImage: "assets/images/error.png",
-                errorMessage: "No internet connection, please check your internet connection and try again.",
+                errorMessage:
+                    "No internet connection, please check your internet connection and try again.",
                 onRefresh: () async {
                   controller.fetchData();
                   controller.update();

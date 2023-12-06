@@ -19,7 +19,7 @@ class StudySignsView extends GetView<StudySignsController> {
     return WillPopScope(
       onWillPop: () async {
         return false;
-      }, 
+      },
       child: Scaffold(
         backgroundColor: themeData?.backgroundColor,
         body: SafeArea(
@@ -160,6 +160,7 @@ class StudySignsView extends GetView<StudySignsController> {
               } else if (controller.apiStateHandler.apiState ==
                   ApiState.error) {
                 return RefreshErrorWidget(
+                  showBackToHomeButton: true,
                   assetImage: "assets/images/error.png",
                   errorMessage: controller.apiStateHandler.error!,
                   onRefresh: () async {
@@ -169,6 +170,7 @@ class StudySignsView extends GetView<StudySignsController> {
                 );
               } else {
                 return RefreshErrorWidget(
+                  showBackToHomeButton: true,
                   assetImage: "assets/images/error.png",
                   errorMessage: "Unknown Error Occured",
                   onRefresh: () async {

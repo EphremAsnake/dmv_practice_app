@@ -124,6 +124,7 @@ class AboutView extends GetView<AboutController> {
               } else if (masterDataController.apiStateHandler.apiState ==
                   ApiState.error) {
                 return RefreshErrorWidget(
+                  showBackToHomeButton: true,
                   assetImage: "assets/images/error.png",
                   errorMessage: masterDataController.apiStateHandler.error!,
                   onRefresh: () async {
@@ -134,6 +135,7 @@ class AboutView extends GetView<AboutController> {
                 );
               } else {
                 return RefreshErrorWidget(
+                  showBackToHomeButton: true,
                   assetImage: "assets/images/error.png",
                   errorMessage:
                       "No internet connection, please check your internet connection and try again.",
