@@ -20,6 +20,7 @@ class TestView extends GetView<TestController> {
   final themeData = Get.find<ThemeController>().themeData.value;
   final MasterDataController masterDataController = Get.find();
   final HomeController homeController = Get.find();
+  final NativeAdController nativeAdController = Get.find();
 
   @override
   Widget build(BuildContext context) {
@@ -250,6 +251,9 @@ class TestView extends GetView<TestController> {
                 onRefresh: () async {
                   controller.fetchData();
                   controller.update();
+                  // reload the ad
+                  nativeAdController.loadAd();
+                  nativeAdController.update();
                 },
               );
             } else {
@@ -260,6 +264,9 @@ class TestView extends GetView<TestController> {
                 onRefresh: () async {
                   controller.fetchData();
                   controller.update();
+                  // reload the ad
+                  nativeAdController.loadAd();
+                  nativeAdController.update();
                 },
               );
             }

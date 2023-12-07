@@ -30,6 +30,7 @@ class NativeAdController extends GetxController {
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {
           nativeAdIsLoaded = true;
+          homeController.isLoadingNativeAdFailed.value = false;
           update();
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
