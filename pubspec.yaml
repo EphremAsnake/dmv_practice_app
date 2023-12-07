@@ -26,7 +26,6 @@ dependencies:
   flutter_native_splash: ^2.3.6
   expandable_page_view: ^1.0.17
   collection: ^1.17.2
-  audioplayers: ^5.2.1
   flutter_statusbarcolor_ns: ^0.5.0
   share_plus: ^7.2.1
   flutter_launcher_icons: ^0.13.1
@@ -46,10 +45,10 @@ flutter_native_splash:
 flutter_launcher_icons:
   android: true
   ios: true
-  image_path: 'assets/images/app_icon.png'
+  image_path: 'assets/images/new_icon.png'
   background_color_ios: '#016A70'
-  adaptive_icon_background: 'assets/images/icon_bg.png'
-  adaptive_icon_foreground: 'assets/images/app_icon.png'
+  # adaptive_icon_background: 'assets/images/icon_bg.png'
+  # adaptive_icon_foreground: 'assets/images/app_icon.png'
   remove_alpha_ios: true
 
 
@@ -57,4 +56,3 @@ flutter:
   uses-material-design: true
   assets:
     - assets/images/
-    - assets/audio/

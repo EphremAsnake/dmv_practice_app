@@ -256,7 +256,7 @@ void showImageModal(BuildContext context, String url) {
     builder: (BuildContext context) {
       return Dialog(
         backgroundColor: Colors.transparent,
-        child: Image.network(url),
+        child: Image.network(url,fit: BoxFit.cover),
       );
     },
   );

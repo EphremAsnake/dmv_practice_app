@@ -10,6 +10,5 @@ export 'package:drivingexam/app/modules/test/controllers/test_http_attribuites.d
 export 'package:drivingexam/app/modules/test/helper/test_helper.dart';
 export 'package:drivingexam/app/modules/test/views/result_page.dart';
 export 'package:drivingexam/app/utils/helper/api_state_handler.dart';
-export 'package:drivingexam/app/utils/helper/sound_service.dart';
 export 'package:flutter/material.dart';
 export 'package:get/get.dart';

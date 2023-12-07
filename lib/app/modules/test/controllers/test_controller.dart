@@ -34,18 +34,10 @@ class TestController extends GetxController {
   @override
   void onInit() {
     fetchData();
-    SoundService.instance.loadSounds();
     scrollController = ScrollController();
     confettiController = ConfettiController();
     super.onInit();
   }
-
-  // @override
-  // void onClose() {
-  //   confettiController.dispose();
-  //   scrollController.dispose();
-  //   super.onClose();
-  // }
 
   void playConfetti() {
     confettiController.play();
