@@ -30,7 +30,11 @@ class PDFReader extends StatelessWidget {
           icon: Icon(Icons.chevron_left,
               color: themeData?.whiteColor, size: 25.sp),
           onPressed: () {
-            Get.back();
+            Get.offAllNamed(
+              "/home",
+              // Remove routes until reaching the /home route
+              predicate: (route) => route.settings.name == "/home",
+            );
           },
         ),
       ),

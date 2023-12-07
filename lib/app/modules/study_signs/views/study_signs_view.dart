@@ -6,6 +6,7 @@ import 'package:drivingexam/app/utils/keys/keys.dart';
 import 'package:drivingexam/app/utils/shared_widgets/custom_progress_indicator.dart';
 import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:drivingexam/app/utils/shared_widgets/search_bar.dart';
+import 'package:drivingexam/app/utils/shared_widgets/search_results_not_found.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -49,7 +50,12 @@ class StudySignsView extends GetView<StudySignsController> {
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: GestureDetector(
                               onTap: () {
-                                Get.back();
+                                Get.offAllNamed(
+                                  "/home",
+                                  // Remove routes until reaching the /home route
+                                  predicate: (route) =>
+                                      route.settings.name == "/home",
+                                );
                               },
                               child: Container(
                                 width: 50,
@@ -99,6 +105,16 @@ class StudySignsView extends GetView<StudySignsController> {
                       ),
                       const SizedBox(
                         height: 5,
+                      ),
+                      Visibility(
+                        visible:
+                            controller.filteredSignsAndDescriptions.isEmpty,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(
+                              horizontal: 5, vertical: 10),
+                          child: SearchResultsNotFoundCard(
+                              message: 'Please retype traffic sign name again'),
+                        ),
                       ),
                       Expanded(
                         child: GridView.builder(
