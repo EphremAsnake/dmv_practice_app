@@ -24,6 +24,7 @@ class StudySignsController extends GetxController {
   final apiStateHandler = ApiStateHandler<SignsStudy>();
   var httpService = Get.find<HttpService>();
   CacheStorageService cacheStorageService = CacheStorageService();
+  List<SignsAndDescription> filteredSignsAndDescriptions = [];
 
   void fetchData() async {
     apiStateHandler.setLoading();
@@ -38,6 +39,8 @@ class StudySignsController extends GetxController {
       cacheStorageService.saveData(
           Keys.studySignsCacheKey, signsStudy!.toJson());
       apiStateHandler.setSuccess(signsStudy!);
+      filteredSignsAndDescriptions =
+          signsStudy!.signsStudy.signsAndDescriptions;
       update();
     } catch (ex) {
       // Update state with error message
@@ -57,6 +60,8 @@ class StudySignsController extends GetxController {
         signsStudy = SignsStudy.fromJson(cachedData);
       }
       apiStateHandler.setSuccess(signsStudy!);
+      filteredSignsAndDescriptions =
+          signsStudy!.signsStudy.signsAndDescriptions;
       update();
     } catch (ex) {
       // Update state with error message
@@ -64,5 +69,18 @@ class StudySignsController extends GetxController {
       apiStateHandler.setError(errorMessage);
       update();
     }
+  }
+
+  void search(String value) {
+    filteredSignsAndDescriptions = apiStateHandler
+        .data!.signsStudy.signsAndDescriptions
+        .where((element) => element.name.toLowerCase().contains(value))
+        .toList();
+
+    if (filteredSignsAndDescriptions.isEmpty && value.isEmpty) {
+      filteredSignsAndDescriptions
+          .addAll(apiStateHandler.data!.signsStudy.signsAndDescriptions);
+    }
+    update();
   }
 }
