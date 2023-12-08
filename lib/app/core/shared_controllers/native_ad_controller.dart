@@ -1,7 +1,6 @@
 import 'dart:io';
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
-import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:get/get.dart';
 
@@ -9,32 +8,41 @@ class NativeAdController extends GetxController {
   NativeAd? nativeAd;
   bool nativeAdIsLoaded = false;
   final MasterDataController masterDataController = Get.find();
-  final HomeController homeController = Get.find();
+  RxBool isLoadingNativeAdFailed = false.obs;
+  RxBool isAdReloadRequested = false.obs;
   final themeData = Get.find<ThemeController>().themeData.value;
 
   @override
   void onInit() {
     super.onInit();
-    if (masterDataController.configs?.settings.showNativeAd == true) {
+    if (masterDataController.configs?.settings.showNativeAd == true &&
+        isAdReloadRequested.value == false) {
       loadAd();
-      update();
     }
   }
 
-  loadAd() {
-    nativeAd = NativeAd(
+  void loadAd() {
+    nativeAd = createNativeAd();
+    nativeAd?.load();
+    update();
+  }
+
+  NativeAd createNativeAd() {
+    return NativeAd(
       adUnitId: Platform.isAndroid
           ? masterDataController.configs!.settings.androidNativeAdId
           : masterDataController.configs!.settings.iosNativeAdId,
-      request: const AdRequest(),
+      request: const AdManagerAdRequest(),
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {
           nativeAdIsLoaded = true;
-          homeController.isLoadingNativeAdFailed.value = false;
+          isLoadingNativeAdFailed.value = false;
+          print('Ad loaded successfully');
           update();
         },
         onAdFailedToLoad: (Ad ad, LoadAdError error) {
-          homeController.isLoadingNativeAdFailed.value = true;
+          isLoadingNativeAdFailed.value = true;
+          print('Ad failed to load: $error');
           ad.dispose();
           update();
         },
@@ -61,12 +69,17 @@ class NativeAdController extends GetxController {
           textColor: themeData?.blackColor,
         ),
       ),
-    )..load();
+    );
   }
 
-  // @override
-  // void onClose() {
-  //   nativeAd?.dispose();
-  //   super.onClose();
-  // }
+  Future<void> reloadAd() async {
+    if (nativeAd != null) {
+      nativeAd!.dispose();
+    }
+    isLoadingNativeAdFailed.value = false;
+    nativeAdIsLoaded = false;
+    if (masterDataController.configs?.settings.showNativeAd == true) {
+      loadAd();
+    }
+  }
 }

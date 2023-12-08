@@ -24,6 +24,7 @@ class UsStatesController extends GetxController {
   State? state;
   RxInt selectedCardIndex = RxInt(-1);
   CacheStorageService cacheStorageService = CacheStorageService();
+  RxList<State> filteredStates = <State>[].obs;
 
   final apiStateHandler = ApiStateHandler<UsStates>();
   final cacheStateHandler = ApiStateHandler<State>();
@@ -41,6 +42,7 @@ class UsStatesController extends GetxController {
       //caching data
       cacheStorageService.saveData(
           Keys.allUsStatesCacheKey, usStates!.toJson());
+      filteredStates.value = usStates!.states;
       // Update state with success and response data
       apiStateHandler.setSuccess(usStates!);
       update();
@@ -62,6 +64,7 @@ class UsStatesController extends GetxController {
         usStates = UsStates.fromJson(cachedData);
       }
       usStates?.states.sort((a, b) => a.name.compareTo(b.name));
+      filteredStates.value = usStates!.states;
       // Update state with success and response data
       apiStateHandler.setSuccess(usStates!);
       update();
@@ -81,7 +84,7 @@ class UsStatesController extends GetxController {
   //get master data from API
   void savedStateData() async {
     try {
-      State state = usStates!.states[selectedCardIndex.value];
+      State state = filteredStates[selectedCardIndex.value];
       //caching the data
       cacheStorageService.saveData(Keys.savedStateCacheKey, state.toJson());
       update();
@@ -98,6 +101,7 @@ class UsStatesController extends GetxController {
       if (cachedData != null) {
         state = State.fromJson(cachedData);
       }
+
       // Update state with success and response data
       cacheStateHandler.setSuccess(state!);
       update();
@@ -106,5 +110,17 @@ class UsStatesController extends GetxController {
       cacheStateHandler.setError(error.toString());
       update();
     }
+  }
+
+  //search state
+  void searchState(String value) {
+    filteredStates.value = apiStateHandler.data!.states
+        .where((element) => element.name.toLowerCase().contains(value))
+        .toList();
+
+    if (filteredStates.isEmpty && value.isEmpty) {
+      filteredStates.addAll(apiStateHandler.data!.states);
+    }
+    update();
   }
 }

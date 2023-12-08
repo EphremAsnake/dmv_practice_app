@@ -23,7 +23,7 @@ class CustomSearchBar extends StatelessWidget {
           // focusNode: FocusNode(),
           controller: controller.controller,
           style: TextStyle(
-            fontSize: SizerUtil.deviceType == DeviceType.mobile ? 9.sp : 7.sp,
+            fontSize: SizerUtil.deviceType == DeviceType.mobile ? 11.sp : 11.sp,
             color: themeData!.primaryColor,
           ),
           cursorColor: Theme.of(context).primaryColor,
@@ -49,17 +49,19 @@ class CustomSearchBar extends StatelessWidget {
             hintText: controller.defaultSearchLabel,
             hintStyle: TextStyle(
               color: themeData!.blackColor,
-              fontSize: SizerUtil.deviceType == DeviceType.mobile ? 9.sp : 7.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.mobile ? 11.sp : 11.sp,
             ),
             labelText: controller.defaultSearchLabel,
             labelStyle: TextStyle(
               color: themeData!.blackColor,
-              fontSize: SizerUtil.deviceType == DeviceType.mobile ? 9.sp : 7.sp,
+              fontSize:
+                  SizerUtil.deviceType == DeviceType.mobile ? 11.sp : 11.sp,
             ),
             border: InputBorder.none,
             prefixIcon: Icon(
               Icons.search,
-              size: SizerUtil.deviceType == DeviceType.mobile ? 15.sp : 10.sp,
+              size: SizerUtil.deviceType == DeviceType.mobile ? 16.sp : 16.sp,
               color: themeData!.grayTextColor,
             ),
             suffixIcon: Visibility(
@@ -69,7 +71,7 @@ class CustomSearchBar extends StatelessWidget {
                 icon: Icon(
                   Icons.clear,
                   size:
-                      SizerUtil.deviceType == DeviceType.mobile ? 15.sp : 13.sp,
+                      SizerUtil.deviceType == DeviceType.mobile ? 11.sp : 11.sp,
                   color: themeData!.grayTextColor,
                 ),
               ),
