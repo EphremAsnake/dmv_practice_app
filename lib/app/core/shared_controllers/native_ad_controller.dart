@@ -15,7 +15,7 @@ class NativeAdController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-    if (masterDataController.configs?.settings.showNativeAd == true &&
+    if (masterDataController.configs?.adSettings.showNativeAd == true &&
         isAdReloadRequested.value == false) {
       loadAd();
     }
@@ -30,8 +30,8 @@ class NativeAdController extends GetxController {
   NativeAd createNativeAd() {
     return NativeAd(
       adUnitId: Platform.isAndroid
-          ? masterDataController.configs!.settings.androidNativeAdId
-          : masterDataController.configs!.settings.iosNativeAdId,
+          ? masterDataController.configs!.adSettings.androidNativeAdId
+          : masterDataController.configs!.adSettings.iosNativeAdId,
       request: const AdManagerAdRequest(),
       listener: NativeAdListener(
         onAdLoaded: (Ad ad) {
@@ -78,7 +78,7 @@ class NativeAdController extends GetxController {
     }
     isLoadingNativeAdFailed.value = false;
     nativeAdIsLoaded = false;
-    if (masterDataController.configs?.settings.showNativeAd == true) {
+    if (masterDataController.configs?.adSettings.showNativeAd == true) {
       loadAd();
     }
   }

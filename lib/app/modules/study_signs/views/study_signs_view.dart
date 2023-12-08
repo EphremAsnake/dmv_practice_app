@@ -50,12 +50,7 @@ class StudySignsView extends GetView<StudySignsController> {
                                 const EdgeInsets.symmetric(horizontal: 5.0),
                             child: GestureDetector(
                               onTap: () {
-                                Get.offAllNamed(
-                                  "/home",
-                                  // Remove routes until reaching the /home route
-                                  predicate: (route) =>
-                                      route.settings.name == "/home",
-                                );
+                                Get.back();
                               },
                               child: Container(
                                 width: 50,
@@ -142,17 +137,28 @@ class StudySignsView extends GetView<StudySignsController> {
                                     borderRadius: BorderRadius.circular(10),
                                     boxShadow: [
                                       BoxShadow(
-                                        color: themeData!.shadowColor
-                                            .withOpacity(0.5),
+                                        color: themeData!.shadowColor,
                                         spreadRadius: 2,
-                                        blurRadius: 1,
+                                        blurRadius: 10,
                                         offset: const Offset(0,
-                                            1), // horizontal, vertical offset
+                                            8), // horizontal, vertical offset
+                                      ),
+                                      BoxShadow(
+                                        color: themeData!.shadowColor,
+                                        spreadRadius: 2,
+                                        blurRadius: 10,
+                                        offset: const Offset(0,
+                                            -8), // horizontal, vertical offset
                                       ),
                                     ],
                                   ),
                                   child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.center,
                                     children: [
+                                      const SizedBox(height: 5),
                                       Center(
                                         child: Padding(
                                             padding: const EdgeInsets.all(5.0),
@@ -174,6 +180,7 @@ class StudySignsView extends GetView<StudySignsController> {
                                           ),
                                         ),
                                       ),
+                                      const SizedBox(height: 5),
                                     ],
                                   ),
                                 ),

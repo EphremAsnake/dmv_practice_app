@@ -191,9 +191,9 @@ class QuestionCard extends StatelessWidget {
  
                                   //showing ad
                                   if (controller.showAdCounter.value ==
-                                      masterDataController.configs?.settings
+                                      masterDataController.configs?.adSettings
                                           .interstitialAdFrequency) {
-                                    if (masterDataController.configs?.settings
+                                    if (masterDataController.configs?.adSettings
                                             .showInterstitialAd ==
                                         true) {
                                       await InterstitialAdManager()

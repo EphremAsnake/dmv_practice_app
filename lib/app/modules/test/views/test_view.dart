@@ -46,7 +46,7 @@ class TestView extends GetView<TestController> {
 
               return Obx(
                 () => SafeArea(
-                  child: masterDataController.configs?.settings.showNativeAd ==
+                  child: masterDataController.configs?.adSettings.showNativeAd ==
                               false ||
                           nativeAdController.isLoadingNativeAdFailed.value ==
                               true
@@ -137,7 +137,7 @@ class TestView extends GetView<TestController> {
                                         const NeverScrollableScrollPhysics(), // Disable swiping between pages
                                   ),
                                   if (masterDataController
-                                          .configs?.settings.showNativeAd ==
+                                          .configs?.adSettings.showNativeAd ==
                                       true)
                                     GetBuilder<NativeAdController>(
                                       init: nativeAdController,
@@ -232,7 +232,7 @@ class TestView extends GetView<TestController> {
                                   const NeverScrollableScrollPhysics(), // Disable swiping between pages
                             ),
                             if (masterDataController
-                                    .configs?.settings.showNativeAd ==
+                                    .configs?.adSettings.showNativeAd ==
                                 true)
                               GetBuilder<NativeAdController>(
                                 init: nativeAdController,

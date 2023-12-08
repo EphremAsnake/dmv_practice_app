@@ -5,14 +5,14 @@ Configs configsFromJson(String str) => Configs.fromJson(json.decode(str));
 String configsToJson(Configs data) => json.encode(data.toJson());
 
 class Configs {
-  Settings settings;
+  AdSettings adSettings;
   AppConfig appConfig;
   AppRateShare appRateShare;
   HouseAd houseAd;
   String aboutApp;
 
   Configs({
-    required this.settings,
+    required this.adSettings,
     required this.appConfig,
     required this.houseAd,
     required this.aboutApp,
@@ -20,14 +20,14 @@ class Configs {
   });
 
   factory Configs.fromJson(Map<String, dynamic> json) => Configs(
-      settings: Settings.fromJson(json["settings"]),
+      adSettings: AdSettings.fromJson(json["ad_settings"]),
       appConfig: AppConfig.fromJson(json["app_config"]),
       houseAd: HouseAd.fromJson(json["house_ad"]),
       appRateShare: AppRateShare.fromJson(json["app_rate_share"]),
       aboutApp: json["about_app"]);
 
   Map<String, dynamic> toJson() => {
-        "settings": settings.toJson(),
+        "ad_settings": adSettings.toJson(),
         "app_config": appConfig.toJson(),
         "house_ad": houseAd.toJson(),
         "about_app": aboutApp,
@@ -151,7 +151,7 @@ class HouseAd {
       };
 }
 
-class Settings {
+class AdSettings {
   String androidInterstitialAdId;
   String androidNativeAdId;
   String iosInterstitialAdId;
@@ -160,7 +160,7 @@ class Settings {
   bool showInterstitialAd;
   bool showNativeAd;
 
-  Settings({
+  AdSettings({
     required this.showNativeAd,
     required this.showInterstitialAd,
     required this.androidInterstitialAdId,
@@ -170,7 +170,7 @@ class Settings {
     required this.interstitialAdFrequency,
   });
 
-  factory Settings.fromJson(Map<String, dynamic> json) => Settings(
+  factory AdSettings.fromJson(Map<String, dynamic> json) => AdSettings(
         androidInterstitialAdId: json["android_interstitial_ad_id"],
         androidNativeAdId: json["android_native_ad_id"],
         iosInterstitialAdId: json["ios_interstitial_ad_id"],

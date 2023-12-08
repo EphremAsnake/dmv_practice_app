@@ -18,8 +18,8 @@ class InterstitialAdManager {
   void loadAd() {
     final MasterDataController masterDataController = Get.find();
     final adUnitId = Platform.isAndroid
-        ? masterDataController.configs!.settings.androidInterstitialAdId
-        : masterDataController.configs!.settings.iosInterstitialAdId;
+        ? masterDataController.configs!.adSettings.androidInterstitialAdId
+        : masterDataController.configs!.adSettings.iosInterstitialAdId;
     InterstitialAd.load(
       adUnitId: adUnitId,
       request: const AdRequest(),

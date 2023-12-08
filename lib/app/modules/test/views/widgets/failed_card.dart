@@ -37,12 +37,11 @@ class FailedWidget extends StatelessWidget {
             ],
           ),
           width: MediaQuery.of(context).size.width,
-          child: SingleChildScrollView(
-            child: FractionallySizedBox(
-              heightFactor: 0.9,
-              child: Card(
-                elevation: 0,
-                child: Column(
+          child: Card(
+            elevation: 0,
+            child: ListView(
+              children: [
+                Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
@@ -85,8 +84,8 @@ class FailedWidget extends StatelessWidget {
                         ),
                       ),
                     ),
-                    const SizedBox(
-                      height: 15,
+                    SizedBox(
+                      height: 6.h,
                     ),
                     GestureDetector(
                       onTap: () {
@@ -287,7 +286,7 @@ class FailedWidget extends StatelessWidget {
                     ),
                   ],
                 ),
-              ),
+              ],
             ),
           ),
         ),

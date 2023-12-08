@@ -114,7 +114,7 @@ class TestController extends GetxController {
       }
 
       //incrementing show ad counter
-      if (masterDataController.configs?.settings.showInterstitialAd == true) {
+      if (masterDataController.configs?.adSettings.showInterstitialAd == true) {
         showAdCounter.value = showAdCounter.value + 1;
       }
 
@@ -174,7 +174,7 @@ class TestController extends GetxController {
     }
 
     //decrementing show ad counter
-    if (masterDataController.configs?.settings.showInterstitialAd == true) {
+    if (masterDataController.configs?.adSettings.showInterstitialAd == true) {
       if (showAdCounter.value > 1) {
         showAdCounter.value = showAdCounter.value - 1;
       }
