@@ -17,48 +17,53 @@ class PDFReader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final PDFController controller = Get.put(PDFController(pdfPath));
-    return Scaffold(
-      appBar: AppBar(
-        automaticallyImplyLeading: false,
-        backgroundColor: themeData?.primaryColor,
-        elevation: 0,
-        title: Text(
-          pdfTitle,
-          style: TextStyle(color: themeData?.whiteColor),
+    return WillPopScope(
+      onWillPop: () async {
+        return false;
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          automaticallyImplyLeading: false,
+          backgroundColor: themeData?.primaryColor,
+          elevation: 0,
+          title: Text(
+            pdfTitle,
+            style: TextStyle(color: themeData?.whiteColor),
+          ),
+          leading: IconButton(
+            icon: Icon(Icons.chevron_left,
+                color: themeData?.whiteColor, size: 25.sp),
+            onPressed: () {
+              Get.back();
+            },
+          ),
         ),
-        leading: IconButton(
-          icon: Icon(Icons.chevron_left,
-              color: themeData?.whiteColor, size: 25.sp),
-          onPressed: () {
-            Get.back();
+        body: GetBuilder<PDFController>(
+          init: controller,
+          initState: (_) {},
+          builder: (_) {
+            if (controller.isLoading.value == true) {
+              return Center(child: CustomProgressIndicator());
+            } else {
+              if (controller.document != null) {
+                return PDFViewer(
+                  scrollDirection: Axis.vertical,
+                  document: controller.document!,
+                  lazyLoad: false,
+                  zoomSteps: 1,
+                  numberPickerConfirmWidget: const Text(
+                    "Confirm",
+                  ),
+                  pickerButtonColor: themeData?.primaryColor,
+                  indicatorBackground: themeData!.primaryColor,
+                  progressIndicator: CustomProgressIndicator(),
+                );
+              } else {
+                return const SizedBox.shrink();
+              }
+            }
           },
         ),
-      ),
-      body: GetBuilder<PDFController>(
-        init: controller,
-        initState: (_) {},
-        builder: (_) {
-          if (controller.isLoading.value == true) {
-            return Center(child: CustomProgressIndicator());
-          } else {
-            if (controller.document != null) {
-              return PDFViewer(
-                scrollDirection: Axis.vertical,
-                document: controller.document!,
-                lazyLoad: false,
-                zoomSteps: 1,
-                numberPickerConfirmWidget: const Text(
-                  "Confirm",
-                ),
-                pickerButtonColor: themeData?.primaryColor,
-                indicatorBackground: themeData!.primaryColor,
-                progressIndicator: CustomProgressIndicator(),
-              );
-            } else {
-              return const SizedBox.shrink();
-            }
-          }
-        },
       ),
     );
   }

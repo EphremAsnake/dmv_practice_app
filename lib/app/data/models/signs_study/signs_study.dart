@@ -37,27 +37,23 @@ class SignsStudyClass {
 }
 
 class SignsAndDescription {
-    int id;
     String image;
     String name;
     String description;
 
     SignsAndDescription({
-        required this.id,
         required this.image,
         required this.name,
         required this.description,
     });
 
     factory SignsAndDescription.fromJson(Map<String, dynamic> json) => SignsAndDescription(
-        id: json["id"],
         image: json["image"],
         name: json["name"],
         description: json["description"],
     );
 
     Map<String, dynamic> toJson() => {
-        "id": id,
         "image": image,
         "name": name,
         "description": description,

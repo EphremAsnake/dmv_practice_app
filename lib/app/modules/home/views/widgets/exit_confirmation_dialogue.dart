@@ -11,7 +11,7 @@ Future<void> showExitConfirmationDialog(BuildContext context) async {
       return AlertDialog(
         title: const Text('Exit App?'),
         content: const Text('Are you sure you want to exit the app?'),
-        actionsPadding: const EdgeInsets.all(0),
+        actionsPadding: const EdgeInsets.symmetric(horizontal: 10,vertical:0),
         actions: <Widget>[
           TextButton(
             onPressed: () {
