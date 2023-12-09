@@ -5,7 +5,6 @@ import 'package:drivingexam/app/data/models/test/test.dart';
 import 'package:drivingexam/app/modules/home/controllers/home_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller.dart';
 import 'package:drivingexam/app/modules/test/helper/test_helper.dart';
-import 'package:drivingexam/app/utils/helper/Interstitial_ad_manager.dart';
 import 'package:drivingexam/app/utils/keys/keys.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -188,22 +187,6 @@ class QuestionCard extends StatelessWidget {
 
                                   //auto scrolling to bottom
                                   controller.autoScrollBottom();
- 
-                                  //showing ad
-                                  if (controller.showAdCounter.value ==
-                                      masterDataController.configs?.adSettings
-                                          .interstitialAdFrequency) {
-                                    if (masterDataController.configs?.adSettings
-                                            .showInterstitialAd ==
-                                        true) {
-                                      await InterstitialAdManager()
-                                          .showInterstitialAd();
-                                      //loading ad for next use
-                                      InterstitialAdManager().loadAd();
-                                      //reset AD counter value
-                                      controller.showAdCounter.value = 0;
-                                    }
-                                  }
 
                                   //
                                   controller.update();

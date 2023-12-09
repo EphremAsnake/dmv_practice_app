@@ -1,4 +1,3 @@
-import 'package:drivingexam/app/core/shared_controllers/native_ad_controller.dart';
 import 'package:drivingexam/app/modules/test/controllers/test_controller_imports.dart';
 
 class TestController extends GetxController {
@@ -16,14 +15,12 @@ class TestController extends GetxController {
   Rx<bool> showDescription = false.obs;
   TestHelper testHelper = TestHelper();
   String testUrl;
-  Rx<int> showAdCounter = 1.obs;
   Rx<bool> isLastQuestionPageBackButtonEnabled = false.obs;
   Question? question;
   int numberOfQuestionsForState = 0;
   late ScrollController scrollController;
   final HomeController homeController = Get.find();
   final MasterDataController masterDataController = Get.find();
-  final NativeAdController nativeAdController = Get.find();
   Rx<bool> isLastTest = false.obs;
 
   TestController(this.testUrl, this.numberOfQuestionsForState);
@@ -112,12 +109,6 @@ class TestController extends GetxController {
       if (questionPageNumber.value <= test!.questions.length) {
         questionPageNumber.value = questionPageNumber.value + 1;
       }
-
-      //incrementing show ad counter
-      if (masterDataController.configs?.adSettings.showInterstitialAd == true) {
-        showAdCounter.value = showAdCounter.value + 1;
-      }
-
       //setting selected question value to false
       for (int i = 0; i < question!.choices.length; i++) {
         question?.choices[i].selected = false;
@@ -173,12 +164,6 @@ class TestController extends GetxController {
       questionPageNumber.value = questionPageNumber.value - 1;
     }
 
-    //decrementing show ad counter
-    if (masterDataController.configs?.adSettings.showInterstitialAd == true) {
-      if (showAdCounter.value > 1) {
-        showAdCounter.value = showAdCounter.value - 1;
-      }
-    }
   }
 
   Future<bool> onWillPop() async {

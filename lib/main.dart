@@ -1,4 +1,3 @@
-import 'dart:async';
 import 'package:drivingexam/app/core/core_dependency.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/utils/helper/inital_route_determiner.dart';
@@ -8,14 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 import 'package:get/get.dart';
-import 'package:google_mobile_ads/google_mobile_ads.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sizer/sizer.dart';
 import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  unawaited(MobileAds.instance.initialize());
   final internetConnectivity = InternetConnectivity();
   await internetConnectivity.initialize();
   await Hive.initFlutter();

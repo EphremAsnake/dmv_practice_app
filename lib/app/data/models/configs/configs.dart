@@ -5,14 +5,12 @@ Configs configsFromJson(String str) => Configs.fromJson(json.decode(str));
 String configsToJson(Configs data) => json.encode(data.toJson());
 
 class Configs {
-  AdSettings adSettings;
   AppConfig appConfig;
   AppRateShare appRateShare;
   HouseAd houseAd;
   String aboutApp;
 
   Configs({
-    required this.adSettings,
     required this.appConfig,
     required this.houseAd,
     required this.aboutApp,
@@ -20,14 +18,12 @@ class Configs {
   });
 
   factory Configs.fromJson(Map<String, dynamic> json) => Configs(
-      adSettings: AdSettings.fromJson(json["ad_settings"]),
       appConfig: AppConfig.fromJson(json["app_config"]),
       houseAd: HouseAd.fromJson(json["house_ad"]),
       appRateShare: AppRateShare.fromJson(json["app_rate_share"]),
       aboutApp: json["about_app"]);
 
   Map<String, dynamic> toJson() => {
-        "ad_settings": adSettings.toJson(),
         "app_config": appConfig.toJson(),
         "house_ad": houseAd.toJson(),
         "about_app": aboutApp,
@@ -128,46 +124,6 @@ class HouseAd {
         "show": show,
         "ios_url": iosUrl,
         "android_url": androidUrl,
-      };
-}
-
-class AdSettings {
-  String androidInterstitialAdId;
-  String androidNativeAdId;
-  String iosInterstitialAdId;
-  String iosNativeAdId;
-  int interstitialAdFrequency;
-  bool showInterstitialAd;
-  bool showNativeAd;
-
-  AdSettings({
-    required this.showNativeAd,
-    required this.showInterstitialAd,
-    required this.androidInterstitialAdId,
-    required this.androidNativeAdId,
-    required this.iosInterstitialAdId,
-    required this.iosNativeAdId,
-    required this.interstitialAdFrequency,
-  });
-
-  factory AdSettings.fromJson(Map<String, dynamic> json) => AdSettings(
-        androidInterstitialAdId: json["android_interstitial_ad_id"],
-        androidNativeAdId: json["android_native_ad_id"],
-        iosInterstitialAdId: json["ios_interstitial_ad_id"],
-        iosNativeAdId: json["ios_native_ad_id"],
-        interstitialAdFrequency: json["interstitial_ad_frequency"],
-        showInterstitialAd: json["show_interstitial_ad"],
-        showNativeAd: json["show_native_ad"],
-      );
-
-  Map<String, dynamic> toJson() => {
-        "android_interstitial_ad_id": androidInterstitialAdId,
-        "android_native_ad_id": androidNativeAdId,
-        "ios_interstitial_ad_id": iosInterstitialAdId,
-        "ios_native_ad_id": iosNativeAdId,
-        "interstitial_ad_frequency": interstitialAdFrequency,
-        "show_interstitial_ad": showInterstitialAd,
-        "show_native_ad": showNativeAd,
       };
 }
 

@@ -1,4 +1,3 @@
-import 'package:drivingexam/app/core/shared_controllers/native_ad_controller.dart';
 import 'package:get/get.dart';
 
 import '../controllers/test_controller.dart';
@@ -9,7 +8,6 @@ class TestBinding extends Bindings {
     Map<String, dynamic> arguments = Get.arguments;
     String testUrl = arguments['test_url'];
     int numberOfQuestions = arguments['number_of_questions'];
-    Get.lazyPut(() => NativeAdController());
     Get.lazyPut<TestController>(
       () => TestController(testUrl, numberOfQuestions),
     );

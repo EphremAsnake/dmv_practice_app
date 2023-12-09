@@ -5,7 +5,6 @@ export 'package:drivingexam/app/core/http_exeption_handler/http_exception_handle
 export 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 export 'package:drivingexam/app/data/models/test/all_test_list.dart';
 export 'package:drivingexam/app/modules/home/controllers/all_tests_http_attribuites.dart';
-export 'package:drivingexam/app/utils/helper/Interstitial_ad_manager.dart';
 export 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 export 'package:drivingexam/app/utils/helper/internet_connectivity.dart';
 export 'package:drivingexam/app/utils/keys/keys.dart';

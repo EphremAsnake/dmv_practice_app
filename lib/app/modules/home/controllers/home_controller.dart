@@ -29,9 +29,6 @@ class HomeController extends GetxController {
     } else {
       fetchFromCacheData();
     }
-    if (masterDataController.configs?.adSettings.showInterstitialAd == true) {
-      InterstitialAdManager().loadAd();
-    }
     super.onInit();
   }
 
