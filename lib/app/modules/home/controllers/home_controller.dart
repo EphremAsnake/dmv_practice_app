@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:drivingexam/app/modules/home/controllers/home_controller_imports.dart';
+import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:share_plus/share_plus.dart';
 
 class HomeController extends GetxController {
@@ -8,7 +9,7 @@ class HomeController extends GetxController {
   var httpService = Get.find<HttpService>();
   Rx<bool> isAutoScrollingEnabled = false.obs;
   Rx<bool> isRandomizeQuestions = false.obs;
- 
+  UsStatesController usStatesController = Get.find();
 
   static final _storage = Hive.box('driving_exam');
   CacheStorageService cacheStorageService = CacheStorageService();
@@ -17,8 +18,13 @@ class HomeController extends GetxController {
   @override
   void onInit() {
     isAutoScrollingEnabled.value = _storage.get(Keys.autoScrollingCacheKey);
-    if (InternetConnectivity().isConnected == true) {
-      fetchData();
+    if (usStatesController.isHomePageInsertedIntoRoute.value == false) {
+      usStatesController.isHomePageInsertedIntoRoute.value = true;
+      if (InternetConnectivity().isConnected == true) {
+        fetchData();
+      } else {
+        fetchFromCacheData();
+      }
     } else {
       fetchFromCacheData();
     }

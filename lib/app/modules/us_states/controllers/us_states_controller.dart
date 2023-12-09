@@ -25,6 +25,7 @@ class UsStatesController extends GetxController {
   RxInt selectedCardIndex = RxInt(-1);
   CacheStorageService cacheStorageService = CacheStorageService();
   RxList<State> filteredStates = <State>[].obs;
+  Rx<bool> isHomePageInsertedIntoRoute = false.obs;
 
   final apiStateHandler = ApiStateHandler<UsStates>();
   final cacheStateHandler = ApiStateHandler<State>();

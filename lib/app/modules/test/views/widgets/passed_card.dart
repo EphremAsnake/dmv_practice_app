@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:confetti/confetti.dart';
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
@@ -94,7 +96,7 @@ class PassedWidget extends StatelessWidget {
                       ],
                     ),
                   ),
-                   SizedBox(
+                  SizedBox(
                     height: 6.h,
                   ),
                   GestureDetector(
@@ -170,7 +172,8 @@ class PassedWidget extends StatelessWidget {
                     onTap: () {
                       Get.offAndToNamed("/test", arguments: {
                         'test_url': controller.testUrl,
-                        'number_of_questions': controller.numberOfQuestionsForState
+                        'number_of_questions':
+                            controller.numberOfQuestionsForState
                       });
                     },
                     child: Container(
@@ -247,11 +250,15 @@ class PassedWidget extends StatelessWidget {
                   ),
                   GestureDetector(
                     onTap: () {
-                      HomeHelpers().openStores(
-                          androidAppId:
-                              masterDataController.configs!.appRateShare.androidId,
-                          iOSAppId:
-                              masterDataController.configs!.appRateShare.iosId);
+                      if (Platform.isAndroid) {
+                        HomeHelpers().openStores(
+                          androidAppId: masterDataController
+                              .configs!.appRateShare.androidId,
+                        );
+                      } else if (Platform.isIOS) {
+                        HomeHelpers().launchWebUrl(
+                            "https://apps.apple.com/app/id${masterDataController.configs!.appRateShare.iosId}?action=write-review");
+                      }
                     },
                     child: Container(
                       width: 70.w,

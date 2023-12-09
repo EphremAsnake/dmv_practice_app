@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:drivingexam/app/core/shared_controllers/master_data_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/home/helpers/home_helpers.dart';
@@ -246,11 +248,15 @@ class FailedWidget extends StatelessWidget {
                     ),
                     GestureDetector(
                       onTap: () {
-                        HomeHelpers().openStores(
+                        if (Platform.isAndroid) {
+                          HomeHelpers().openStores(
                             androidAppId: masterDataController
                                 .configs!.appRateShare.androidId,
-                            iOSAppId: masterDataController
-                                .configs!.appRateShare.iosId);
+                          );
+                        } else if (Platform.isIOS) {
+                          HomeHelpers().launchWebUrl(
+                              "https://apps.apple.com/app/id${masterDataController.configs!.appRateShare.iosId}?action=write-review");
+                        }
                       },
                       child: Container(
                         width: 70.w,
