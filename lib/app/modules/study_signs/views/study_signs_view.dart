@@ -183,7 +183,7 @@ class StudySignsView extends GetView<StudySignsController> {
                                               color: themeData?.blackColor,
                                               fontSize: 17,
                                             ),
-                                            maxLines: 2,
+                                            maxLines: 1,
                                             overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
