@@ -43,13 +43,6 @@ void main() async {
     const Color(0xFF016A70),
   );
 
-  //set the status bar color to teal in android
-  if (Platform.isAndroid) {
-    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
-      statusBarColor:  Color(0xFF016A70), // Set your desired status bar color
-    ));
-  }
-
   //set the status bar  text color to white
   FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
   runApp(
