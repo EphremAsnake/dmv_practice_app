@@ -1,3 +1,5 @@
+import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
+import 'package:drivingexam/app/utils/helper/internet_connectivity.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -5,6 +7,7 @@ class SearchBarController extends GetxController {
   final TextEditingController controller = TextEditingController();
   final RxBool isClearIconVisible = false.obs;
   final String defaultSearchLabel = "Search";
+  final UsStatesController usStatesController = Get.find();
 
   void onTextFieldFocusChange(bool hasFocus) {
     isClearIconVisible.value = hasFocus;
@@ -12,5 +15,18 @@ class SearchBarController extends GetxController {
 
   void clearSearch() {
     controller.clear();
+  }
+
+  @override
+  void onClose() {
+    controller.dispose();
+    usStatesController.filteredStates.clear();
+    if (InternetConnectivity().isConnected == true) {
+      usStatesController.fetchData();
+    } else {
+      usStatesController.fetchDataFromCache();
+    }
+    usStatesController.update();
+    super.onClose();
   }
 }
