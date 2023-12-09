@@ -6,6 +6,7 @@ import 'package:drivingexam/app/utils/extensions/title_case_extension.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
 import 'package:drivingexam/app/utils/shared_widgets/refresh_error_widget.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:shimmer/shimmer.dart';
@@ -17,8 +18,12 @@ class HomeView extends GetView<HomeController> {
   final UsStatesController usStatesController = Get.find();
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor: Color(0xFF016A70), // Replace with your desired color
+    ));
+
     return WillPopScope(
-      onWillPop: () async {  
+      onWillPop: () async {
         showExitConfirmationDialog(context);
         return false;
       },
@@ -352,7 +357,7 @@ class HomeView extends GetView<HomeController> {
                                 );
                               } else {
                                 return RefreshErrorWidget(
-                                   showBackToHomeButton: false,
+                                  showBackToHomeButton: false,
                                   assetImage: "assets/images/error.png",
                                   errorMessage:
                                       "No internet connection, please check your internet connection and try again.",
@@ -381,7 +386,7 @@ class HomeView extends GetView<HomeController> {
                           );
                         } else {
                           return RefreshErrorWidget(
-                             showBackToHomeButton: false,
+                            showBackToHomeButton: false,
                             assetImage: "assets/images/error.png",
                             errorMessage:
                                 "No internet connection, please check your internet connection and try again.",
