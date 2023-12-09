@@ -16,27 +16,13 @@ class ThemeController extends GetxController {
           controller.configs?.appConfig.appColors.backgroundColor ?? "#F8F8F8"),
       primaryColor: HexColor(
           controller.configs?.appConfig.appColors.primaryColor ?? "#016A70"),
-      secondaryColor: HexColor(
-          controller.configs?.appConfig.appColors.secondaryColor ?? "#FCCCC5"),
       blackColor: HexColor(
           controller.configs?.appConfig.appColors.blackColor ?? "#000000"),
-      primaryTextColor: HexColor(
-          controller.configs?.appConfig.appColors.primaryTextColor ??
-              "#ffffff"),
-      secondaryTextColor: HexColor(
-          controller.configs?.appConfig.appColors.secondaryTextColor ??
-              "#43374F"),
       grayTextColor: HexColor(
         controller.configs?.appConfig.appColors.grayTextColor ?? "#747475",
       ),
-      blackTextColor: HexColor(
-        controller.configs?.appConfig.appColors.blackTextColor ?? "#DCDFE5",
-      ),
       shadowColor: HexColor(
           controller.configs?.appConfig.appColors.shadowColor ?? "#EEEDED"),
-      primaryGrayColor: HexColor(
-          controller.configs?.appConfig.appColors.primaryGrayColor ??
-              "#9B9A9A"),
       splashColor: HexColor(
           controller.configs?.appConfig.appColors.splashColor ?? "#B3E8EB"),
       errorColor: HexColor(
@@ -57,8 +43,8 @@ void setAppTheme(ThemeDataModel theme) {
     textTheme: TextTheme(
       headlineMedium: TextStyle(color: theme.blackColor),
       labelMedium: TextStyle(color: theme.blackColor),
-      bodyMedium: TextStyle(color: theme.primaryTextColor),
-      bodySmall: TextStyle(color: theme.secondaryTextColor),
+      bodyMedium: TextStyle(color: theme.blackColor),
+      bodySmall: TextStyle(color: theme.blackColor),
       titleMedium: TextStyle(color: theme.grayTextColor),
     ),
   );

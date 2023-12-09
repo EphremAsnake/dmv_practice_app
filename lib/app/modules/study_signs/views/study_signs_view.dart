@@ -93,10 +93,13 @@ class StudySignsView extends GetView<StudySignsController> {
                       const SizedBox(
                         height: 5,
                       ),
-                      CustomSearchBar(
-                        onChange: (value) {
-                          controller.search(value);
-                        },
+                      Padding(
+                       padding: const EdgeInsets.all(2.0),
+                        child: CustomSearchBar(
+                          onChange: (value) {
+                            controller.search(value);
+                          },
+                        ),
                       ),
                       const SizedBox(
                         height: 5,
@@ -168,15 +171,20 @@ class StudySignsView extends GetView<StudySignsController> {
                                               height: 100,
                                             )),
                                       ),
-                                      Center(
-                                        child: Text(
-                                          controller
-                                              .filteredSignsAndDescriptions[
-                                                  index]
-                                              .name,
-                                          style: TextStyle(
-                                            color: themeData?.blackColor,
-                                            fontSize: 17,
+                                      Padding(
+                                        padding: const EdgeInsets.symmetric(horizontal: 8),
+                                        child: Center(
+                                          child: Text(
+                                            controller
+                                                .filteredSignsAndDescriptions[
+                                                    index]
+                                                .name,
+                                            style: TextStyle(
+                                              color: themeData?.blackColor,
+                                              fontSize: 17,
+                                            ),
+                                            maxLines: 2,
+                                            overflow: TextOverflow.ellipsis,
                                           ),
                                         ),
                                       ),

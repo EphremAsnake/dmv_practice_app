@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:io';
 import 'package:drivingexam/app/core/core_dependency.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/utils/helper/inital_route_determiner.dart';
@@ -42,6 +43,13 @@ void main() async {
     const Color(0xFF016A70),
   );
 
+  //set the status bar color to teal in android
+  if (Platform.isAndroid) {
+    SystemChrome.setSystemUIOverlayStyle(const SystemUiOverlayStyle(
+      statusBarColor:  Color(0xFF016A70), // Set your desired status bar color
+    ));
+  }
+
   //set the status bar  text color to white
   FlutterStatusbarcolor.setStatusBarWhiteForeground(true);
   runApp(
@@ -60,7 +68,6 @@ void main() async {
     ),
   );
 }
-
 
 const MaterialColor tealSwatch = MaterialColor(
   0xFF016A70, // Primary color value

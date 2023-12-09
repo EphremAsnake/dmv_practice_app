@@ -9,43 +9,50 @@ void showSignsDetailModal(SignsAndDescription item) {
   Get.dialog(
     AlertDialog(
       elevation: 1,
-      content: Wrap(
-        children: [
-          Center(
-            child: Padding(
-                padding: const EdgeInsets.all(10.0),
-                child: Image.network(
-                  "${Keys.baseurl}${item.image}",
-                  width: 100,
-                  height: 100,
-                )),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            children: [
-              Expanded(
-                child: Text(
-                  item.name,
-                  style: TextStyle(
-                      color: themeData?.primaryColor,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold),
+      content: SingleChildScrollView(
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Center(
+              child: Padding(
+                  padding: const EdgeInsets.all(10.0),
+                  child: Image.network(
+                    "${Keys.baseurl}${item.image}",
+                    width: 100,
+                    height: 100,
+                  )),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    item.name,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                        color: themeData?.primaryColor,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ],
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 15),
+              child: Text(
+                item.description,
+                textAlign: TextAlign.justify,
+                style: TextStyle(
+                  color: themeData?.blackColor,
+                  fontSize: 16,
                 ),
               ),
-            ],
-          ),
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 15),
-            child: Text(
-              item.description,
-              textAlign: TextAlign.justify,
-              style: TextStyle(
-                color: themeData?.blackColor,
-                fontSize: 16,
-              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
       actions: [
         TextButton(

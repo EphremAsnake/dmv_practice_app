@@ -24,31 +24,26 @@ class AppPages {
       name: _Paths.HOME,
       page: () => HomeView(),
       binding: HomeBinding(),
-      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.US_STATES,
       page: () => UsStatesView(),
       binding: UsStatesBinding(),
-      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.TEST,
       page: () => TestView(),
       binding: TestBinding(),
-      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.STUDY_SIGNS,
       page: () => StudySignsView(),
       binding: StudySignsBinding(),
-      transition: Transition.fade,
     ),
     GetPage(
       name: _Paths.ABOUT,
       page: () => AboutView(),
       binding: AboutBinding(),
-      transition: Transition.fade,
     ),
   ];
 }

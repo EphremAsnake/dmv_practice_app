@@ -55,14 +55,9 @@ class AppColors {
   String whiteColor;
   String backgroundColor;
   String primaryColor;
-  String secondaryColor;
   String blackColor;
-  String primaryTextColor;
-  String secondaryTextColor;
   String grayTextColor;
-  String blackTextColor;
   String shadowColor;
-  String primaryGrayColor;
   String splashColor;
   String errorColor;
   String lightGrey;
@@ -71,14 +66,9 @@ class AppColors {
     required this.whiteColor,
     required this.backgroundColor,
     required this.primaryColor,
-    required this.secondaryColor,
     required this.blackColor,
-    required this.primaryTextColor,
-    required this.secondaryTextColor,
     required this.grayTextColor,
-    required this.blackTextColor,
     required this.shadowColor,
-    required this.primaryGrayColor,
     required this.splashColor,
     required this.errorColor,
     required this.lightGrey,
@@ -88,14 +78,9 @@ class AppColors {
         whiteColor: json["white_color"],
         backgroundColor: json["background_color"],
         primaryColor: json["primary_color"],
-        secondaryColor: json["secondary_color"],
         blackColor: json["black_color"],
-        primaryTextColor: json["primary_text_color"],
-        secondaryTextColor: json["secondary_text_color"],
         grayTextColor: json["gray_text_color"],
-        blackTextColor: json["black_text_color"],
         shadowColor: json["shadow_color"],
-        primaryGrayColor: json["primary_gray_color"],
         splashColor: json["splash_color"],
         errorColor: json["error_color"],
         lightGrey: json["light_grey"],
@@ -105,14 +90,9 @@ class AppColors {
         "white_color": whiteColor,
         "background_color": backgroundColor,
         "primary_color": primaryColor,
-        "secondary_color": secondaryColor,
         "black_color": blackColor,
-        "primary_text_color": primaryTextColor,
-        "secondary_text_color": secondaryTextColor,
         "gray_text_color": grayTextColor,
-        "black_text_color": blackTextColor,
         "shadow_color": shadowColor,
-        "primary_gray_color": primaryGrayColor,
         "splash_color": splashColor,
         "error_color": errorColor,
         "light_grey": lightGrey,

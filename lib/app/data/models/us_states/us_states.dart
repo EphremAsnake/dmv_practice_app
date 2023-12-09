@@ -20,7 +20,6 @@ class UsStates {
 }
 
 class State {
-  int id;
   String name;
   String dmvManualLink;
   String abbreviation;
@@ -28,7 +27,6 @@ class State {
   int passingScore;
 
   State({
-    required this.id,
     required this.name,
     required this.dmvManualLink,
     required this.abbreviation,
@@ -37,7 +35,6 @@ class State {
   });
 
   factory State.fromJson(Map<String, dynamic> json) => State(
-        id: json["id"],
         name: json["name"],
         dmvManualLink: json["dmvManualLink"],
         abbreviation: json["abbreviation"],
@@ -46,7 +43,6 @@ class State {
       );
 
   Map<String, dynamic> toJson() => {
-        "id": id,
         "name": name,
         "dmvManualLink": dmvManualLink,
         "abbreviation": abbreviation,
