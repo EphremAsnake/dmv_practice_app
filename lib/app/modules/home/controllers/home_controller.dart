@@ -1,7 +1,9 @@
 import 'dart:io';
 
 import 'package:drivingexam/app/modules/home/controllers/home_controller_imports.dart';
+import 'package:drivingexam/app/modules/test/controllers/test_controller_imports.dart';
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
+import 'package:flutter/services.dart';
 import 'package:share_plus/share_plus.dart';
 
 class HomeController extends GetxController {
@@ -17,6 +19,11 @@ class HomeController extends GetxController {
 
   @override
   void onInit() {
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      SystemChrome.setSystemUIOverlayStyle( const SystemUiOverlayStyle(
+        statusBarColor:   Color(0xFF016A70),
+      ));
+    });
     isAutoScrollingEnabled.value = _storage.get(Keys.autoScrollingCacheKey);
     if (usStatesController.isHomePageInsertedIntoRoute.value == false) {
       usStatesController.isHomePageInsertedIntoRoute.value = true;
