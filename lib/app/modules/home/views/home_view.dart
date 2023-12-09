@@ -11,14 +11,19 @@ import 'package:get/get.dart';
 import 'package:line_icons/line_icon.dart';
 import 'package:shimmer/shimmer.dart';
 import '../controllers/home_controller.dart';
+import 'package:flutter_statusbarcolor_ns/flutter_statusbarcolor_ns.dart';
 
 class HomeView extends GetView<HomeController> {
   HomeView({Key? key}) : super(key: key);
   final themeData = Get.find<ThemeController>().themeData.value;
   final UsStatesController usStatesController = Get.find();
-  
+
   @override
   Widget build(BuildContext context) {
+    //set the status bar color to teal
+    FlutterStatusbarcolor.setStatusBarColor(
+      const Color(0xFF016A70),
+    );
     return AnnotatedRegion<SystemUiOverlayStyle>(
       value: const SystemUiOverlayStyle(
         statusBarColor: Color(0xFF016A70),
