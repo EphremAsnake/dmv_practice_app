@@ -15,6 +15,18 @@ class SearchBarController extends GetxController {
 
   void clearSearch() {
     controller.clear();
+    // Checking if UsStatesController is registered
+    bool isRegistered = GetInstance().isRegistered<UsStatesController>();
+    if (isRegistered) {
+      usStatesController.filteredStates.clear();
+      usStatesController.selectedCardIndex.value = -1;
+      if (InternetConnectivity().isConnected == true) {
+        usStatesController.fetchData();
+      } else {
+        usStatesController.fetchDataFromCache();
+      }
+      usStatesController.update();
+    }
   }
 
   @override
