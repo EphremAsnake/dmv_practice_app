@@ -1,3 +1,4 @@
+import 'package:drivingexam/app/core/shared_controllers/search_controller.dart';
 import 'package:drivingexam/app/core/shared_controllers/theme_controller.dart';
 import 'package:drivingexam/app/modules/us_states/controllers/us_states_controller.dart';
 import 'package:drivingexam/app/utils/helper/api_state_handler.dart';
@@ -14,6 +15,7 @@ import 'package:get/get.dart';
 class UsStatesView extends GetView<UsStatesController> {
   UsStatesView({Key? key}) : super(key: key);
   final themeData = Get.find<ThemeController>().themeData.value;
+  final SearchBarController searchController = Get.find();
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -155,6 +157,7 @@ class UsStatesView extends GetView<UsStatesController> {
                         if (controller.selectedCardIndex.value != -1) {
                           controller.savedStateData();
                           Get.toNamed('/home');
+                          searchController.clearSearch();
                         } else {
                           customSnackBar(
                               title: "Error",
